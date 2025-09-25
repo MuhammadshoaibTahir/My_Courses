@@ -59,18 +59,42 @@
   color: #0077cc;
 }
 
-/* Hero Section */
-.hero {
-  background: linear-gradient(to right, rgba(0,119,204,0.6), rgba(0,0,0,0.6)),
-              url("Images/header.jpg") no-repeat center center/cover;
+/* Shared Hero Section */
+.hero,
+.course-hero {
   height: 70vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
   text-align: center;
-  position: relative;
+  color: white;
   animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Default Homepage Hero Background */
+.hero {
+  background: linear-gradient(to right, rgba(0,119,204,0.6), rgba(0,0,0,0.6)),
+              url("images/header.jpg") no-repeat center center/cover;
+}
+
+/* Overlay for Course Pages */
+.course-hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-text h1 {
@@ -84,7 +108,23 @@
   animation: slideInUp 1.2s ease;
 }
 
-/* Courses */
+.hero-text .btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #0077cc;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.hero-text .btn:hover {
+  background: #005fa3;
+}
+
+/* Courses Section */
 .courses {
   padding: 60px 20px;
   text-align: center;
@@ -160,7 +200,7 @@
   background: #005fa3;
 }
 
-/* Pricing */
+/* Pricing Section */
 .pricing {
   padding: 60px 20px;
   text-align: center;
