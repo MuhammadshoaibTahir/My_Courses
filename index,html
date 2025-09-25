@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Courses</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🚀 Learn with Muhammad Shoaib Tahir</h1>
+    <p>Professional courses in Computational Linguistics, Corpus Linguistics & Python Programming</p>
+  </header>
+
+  <section class="course">
+    <div class="details">
+      <h2>Computational Linguistics</h2>
+      <p>25 Days | 100% Practical | 20k PKR (Pakistan) / 75 USD (International)</p>
+    </div>
+  </section>
+
+  <section class="course">
+    <div class="details">
+      <h2>Corpus Linguistics</h2>
+      <p>Modern introduction with hands-on applications.</p>
+    </div>
+  </section>
+
+  <section class="course">
+    <div class="details">
+      <h2>Python Programming</h2>
+      <p>Hands-on training from basics to advanced concepts.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Muhammad Shoaib Tahir | Contact: example@email.com</p>
+  </footer>
+</body>
+</html>
