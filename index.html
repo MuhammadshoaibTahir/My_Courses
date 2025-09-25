@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>My Courses</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Chart.js CDN -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -16,9 +15,13 @@
         <a href="python.html">Python Programming</a>
     </nav>
 
+    <!-- Hero / Header Section -->
     <header class="hero">
-        <h1>Welcome to My Courses</h1>
-        <p>Explore my academic journey in Corpus Linguistics, Computational Linguistics, and Python Programming.</p>
+        <img src="images/header.jpg" alt="Courses Banner" class="header-img">
+        <div class="hero-text">
+            <h1>Welcome to My Learning Hub</h1>
+            <p>I’m <strong>Muhammad Shoaib Tahir</strong> and I’m offering the following courses:</p>
+        </div>
     </header>
 
     <div class="container">
@@ -64,58 +67,30 @@
         <p>© 2025 Muhammad Shoaib Tahir</p>
     </footer>
 
+    <!-- Charts -->
     <script>
-    // Data and charts for each card
     document.addEventListener('DOMContentLoaded', function () {
         const ctx1 = document.getElementById('chart-corpus').getContext('2d');
-        const chart1 = new Chart(ctx1, {
+        new Chart(ctx1, {
             type: 'bar',
-            data: {
-                labels: ['PKR','USD'],
-                datasets: [{
-                    label: 'Corpus Linguistics Price',
-                    data: [6500, 23],
-                    backgroundColor: ['rgba(26, 115, 232, 0.7)', 'rgba(255, 99, 132, 0.7)'],
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+            data: { labels: ['PKR','USD'], datasets: [{ label: 'Corpus Linguistics Price', data: [6500, 23], backgroundColor: ['#1a73e8','#ff6384'] }] },
+            options: { scales: { y: { beginAtZero: true } } }
         });
 
         const ctx2 = document.getElementById('chart-computational').getContext('2d');
-        const chart2 = new Chart(ctx2, {
+        new Chart(ctx2, {
             type: 'bar',
-            data: {
-                labels: ['PKR','USD'],
-                datasets: [{
-                    label: 'Computational Linguistics Price',
-                    data: [19500, 70],
-                    backgroundColor: ['rgba(26, 115, 232, 0.7)', 'rgba(75, 192, 192, 0.7)'],
-                }]
-            },
+            data: { labels: ['PKR','USD'], datasets: [{ label: 'Computational Linguistics Price', data: [19500, 70], backgroundColor: ['#1a73e8','#4bc0c0'] }] },
             options: { scales: { y: { beginAtZero: true } } }
         });
 
         const ctx3 = document.getElementById('chart-python').getContext('2d');
-        const chart3 = new Chart(ctx3, {
+        new Chart(ctx3, {
             type: 'bar',
-            data: {
-                labels: ['PKR','USD'],
-                datasets: [{
-                    label: 'Python Programming Price',
-                    data: [15000, 53],
-                    backgroundColor: ['rgba(26, 115, 232, 0.7)', 'rgba(255, 206, 86, 0.7)'],
-                }]
-            },
+            data: { labels: ['PKR','USD'], datasets: [{ label: 'Python Programming Price', data: [15000, 53], backgroundColor: ['#1a73e8','#ffce56'] }] },
             options: { scales: { y: { beginAtZero: true } } }
         });
     });
     </script>
-
 </body>
 </html>
