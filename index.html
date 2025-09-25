@@ -3,22 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Courses</title>
+  <title>My Courses - Muhammad Shoaib Tahir</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- Header Section -->
-  <header class="hero">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">My Courses</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" style="background-image: url('Images/header.jpg');">
+    <div class="overlay"></div>
     <div class="hero-text">
       <h1>Learn with Muhammad Shoaib Tahir</h1>
-      <p>Offering Corpus Linguistics, Computational Linguistics, and Python Programming</p>
+      <p>Offering <b>Corpus Linguistics</b>, <b>Computational Linguistics</b>, and <b>Python Programming</b></p>
+      <a href="#courses" class="btn">Explore Courses</a>
     </div>
   </header>
 
   <!-- Courses Section -->
-  <section class="courses">
+  <section class="courses" id="courses">
     <h2>Our Courses</h2>
     <div class="course-container">
 
@@ -47,7 +60,7 @@
   </section>
 
   <!-- Pricing Table -->
-  <section class="pricing">
+  <section class="pricing" id="pricing">
     <h2>Pricing Comparison</h2>
     <table>
       <tr>
@@ -74,7 +87,7 @@
   </section>
 
   <!-- Footer with Socials -->
-  <footer>
+  <footer id="contact">
     <p>Connect with me:</p>
     <div class="socials">
       <a href="https://github.com/MuhammadshoaibTahir"><i class="fab fa-github"></i></a>
