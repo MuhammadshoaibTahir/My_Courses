@@ -7,34 +7,58 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- 🔹 Navigation Bar -->
+  <nav>
+    <h2 class="logo">My Courses</h2>
+    <ul>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- 🔹 Header -->
   <header>
     <h1>🚀 Learn with Muhammad Shoaib Tahir</h1>
-    <p>Professional courses in Computational Linguistics, Corpus Linguistics & Python Programming</p>
+    <p>Professional training in Computational Linguistics, Corpus Linguistics & Python Programming</p>
   </header>
 
-  <section class="course">
-    <div class="details">
-      <h2>Computational Linguistics</h2>
-      <p>25 Days | 100% Practical | 20k PKR (Pakistan) / 75 USD (International)</p>
-    </div>
+  <!-- 🔹 Courses Section -->
+  <main id="courses">
+    <section class="course">
+      <div class="details">
+        <h2>📘 Computational Linguistics</h2>
+        <p>25 Days | 100% Practical | 20k PKR (Pakistan) / 75 USD (International)</p>
+        <a href="https://wa.me/923000000000" class="btn">📩 Enroll Now</a>
+      </div>
+    </section>
+
+    <section class="course">
+      <div class="details">
+        <h2>📖 Corpus Linguistics</h2>
+        <p>Modern introduction with hands-on applications.</p>
+        <a href="mailto:example@email.com" class="btn">📧 Learn More</a>
+      </div>
+    </section>
+
+    <section class="course">
+      <div class="details">
+        <h2>🐍 Python Programming</h2>
+        <p>Hands-on training from basics to advanced concepts.</p>
+        <a href="https://wa.me/923000000000" class="btn">📩 Enroll Now</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 🔹 Contact Section -->
+  <section id="contact" class="contact">
+    <h2>📬 Contact Me</h2>
+    <p>Email: <a href="mailto:example@email.com">example@email.com</a></p>
+    <p>WhatsApp: <a href="https://wa.me/923000000000">+92 300 0000000</a></p>
   </section>
 
-  <section class="course">
-    <div class="details">
-      <h2>Corpus Linguistics</h2>
-      <p>Modern introduction with hands-on applications.</p>
-    </div>
-  </section>
-
-  <section class="course">
-    <div class="details">
-      <h2>Python Programming</h2>
-      <p>Hands-on training from basics to advanced concepts.</p>
-    </div>
-  </section>
-
+  <!-- 🔹 Footer -->
   <footer>
-    <p>© 2025 Muhammad Shoaib Tahir | Contact: example@email.com</p>
+    <p>© 2025 Muhammad Shoaib Tahir | All rights reserved</p>
   </footer>
 </body>
 </html>
