@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>My Courses</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <a href="index.html">Home</a>
         <a href="corpus.html">Corpus Linguistics</a>
@@ -14,37 +16,106 @@
         <a href="python.html">Python Programming</a>
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero">
         <h1>Welcome to My Courses</h1>
         <p>Explore my academic journey in Corpus Linguistics, Computational Linguistics, and Python Programming.</p>
     </header>
 
-    <!-- Courses Grid -->
     <div class="container">
+        <!-- Course Card 1 -->
         <div class="course-card">
             <img src="images/corpus.jpg" alt="Corpus Linguistics">
             <h2>Corpus Linguistics</h2>
             <p>Learn how to analyze language data using corpora. Topics include concordances, collocations, and more.</p>
+            <div class="price">Full Course: <strong>6500 PKR / $23</strong></div>
+            <canvas id="chart-corpus" width="300" height="200"></canvas>
             <a class="btn" href="corpus.html">Read more →</a>
         </div>
 
+        <!-- Course Card 2 -->
         <div class="course-card">
             <img src="images/computational.jpg" alt="Computational Linguistics">
             <h2>Computational Linguistics</h2>
             <p>Introduction to NLP, POS tagging, parsing, and speech technologies.</p>
+            <div class="price">Full Course: <strong>19500 PKR / $70</strong></div>
+            <canvas id="chart-computational" width="300" height="200"></canvas>
             <a class="btn" href="computational.html">Read more →</a>
         </div>
 
+        <!-- Course Card 3 -->
         <div class="course-card">
             <img src="images/python.jpg" alt="Python Programming">
             <h2>Python Programming</h2>
             <p>Hands-on Python for linguistics and general programming, covering syntax, data structures, and text processing.</p>
+            <div class="price">Full Course: <strong>15000 PKR / $53</strong></div>
+            <canvas id="chart-python" width="300" height="200"></canvas>
             <a class="btn" href="python.html">Read more →</a>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>© 2025 My Courses | Built with HTML, CSS, and GitHub Pages</footer>
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/MuhammadshoaibTahir" target="_blank">GitHub</a> |
+            <a href="https://scholar.google.com/citations?user=YNAz_0kAAAAJ&hl=en&authuser=1" target="_blank">Google Scholar</a> |
+            <a href="https://youtube.com/@linguistics-k1v?si=R5KztWF_M1W4OiFy" target="_blank">YouTube</a> |
+            <a href="https://www.linkedin.com/in/muhammad-shoaib-tahir-3a9103179/" target="_blank">LinkedIn</a> |
+            <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555" target="_blank">Facebook</a>
+        </div>
+        <p>© 2025 Muhammad Shoaib Tahir</p>
+    </footer>
+
+    <script>
+    // Data and charts for each card
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx1 = document.getElementById('chart-corpus').getContext('2d');
+        const chart1 = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['PKR','USD'],
+                datasets: [{
+                    label: 'Corpus Linguistics Price',
+                    data: [6500, 23],
+                    backgroundColor: ['rgba(26, 115, 232, 0.7)', 'rgba(255, 99, 132, 0.7)'],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const ctx2 = document.getElementById('chart-computational').getContext('2d');
+        const chart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['PKR','USD'],
+                datasets: [{
+                    label: 'Computational Linguistics Price',
+                    data: [19500, 70],
+                    backgroundColor: ['rgba(26, 115, 232, 0.7)', 'rgba(75, 192, 192, 0.7)'],
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
+        const ctx3 = document.getElementById('chart-python').getContext('2d');
+        const chart3 = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['PKR','USD'],
+                datasets: [{
+                    label: 'Python Programming Price',
+                    data: [15000, 53],
+                    backgroundColor: ['rgba(26, 115, 232, 0.7)', 'rgba(255, 206, 86, 0.7)'],
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+    });
+    </script>
+
 </body>
 </html>
