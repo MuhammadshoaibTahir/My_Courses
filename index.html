@@ -1,96 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>My Courses</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Courses</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="corpus.html">Corpus Linguistics</a>
-        <a href="computational.html">Computational Linguistics</a>
-        <a href="python.html">Python Programming</a>
-    </nav>
 
-    <!-- Hero / Header Section -->
-    <header class="hero">
-        <img src="images/header.jpg" alt="Courses Banner" class="header-img">
-        <div class="hero-text">
-            <h1>Welcome to My Learning Hub</h1>
-            <p>I’m <strong>Muhammad Shoaib Tahir</strong> and I’m offering the following courses:</p>
-        </div>
-    </header>
-
-    <div class="container">
-        <!-- Course Card 1 -->
-        <div class="course-card">
-            <img src="images/corpus.jpg" alt="Corpus Linguistics">
-            <h2>Corpus Linguistics</h2>
-            <p>Learn how to analyze language data using corpora. Topics include concordances, collocations, and more.</p>
-            <div class="price">Full Course: <strong>6500 PKR / $23</strong></div>
-            <canvas id="chart-corpus" width="300" height="200"></canvas>
-            <a class="btn" href="corpus.html">Read more →</a>
-        </div>
-
-        <!-- Course Card 2 -->
-        <div class="course-card">
-            <img src="images/computational.jpg" alt="Computational Linguistics">
-            <h2>Computational Linguistics</h2>
-            <p>Introduction to NLP, POS tagging, parsing, and speech technologies.</p>
-            <div class="price">Full Course: <strong>19500 PKR / $70</strong></div>
-            <canvas id="chart-computational" width="300" height="200"></canvas>
-            <a class="btn" href="computational.html">Read more →</a>
-        </div>
-
-        <!-- Course Card 3 -->
-        <div class="course-card">
-            <img src="images/python.jpg" alt="Python Programming">
-            <h2>Python Programming</h2>
-            <p>Hands-on Python for linguistics and general programming, covering syntax, data structures, and text processing.</p>
-            <div class="price">Full Course: <strong>15000 PKR / $53</strong></div>
-            <canvas id="chart-python" width="300" height="200"></canvas>
-            <a class="btn" href="python.html">Read more →</a>
-        </div>
+  <!-- Header Section -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Learn with Muhammad Shoaib Tahir</h1>
+      <p>Offering Corpus Linguistics, Computational Linguistics, and Python Programming</p>
     </div>
+  </header>
 
-    <footer>
-        <div class="social-links">
-            <a href="https://github.com/MuhammadshoaibTahir" target="_blank">GitHub</a> |
-            <a href="https://scholar.google.com/citations?user=YNAz_0kAAAAJ&hl=en&authuser=1" target="_blank">Google Scholar</a> |
-            <a href="https://youtube.com/@linguistics-k1v?si=R5KztWF_M1W4OiFy" target="_blank">YouTube</a> |
-            <a href="https://www.linkedin.com/in/muhammad-shoaib-tahir-3a9103179/" target="_blank">LinkedIn</a> |
-            <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555" target="_blank">Facebook</a>
-        </div>
-        <p>© 2025 Muhammad Shoaib Tahir</p>
-    </footer>
+  <!-- Courses Section -->
+  <section class="courses">
+    <h2>Our Courses</h2>
+    <div class="course-container">
 
-    <!-- Charts -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const ctx1 = document.getElementById('chart-corpus').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: { labels: ['PKR','USD'], datasets: [{ label: 'Corpus Linguistics Price', data: [6500, 23], backgroundColor: ['#1a73e8','#ff6384'] }] },
-            options: { scales: { y: { beginAtZero: true } } }
-        });
+      <div class="course-card">
+        <img src="Images/corpus.jpg" alt="Corpus Linguistics">
+        <h3>Corpus Linguistics</h3>
+        <p>Understand language through large text corpora with modern tools and methods.</p>
+        <span class="price">6500 PKR / $23</span>
+      </div>
 
-        const ctx2 = document.getElementById('chart-computational').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: { labels: ['PKR','USD'], datasets: [{ label: 'Computational Linguistics Price', data: [19500, 70], backgroundColor: ['#1a73e8','#4bc0c0'] }] },
-            options: { scales: { y: { beginAtZero: true } } }
-        });
+      <div class="course-card">
+        <img src="Images/computational.jpg" alt="Computational Linguistics">
+        <h3>Computational Linguistics</h3>
+        <p>Explore how computers process and analyze natural language with AI techniques.</p>
+        <span class="price">19500 PKR / $70</span>
+      </div>
 
-        const ctx3 = document.getElementById('chart-python').getContext('2d');
-        new Chart(ctx3, {
-            type: 'bar',
-            data: { labels: ['PKR','USD'], datasets: [{ label: 'Python Programming Price', data: [15000, 53], backgroundColor: ['#1a73e8','#ffce56'] }] },
-            options: { scales: { y: { beginAtZero: true } } }
-        });
-    });
-    </script>
+      <div class="course-card">
+        <img src="Images/python.jpg" alt="Python Programming">
+        <h3>Python Programming</h3>
+        <p>Learn Python programming from basics to advanced with practical projects.</p>
+        <span class="price">15000 PKR / $53</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Pricing Table -->
+  <section class="pricing">
+    <h2>Pricing Comparison</h2>
+    <table>
+      <tr>
+        <th>Course</th>
+        <th>Price (PKR)</th>
+        <th>Price (USD)</th>
+      </tr>
+      <tr>
+        <td>Corpus Linguistics</td>
+        <td>6500</td>
+        <td>$23</td>
+      </tr>
+      <tr>
+        <td>Computational Linguistics</td>
+        <td>19500</td>
+        <td>$70</td>
+      </tr>
+      <tr>
+        <td>Python Programming</td>
+        <td>15000</td>
+        <td>$53</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Footer with Socials -->
+  <footer>
+    <p>Connect with me:</p>
+    <div class="socials">
+      <a href="https://github.com/MuhammadshoaibTahir"><i class="fab fa-github"></i></a>
+      <a href="https://scholar.google.com/citations?user=YNAz_0kAAAAJ"><i class="fa-solid fa-graduation-cap"></i></a>
+      <a href="https://youtube.com/@linguistics-k1v"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.linkedin.com/in/muhammad-shoaib-tahir-3a9103179/"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555"><i class="fab fa-facebook"></i></a>
+    </div>
+    <p>&copy; 2025 Muhammad Shoaib Tahir</p>
+  </footer>
+
 </body>
 </html>
