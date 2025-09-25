@@ -6,6 +6,53 @@
   <title>My Courses - Muhammad Shoaib Tahir</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Modal styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-bottom: 15px;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .modal-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    .modal-content table th, .modal-content table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+    .modal-content table th {
+      background: #f5f5f5;
+    }
+  </style>
 </head>
 <body>
 
@@ -35,21 +82,21 @@
     <h2>Our Courses</h2>
     <div class="course-container">
 
-      <div class="course-card">
+      <div class="course-card" onclick="openModal('corpus')">
         <img src="Images/corpus.png" alt="Corpus Linguistics">
         <h3>Corpus Linguistics</h3>
         <p>Understand language through large text corpora with modern tools and methods.</p>
         <span class="price">6500 PKR / $23</span>
       </div>
 
-      <div class="course-card">
+      <div class="course-card" onclick="openModal('computational')">
         <img src="Images/computational.png" alt="Computational Linguistics">
         <h3>Computational Linguistics</h3>
         <p>Explore how computers process and analyze natural language with AI techniques.</p>
         <span class="price">19500 PKR / $70</span>
       </div>
 
-      <div class="course-card">
+      <div class="course-card" onclick="openModal('python')">
         <img src="Images/python.png" alt="Python Programming">
         <h3>Python Programming</h3>
         <p>Learn Python programming from basics to advanced with practical projects.</p>
@@ -59,34 +106,44 @@
     </div>
   </section>
 
-  <!-- Pricing Table -->
-  <section class="pricing" id="pricing">
-    <h2>Pricing Comparison</h2>
-    <table>
-      <tr>
-        <th>Course</th>
-        <th>Price (PKR)</th>
-        <th>Price (USD)</th>
-      </tr>
-      <tr>
-        <td>Corpus Linguistics</td>
-        <td>6500</td>
-        <td>$23</td>
-      </tr>
-      <tr>
-        <td>Computational Linguistics</td>
-        <td>19500</td>
-        <td>$70</td>
-      </tr>
-      <tr>
-        <td>Python Programming</td>
-        <td>15000</td>
-        <td>$53</td>
-      </tr>
-    </table>
-  </section>
+  <!-- Modals for each course -->
+  <div id="corpus" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('corpus')">&times;</span>
+      <h2>Corpus Linguistics</h2>
+      <p>Understand language through large text corpora with modern tools and methods.</p>
+      <table>
+        <tr><th>Price (PKR)</th><th>Price (USD)</th></tr>
+        <tr><td>6500</td><td>$23</td></tr>
+      </table>
+    </div>
+  </div>
 
-  <!-- Footer with Socials -->
+  <div id="computational" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('computational')">&times;</span>
+      <h2>Computational Linguistics</h2>
+      <p>Explore how computers process and analyze natural language with AI techniques.</p>
+      <table>
+        <tr><th>Price (PKR)</th><th>Price (USD)</th></tr>
+        <tr><td>19500</td><td>$70</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="python" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('python')">&times;</span>
+      <h2>Python Programming</h2>
+      <p>Learn Python programming from basics to advanced with practical projects.</p>
+      <table>
+        <tr><th>Price (PKR)</th><th>Price (USD)</th></tr>
+        <tr><td>15000</td><td>$53</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer id="contact">
     <p>Connect with me:</p>
     <div class="socials">
@@ -98,6 +155,23 @@
     </div>
     <p>&copy; 2025 Muhammad Shoaib Tahir</p>
   </footer>
+
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = "block";
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+    window.onclick = function(event) {
+      const modals = document.querySelectorAll(".modal");
+      modals.forEach(modal => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
