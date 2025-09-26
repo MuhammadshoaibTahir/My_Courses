@@ -11,6 +11,7 @@
       margin: 0;
       background-color: #f8f8f8;
       color: #333;
+      scroll-behavior: smooth;
     }
 
     /* Navbar */
@@ -21,6 +22,9 @@
       background: #000;
       color: #fff;
       padding: 15px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
     .navbar .logo {
       font-size: 22px;
@@ -87,6 +91,7 @@
       background-color: #fff;
       color: #000;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -240,6 +245,45 @@
       cursor: pointer;
     }
 
+    /* FAQ Accordion */
+    #faq {
+      padding: 80px 60px;
+      background-color: #f9f9f9;
+    }
+    #faq h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 40px;
+      color: #111;
+    }
+    .accordion {
+      background-color: #fff;
+      color: #444;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 1em;
+      transition: 0.4s;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .accordion.active, .accordion:hover {
+      background-color: #FFD700;
+      color: #000;
+    }
+    .panel {
+      padding: 0 18px;
+      background-color: white;
+      display: none;
+      overflow: hidden;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
     /* Footer */
     footer {
       background: #000;
@@ -253,6 +297,31 @@
       margin: 0 10px;
       font-size: 20px;
     }
+
+    /* Chat Popup */
+    .chat-popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .chat-popup a {
+      background-color: #25D366;
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 50px;
+      font-size: 16px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s;
+    }
+    .chat-popup a:hover {
+      background-color: #128C7E;
+    }
+
   </style>
 </head>
 <body>
@@ -263,6 +332,7 @@
     <ul class="nav-links">
       <li><a href="#hero" class="active">Home</a></li>
       <li><a href="#courses">Courses</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#testimonials">Feedback</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -282,7 +352,7 @@
   <section id="courses">
     <h2>Available Courses</h2>
     <div class="course-grid">
-      <div class="course-card" onclick="showPricing('Corpus Linguistics', '14,500 PKR / $52')">
+      <div class="course-card" onclick="showPricing('Corpus Linguistics', '6,500 PKR / $23')">
         <i class="fa-solid fa-database"></i>
         <h3>Corpus Linguistics</h3>
         <p>Analyze text corpora, extract linguistic patterns, and apply corpus-based approaches in your research.</p>
@@ -292,7 +362,7 @@
         <h3>Computational Linguistics</h3>
         <p>Work on NLP projects, POS tagging, parsing, embeddings, and real-world AI-based linguistic applications.</p>
       </div>
-      <div class="course-card" onclick="showPricing('Python Programming', '9,500 PKR / $34')">
+      <div class="course-card" onclick="showPricing('Python Programming', '15,000 PKR / $53')">
         <i class="fa-brands fa-python"></i>
         <h3>Python Programming</h3>
         <p>Start from basics to advanced — automate tasks, analyze data, and build your own NLP tools.</p>
@@ -300,30 +370,53 @@
     </div>
   </section>
 
-  <!-- Why Learn -->
-  <section class="why-learn">
-    <h2>Why Learn with Me?</h2>
-    <div class="features">
-      <div class="feature-box">
-        <i class="fa-solid fa-chalkboard-user"></i>
-        <h4>Practical Learning</h4>
-        <p>All lessons focus on real-world examples and projects for hands-on experience.</p>
-      </div>
-      <div class="feature-box">
-        <i class="fa-solid fa-certificate"></i>
-        <h4>Certification</h4>
-        <p>Get a certificate of completion verified by Muhammad Shoaib Tahir.</p>
-      </div>
-      <div class="feature-box">
-        <i class="fa-solid fa-users"></i>
-        <h4>Community Support</h4>
-        <p>Join an active learners’ community and discuss projects and assignments.</p>
-      </div>
-      <div class="feature-box">
-        <i class="fa-solid fa-globe"></i>
-        <h4>Global Perspective</h4>
-        <p>Courses designed for both national and international learners in applied linguistics & NLP.</p>
-      </div>
+  <!-- FAQ Section -->
+  <section id="faq">
+    <h2>🧠 Frequently Asked Questions (FAQ)</h2>
+
+    <button class="accordion">🎓 What topics are covered in each course?</button>
+    <div class="panel">
+      <p><b>Corpus Linguistics:</b> Build, analyze, and interpret linguistic corpora using AntConc, Sketch Engine, and Python.<br>
+      <b>Computational Linguistics:</b> NLP, Machine Learning for language, using spaCy, NLTK, Hugging Face.<br>
+      <b>Python Programming:</b> Basics to advanced Python including text processing and small automation projects.</p>
+    </div>
+
+    <button class="accordion">Q: What will I be able to do after completing the course?</button>
+    <div class="panel">
+      <p>You’ll be able to design experiments, process language data, write NLP pipelines, and use programming for linguistic projects.</p>
+    </div>
+
+    <button class="accordion">Q: Is this course suitable for beginners?</button>
+    <div class="panel">
+      <p>Absolutely! Courses start from zero. No prior coding or linguistic background required.</p>
+    </div>
+
+    <button class="accordion">Q: Are the classes live or recorded?</button>
+    <div class="panel">
+      <p>Live interactive sessions on Google Meet. Recordings are provided for revision or missed sessions.</p>
+    </div>
+
+    <button class="accordion">💵 Pricing & Payment</button>
+    <div class="panel">
+      <p>Corpus Linguistics: PKR 6500 / $23<br>
+      Computational Linguistics: PKR 19500 / $70<br>
+      Python Programming: PKR 15000 / $53</p>
+      <p>Installments available. Pay via Easypaisa, JazzCash, Bank Transfer, or PayPal (for international students).</p>
+    </div>
+
+    <button class="accordion">📜 Certification & Outcomes</button>
+    <div class="panel">
+      <p>Receive a verified digital certificate. Suitable for CV, LinkedIn, and academic portfolio.</p>
+    </div>
+
+    <button class="accordion">🧑‍🏫 Instructor & Support</button>
+    <div class="panel">
+      <p>Courses are taught by Muhammad Shoaib Tahir. Students get direct support and access to private discussion groups.</p>
+    </div>
+
+    <button class="accordion">🚀 Future Opportunities</button>
+    <div class="panel">
+      <p>Prepare for research, PhD, NLP careers, or linguistic publications. Guidance provided for projects and papers.</p>
     </div>
   </section>
 
@@ -355,6 +448,11 @@
     </div>
   </div>
 
+  <!-- Chat Popup -->
+  <div class="chat-popup">
+    <a href="https://wa.me/923001234567" target="_blank"><i class="fa-brands fa-whatsapp"></i> Have more questions?</a>
+  </div>
+
   <!-- Footer -->
   <footer id="contact">
     <p>© 2025 Muhammad Shoaib Tahir | All Rights Reserved</p>
@@ -369,6 +467,7 @@
   </footer>
 
   <script>
+    // Pricing Modal
     function showPricing(course, price) {
       document.getElementById('pricingModal').style.display = 'flex';
       document.getElementById('courseTitle').innerText = course;
@@ -377,6 +476,17 @@
     function closePricing() {
       document.getElementById('pricingModal').style.display = 'none';
     }
+
+    // FAQ Accordion
+    const accordions = document.getElementsByClassName("accordion");
+    for (let i = 0; i < accordions.length; i++) {
+      accordions[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        const panel = this.nextElementSibling;
+        panel.style.display = panel.style.display === "block" ? "none" : "block";
+      });
+    }
   </script>
+
 </body>
 </html>
