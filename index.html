@@ -2,275 +2,358 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Courses | Muhammad Shoaib Tahir</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses by Muhammad Shoaib Tahir</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
+    :root {
+      --gold: #d4af37;
+      --dark-bg: #0d0d0d;
+      --text-light: #f9f9f9;
+      --gray: #ccc;
+    }
+
+    * {
       margin: 0;
-      background-color: #f8f8f8;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #fff;
       color: #333;
     }
 
-    /* Navbar */
+    /* NAVBAR */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #000;
-      color: #fff;
-      padding: 15px 60px;
+      background: var(--dark-bg);
+      padding: 15px 50px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
     }
+
     .navbar .logo {
+      color: var(--gold);
       font-size: 22px;
       font-weight: bold;
     }
+
     .nav-links {
       list-style: none;
       display: flex;
       gap: 25px;
     }
+
     .nav-links a {
-      color: #fff;
+      color: var(--text-light);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover, .nav-links a.active {
-      color: #FFD700;
+      transition: 0.3s;
     }
 
-    /* Hero */
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    /* HERO SECTION */
     .hero {
-      position: relative;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('images/bg.jpg') center/cover no-repeat;
       height: 100vh;
-      background-image: url('images/bg.jpg');
-      background-size: cover;
-      background-position: center;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #fff;
       text-align: center;
+      color: #fff;
+      padding: 20px;
     }
-    .overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    .hero-text {
-      position: relative;
-      z-index: 2;
-      animation: fadeIn 2s ease;
-      max-width: 700px;
-    }
+
     .hero-text h1 {
-      font-size: 2.8em;
-      margin-bottom: 10px;
+      font-size: 48px;
+      margin-bottom: 15px;
     }
+
     .hero-text p {
-      font-size: 1.2em;
+      font-size: 20px;
       margin-bottom: 25px;
     }
+
     .btn {
-      background-color: #FFD700;
+      background: var(--gold);
       color: #000;
       padding: 12px 30px;
-      text-decoration: none;
       border-radius: 30px;
+      text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
     }
+
     .btn:hover {
-      background-color: #fff;
-      color: #000;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      background: #000;
+      color: var(--gold);
+      border: 1px solid var(--gold);
     }
 
-    /* Courses */
-    #courses {
-      padding: 80px 60px;
+    /* COURSES */
+    .courses {
       text-align: center;
-      background-color: #fff;
+      padding: 80px 40px;
     }
-    #courses h2 {
-      font-size: 2.2em;
+
+    .courses h2 {
+      font-size: 36px;
+      color: var(--dark-bg);
       margin-bottom: 40px;
-      color: #111;
     }
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+
+    .course-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
     }
+
     .course-card {
-      background: #f9f9f9;
-      padding: 25px;
+      width: 320px;
+      background: #fff;
+      border: 1px solid #eee;
       border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
     }
+
     .course-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
-    .course-card i {
-      font-size: 40px;
-      color: #FFD700;
-      margin-bottom: 15px;
+
+    .course-card img {
+      width: 100%;
+      border-radius: 15px 15px 0 0;
+      height: 180px;
+      object-fit: cover;
     }
+
     .course-card h3 {
-      margin-bottom: 10px;
+      font-size: 20px;
+      margin: 15px 0;
     }
+
     .course-card p {
-      font-size: 0.95em;
+      padding: 0 15px 20px;
+      font-size: 15px;
+      color: #555;
     }
 
-    /* Why Learn Section */
-    .why-learn {
-      background-color: #000;
-      color: #fff;
-      text-align: center;
-      padding: 80px 60px;
-    }
-    .why-learn h2 {
-      color: #FFD700;
-      font-size: 2em;
-      margin-bottom: 30px;
-    }
+    /* FEATURES */
     .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .feature-box {
-      background-color: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 10px;
-    }
-    .feature-box i {
-      font-size: 35px;
-      color: #FFD700;
-      margin-bottom: 10px;
-    }
-
-    /* Testimonials */
-    .testimonials {
-      padding: 80px 60px;
-      background-color: #fff;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      padding: 70px 40px;
       text-align: center;
     }
-    .testimonials h2 {
-      font-size: 2em;
+
+    .features h2 {
+      font-size: 36px;
+      color: var(--gold);
       margin-bottom: 40px;
     }
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-    }
-    .testimonial {
-      background: #f9f9f9;
-      border-left: 5px solid #FFD700;
-      padding: 25px;
-      border-radius: 10px;
-      font-style: italic;
+
+    .feature-boxes {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
     }
 
-    /* Pricing Modal */
-    .pricing-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-    .pricing-content {
-      background: #fff;
-      padding: 40px;
+    .feature {
+      background: #1a1a1a;
       border-radius: 15px;
-      text-align: center;
-      width: 90%;
-      max-width: 500px;
-      animation: fadeIn 0.4s ease;
+      width: 280px;
+      padding: 30px 20px;
+      transition: 0.3s;
     }
-    .pricing-content h3 {
+
+    .feature:hover {
+      background: #222;
+    }
+
+    .feature i {
+      color: var(--gold);
+      font-size: 40px;
       margin-bottom: 15px;
     }
-    .pricing-content .price {
-      font-size: 1.6em;
-      color: #FFD700;
-      margin-bottom: 20px;
-    }
-    .pricing-content ul {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-      margin-bottom: 25px;
-    }
-    .pricing-content ul li {
-      margin: 8px 0;
-      font-size: 0.95em;
-    }
-    .enroll-btn {
-      background-color: #FFD700;
-      border: none;
-      color: #000;
-      padding: 10px 25px;
-      border-radius: 25px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .close-btn {
-      background-color: #000;
-      color: #fff;
-      padding: 10px 25px;
-      border-radius: 25px;
-      margin-top: 10px;
-      border: none;
-      cursor: pointer;
+
+    .feature h4 {
+      margin-bottom: 10px;
+      font-size: 20px;
     }
 
-    /* Footer */
-    footer {
-      background: #000;
-      color: #fff;
+    /* INSTRUCTOR */
+    .instructor {
+      padding: 80px 40px;
       text-align: center;
-      padding: 25px 10px;
-      margin-top: 60px;
     }
-    footer .socials a {
-      color: #FFD700;
+
+    .instructor img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .instructor h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .instructor p {
+      font-size: 16px;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* FAQ */
+    .faq {
+      padding: 70px 40px;
+      background: #f9f9f9;
+    }
+
+    .faq h2 {
+      text-align: center;
+      color: var(--dark-bg);
+      margin-bottom: 40px;
+    }
+
+    details {
+      background: #fff;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    details:hover {
+      border-color: var(--gold);
+    }
+
+    summary {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+      background: #fff;
+      margin: 8% auto;
+      padding: 25px;
+      border-radius: 15px;
+      width: 85%;
+      max-width: 600px;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .enroll-btn {
+      background: var(--gold);
+      color: #000;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    .enroll-btn:hover {
+      background: #000;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark-bg);
+      color: var(--text-light);
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    .socials a {
+      color: var(--gold);
       margin: 0 10px;
-      font-size: 20px;
+      font-size: 22px;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      color: #fff;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-text h1 { font-size: 32px; }
+      .hero-text p { font-size: 16px; }
+      .course-card { width: 90%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- NAVIGATION -->
   <nav class="navbar">
     <div class="logo">My Courses</div>
     <ul class="nav-links">
-      <li><a href="#hero" class="active">Home</a></li>
       <li><a href="#courses">Courses</a></li>
-      <li><a href="#testimonials">Feedback</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#instructor">Instructor</a></li>
+      <li><a href="#faq">FAQ</a></li>
     </ul>
   </nav>
 
-  <!-- Hero -->
-  <header class="hero" id="hero">
-    <div class="overlay"></div>
+  <!-- HERO -->
+  <header class="hero">
     <div class="hero-text">
       <h1>Learn with Muhammad Shoaib Tahir</h1>
       <p>Master <b>Corpus Linguistics</b>, <b>Computational Linguistics</b>, & <b>Python Programming</b></p>
@@ -278,87 +361,70 @@
     </div>
   </header>
 
-  <!-- Courses -->
-  <section id="courses">
-    <h2>Available Courses</h2>
-    <div class="course-grid">
-      <div class="course-card" onclick="showPricing('Corpus Linguistics', '14,500 PKR / $52')">
-        <i class="fa-solid fa-database"></i>
+  <!-- COURSES -->
+  <section class="courses" id="courses">
+    <h2>Our Courses</h2>
+    <div class="course-container">
+      <div class="course-card" onclick="openModal('corpus')">
+        <img src="images/corpus.png" alt="Corpus Linguistics">
         <h3>Corpus Linguistics</h3>
-        <p>Analyze text corpora, extract linguistic patterns, and apply corpus-based approaches in your research.</p>
+        <p>Analyze language patterns through large text datasets with practical tools.</p>
       </div>
-      <div class="course-card" onclick="showPricing('Computational Linguistics', '19,500 PKR / $70')">
-        <i class="fa-solid fa-robot"></i>
+      <div class="course-card" onclick="openModal('computational')">
+        <img src="images/computational.png" alt="Computational Linguistics">
         <h3>Computational Linguistics</h3>
-        <p>Work on NLP projects, POS tagging, parsing, embeddings, and real-world AI-based linguistic applications.</p>
+        <p>Explore AI and NLP techniques that make machines understand human language.</p>
       </div>
-      <div class="course-card" onclick="showPricing('Python Programming', '9,500 PKR / $34')">
-        <i class="fa-brands fa-python"></i>
+      <div class="course-card" onclick="openModal('python')">
+        <img src="images/python.png" alt="Python Programming">
         <h3>Python Programming</h3>
-        <p>Start from basics to advanced — automate tasks, analyze data, and build your own NLP tools.</p>
+        <p>Learn Python through real-world coding projects from basics to automation.</p>
       </div>
     </div>
   </section>
 
-  <!-- Why Learn -->
-  <section class="why-learn">
-    <h2>Why Learn with Me?</h2>
-    <div class="features">
-      <div class="feature-box">
-        <i class="fa-solid fa-chalkboard-user"></i>
-        <h4>Practical Learning</h4>
-        <p>All lessons focus on real-world examples and projects for hands-on experience.</p>
-      </div>
-      <div class="feature-box">
-        <i class="fa-solid fa-certificate"></i>
-        <h4>Certification</h4>
-        <p>Get a certificate of completion verified by Muhammad Shoaib Tahir.</p>
-      </div>
-      <div class="feature-box">
-        <i class="fa-solid fa-users"></i>
-        <h4>Community Support</h4>
-        <p>Join an active learners’ community and discuss projects and assignments.</p>
-      </div>
-      <div class="feature-box">
-        <i class="fa-solid fa-globe"></i>
-        <h4>Global Perspective</h4>
-        <p>Courses designed for both national and international learners in applied linguistics & NLP.</p>
-      </div>
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <h2>Why Learn With Us?</h2>
+    <div class="feature-boxes">
+      <div class="feature"><i class="fa-solid fa-certificate"></i><h4>Certificate of Completion</h4><p>Get a professional certificate after completing each course.</p></div>
+      <div class="feature"><i class="fa-solid fa-laptop-code"></i><h4>Project-Based Learning</h4><p>Hands-on exercises and real-world projects for each topic.</p></div>
+      <div class="feature"><i class="fa-solid fa-users"></i><h4>Community Support</h4><p>Join a growing community of learners and linguists.</p></div>
+      <div class="feature"><i class="fa-solid fa-comments"></i><h4>1-on-1 Mentorship</h4><p>Get personal feedback and guidance throughout your journey.</p></div>
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="testimonials" id="testimonials">
-    <h2>What Students Say</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial">“The best course I’ve taken in computational linguistics! Shoaib Sir makes even complex NLP easy to understand.”</div>
-      <div class="testimonial">“Loved the hands-on projects — especially the text processing and tense detection system!”</div>
-      <div class="testimonial">“Very clear explanations and practical tasks. Great for both linguists and programmers.”</div>
-    </div>
+  <!-- INSTRUCTOR -->
+  <section class="instructor" id="instructor">
+    <img src="images/instructor.png" alt="Muhammad Shoaib Tahir">
+    <h2>Muhammad Shoaib Tahir</h2>
+    <p>Computational Linguist and Researcher specializing in low-resource South Asian languages. Developed linguistic tools and NLP systems for Urdu and Punjabi with a focus on syntax, semantics, and automation.</p>
   </section>
 
-  <!-- Pricing Modal -->
-  <div class="pricing-modal" id="pricingModal">
-    <div class="pricing-content">
-      <h3 id="courseTitle"></h3>
-      <p class="price" id="coursePrice"></p>
-      <ul>
-        <li><i class="fa-solid fa-check"></i> 20+ Hours of Interactive Learning</li>
-        <li><i class="fa-solid fa-check"></i> Hands-on Projects</li>
-        <li><i class="fa-solid fa-check"></i> Downloadable Resources</li>
-        <li><i class="fa-solid fa-check"></i> Certificate of Completion</li>
-        <li><i class="fa-solid fa-check"></i> One-on-One Mentoring Sessions</li>
-        <li><i class="fa-solid fa-check"></i> Lifetime Access to Recorded Lectures</li>
-      </ul>
-      <a href="https://forms.gle/dc3hJ6NkMPkxtvzv8" target="_blank" class="enroll-btn">Enroll Now</a><br>
-      <button class="close-btn" onclick="closePricing()">Close</button>
-    </div>
-  </div>
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What is the duration of each course?</summary>
+      <p>Each course runs for 4–6 weeks with flexible schedules.</p>
+    </details>
+    <details>
+      <summary>Are there certificates available?</summary>
+      <p>Yes, certificates are provided upon successful completion.</p>
+    </details>
+    <details>
+      <summary>What tools are used in Corpus Linguistics?</summary>
+      <p>AntConc, SketchEngine, Python (NLTK, SpaCy), and custom scripts.</p>
+    </details>
+    <details>
+      <summary>Is prior programming experience required?</summary>
+      <p>No. Python course starts from zero and covers all fundamentals.</p>
+    </details>
+  </section>
 
-  <!-- Footer -->
-  <footer id="contact">
-    <p>© 2025 Muhammad Shoaib Tahir | All Rights Reserved</p>
-    <p>📩 <a href="mailto:muhammadshoaibtahir@gmail.com" style="color:#FFD700;">muhammadshoaibtahir@gmail.com</a></p>
+  <!-- FOOTER -->
+  <footer>
+    <p>Connect with me:</p>
     <div class="socials">
       <a href="https://github.com/MuhammadshoaibTahir"><i class="fab fa-github"></i></a>
       <a href="https://scholar.google.com/citations?user=YNAz_0kAAAAJ"><i class="fa-solid fa-graduation-cap"></i></a>
@@ -366,17 +432,54 @@
       <a href="https://www.linkedin.com/in/muhammad-shoaib-tahir-3a9103179/"><i class="fab fa-linkedin"></i></a>
       <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555"><i class="fab fa-facebook"></i></a>
     </div>
+    <p>&copy; 2025 Muhammad Shoaib Tahir</p>
   </footer>
 
+  <!-- COURSE MODALS -->
+  <div id="corpus" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('corpus')">&times;</span>
+      <h2>Corpus Linguistics</h2>
+      <p>Learn how to explore and analyze linguistic data using corpora. You'll cover corpus design, annotation, concordancing, and computational methods.</p>
+      <p><b>Price:</b> 6,500 PKR (≈ $23)</p>
+      <a href="https://forms.gle/dc3hJ6NkMPkxtvzv8" class="enroll-btn" target="_blank">Enroll Now</a>
+    </div>
+  </div>
+
+  <div id="computational" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('computational')">&times;</span>
+      <h2>Computational Linguistics</h2>
+      <p>Understand how computers process human language through syntax, semantics, and machine learning. Topics include tokenization, parsing, and NLP model building.</p>
+      <p><b>Price:</b> 19,500 PKR (≈ $70)</p>
+      <a href="https://forms.gle/dc3hJ6NkMPkxtvzv8" class="enroll-btn" target="_blank">Enroll Now</a>
+    </div>
+  </div>
+
+  <div id="python" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('python')">&times;</span>
+      <h2>Python Programming</h2>
+      <p>Master Python for linguistics, AI, and data science. Learn variables, loops, data structures, and automation with real-world mini-projects.</p>
+      <p><b>Price:</b> 15,000 PKR (≈ $53)</p>
+      <a href="https://forms.gle/dc3hJ6NkMPkxtvzv8" class="enroll-btn" target="_blank">Enroll Now</a>
+    </div>
+  </div>
+
   <script>
-    function showPricing(course, price) {
-      document.getElementById('pricingModal').style.display = 'flex';
-      document.getElementById('courseTitle').innerText = course;
-      document.getElementById('coursePrice').innerText = price;
+    function openModal(id) {
+      document.getElementById(id).style.display = "block";
     }
-    function closePricing() {
-      document.getElementById('pricingModal').style.display = 'none';
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
     }
+    window.onclick = function(event) {
+      const modals = document.querySelectorAll(".modal");
+      modals.forEach(modal => {
+        if (event.target === modal) modal.style.display = "none";
+      });
+    };
   </script>
+
 </body>
 </html>
