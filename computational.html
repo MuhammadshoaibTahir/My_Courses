@@ -4,8 +4,195 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Computational Linguistics | My Courses</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ========== Global ========== */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: #333;
+      background: #f7f9fb;
+    }
+
+    a { text-decoration: none; }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* ========== Navbar ========== */
+    .navbar {
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+
+    .logo {
+      font-size: 1.4em;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover, .active {
+      color: #f5b301;
+    }
+
+    /* ========== Hero ========== */
+    .course-hero {
+      position: relative;
+      height: 55vh;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .hero-text {
+      position: relative;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5em;
+    }
+
+    .hero-text .btn {
+      background: #f5b301;
+      color: #111;
+      padding: 12px 25px;
+      border-radius: 30px;
+      transition: background 0.3s;
+      font-weight: 600;
+    }
+
+    .hero-text .btn:hover {
+      background: #ffcc33;
+    }
+
+    /* ========== Intro ========== */
+    .intro {
+      padding: 50px 15%;
+      text-align: center;
+    }
+
+    .intro p {
+      line-height: 1.7;
+    }
+
+    /* ========== Course Card ========== */
+    .course-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .course-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 40px;
+      text-align: center;
+      max-width: 700px;
+      transition: transform 0.3s;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .course-card img {
+      width: 100%;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .details {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.6s ease, max-height 0.6s ease;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .details.active {
+      display: block;
+      opacity: 1;
+      max-height: 1000px;
+    }
+
+    .price-box {
+      background: #111;
+      color: #fff;
+      border-radius: 15px;
+      padding: 25px;
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .price-box h3 {
+      margin-top: 0;
+    }
+
+    .price {
+      font-size: 1.8em;
+      color: #f5b301;
+    }
+
+    .btn-toggle {
+      background: #f5b301;
+      border: none;
+      color: #111;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn-toggle:hover {
+      background: #ffcc33;
+    }
+
+    /* ========== Footer ========== */
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 25px 0;
+      margin-top: 60px;
+    }
+
+    footer .socials a {
+      color: #f5b301;
+      margin: 0 8px;
+      font-size: 1.3em;
+    }
+  </style>
 </head>
 <body>
 
@@ -20,52 +207,56 @@
     </ul>
   </nav>
 
-  <!-- Hero Banner -->
+  <!-- Hero -->
   <header class="course-hero" style="background-image: url('images/computational.png');">
     <div class="overlay"></div>
     <div class="hero-text">
       <h1>Computational Linguistics</h1>
       <p>Bridge the gap between language and technology with cutting-edge NLP skills</p>
-      <a href="#enroll" class="btn">Enroll Now</a>
+      <a href="#course" class="btn">Explore Course</a>
     </div>
   </header>
 
-  <!-- Course Intro -->
+  <!-- Intro -->
   <section class="intro">
     <h2>About the Course</h2>
     <p>
       This course introduces the fundamentals of <strong>Computational Linguistics</strong> — the 
-      science of making human language accessible to machines. From <em>natural language processing (NLP)</em> 
-      basics to advanced applications in AI, this course equips you with both theoretical knowledge 
-      and practical tools to work in one of the fastest-growing fields of technology.
+      science of making human language accessible to machines. Learn <em>Natural Language Processing (NLP)</em> 
+      techniques and get hands-on experience building AI language tools.
     </p>
   </section>
 
-  <!-- Course Outline -->
-  <section class="outline">
-    <h2>Course Outline</h2>
-    <div class="modules">
-      <div class="module"><i class="fa-solid fa-book"></i> Basics of Computational Linguistics</div>
-      <div class="module"><i class="fa-solid fa-filter"></i> Text Preprocessing & Tokenization</div>
-      <div class="module"><i class="fa-solid fa-spell-check"></i> POS Tagging & Parsing Techniques</div>
-      <div class="module"><i class="fa-solid fa-language"></i> Machine Translation Fundamentals</div>
-      <div class="module"><i class="fa-solid fa-microchip"></i> Applications in AI & NLP</div>
-    </div>
-  </section>
+  <!-- Interactive Course Card -->
+  <section class="course-section" id="course">
+    <div class="course-card">
+      <img src="images/computational.png" alt="Computational Linguistics">
+      <h2>Computational Linguistics Course</h2>
+      <p>Click below to see details and pricing</p>
+      <button class="btn-toggle" id="toggleBtn">Show Details</button>
 
-  <!-- Pricing & Enrollment -->
-  <section class="pricing" id="enroll">
-    <h2>Pricing & Enrollment</h2>
-    <div class="price-box">
-      <h3>Full Course Access</h3>
-      <p class="price">19,500 PKR / $70</p>
-      <ul>
-        <li><i class="fa-solid fa-check"></i> 20+ Hours of Video Content</li>
-        <li><i class="fa-solid fa-check"></i> Hands-on Projects</li>
-        <li><i class="fa-solid fa-check"></i> Downloadable Resources</li>
-        <li><i class="fa-solid fa-check"></i> Certificate of Completion</li>
-      </ul>
-      <a href="#" class="btn enroll-btn">Enroll Now</a>
+      <div class="details" id="courseDetails">
+        <h3>Course Outline</h3>
+        <ul style="text-align:left; list-style:none; padding:0; line-height:1.8;">
+          <li><i class="fa-solid fa-book"></i> Basics of Computational Linguistics</li>
+          <li><i class="fa-solid fa-filter"></i> Text Preprocessing & Tokenization</li>
+          <li><i class="fa-solid fa-spell-check"></i> POS Tagging & Parsing Techniques</li>
+          <li><i class="fa-solid fa-language"></i> Machine Translation Fundamentals</li>
+          <li><i class="fa-solid fa-microchip"></i> Applications in AI & NLP</li>
+        </ul>
+
+        <div class="price-box">
+          <h3>Full Course Access</h3>
+          <p class="price">19,500 PKR / $70</p>
+          <ul style="list-style:none; padding:0;">
+            <li><i class="fa-solid fa-check"></i> 20+ Hours of Video Content</li>
+            <li><i class="fa-solid fa-check"></i> Hands-on Projects</li>
+            <li><i class="fa-solid fa-check"></i> Downloadable Resources</li>
+            <li><i class="fa-solid fa-check"></i> Certificate of Completion</li>
+          </ul>
+          <a href="#" class="btn-toggle">Enroll Now</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -80,6 +271,19 @@
       <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555"><i class="fab fa-facebook"></i></a>
     </div>
   </footer>
+
+  <!-- ========== Script ========== -->
+  <script>
+    const btn = document.getElementById('toggleBtn');
+    const details = document.getElementById('courseDetails');
+
+    btn.addEventListener('click', () => {
+      details.classList.toggle('active');
+      btn.textContent = details.classList.contains('active')
+        ? 'Hide Details'
+        : 'Show Details';
+    });
+  </script>
 
 </body>
 </html>
