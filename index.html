@@ -64,7 +64,6 @@
       color: #f5b301;
     }
 
-    /* Dark Mode Button */
     .dark-toggle {
       background: #f5b301;
       color: #111;
@@ -75,7 +74,7 @@
       font-weight: 600;
     }
 
-    /* ---------------------- Hero Section ---------------------- */
+    /* ---------------------- Hero ---------------------- */
     .hero {
       height: 60vh;
       background-size: cover;
@@ -120,7 +119,7 @@
       background: #ffd43b;
     }
 
-    /* ---------------------- Courses Section ---------------------- */
+    /* ---------------------- Courses ---------------------- */
     .courses {
       text-align: center;
       padding: 60px 5%;
@@ -207,16 +206,6 @@
       animation: zoomIn 0.4s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
     .close {
       position: absolute;
       top: 12px;
@@ -266,6 +255,41 @@
       background: #ffd43b;
     }
 
+    /* ---------------------- FAQ Section ---------------------- */
+    .faq {
+      padding: 60px 10%;
+      background: #fff;
+    }
+
+    .faq h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .faq-item {
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f9f9f9;
+    }
+
+    .faq-question {
+      padding: 15px;
+      background: #f5b301;
+      color: #111;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 15px;
+      line-height: 1.6;
+      color: #444;
+      background: #fff;
+    }
+
     /* ---------------------- Footer ---------------------- */
     footer {
       background: #111;
@@ -285,7 +309,6 @@
       color: #fff;
     }
 
-    /* ---------------------- Floating Contact ---------------------- */
     .contact-float {
       position: fixed;
       bottom: 25px;
@@ -309,7 +332,6 @@
       background: #ffd43b;
     }
 
-    /* ---------------------- Dark Mode ---------------------- */
     body.dark {
       background: #111;
       color: #eee;
@@ -319,16 +341,12 @@
       background: #222;
     }
 
-    body.dark .course-card {
+    body.dark .course-card,
+    body.dark .modal-content,
+    body.dark .faq-answer {
       background: #1a1a1a;
       color: #eee;
     }
-
-    body.dark .modal-content {
-      background: #222;
-      color: #eee;
-    }
-
   </style>
 </head>
 <body>
@@ -338,7 +356,7 @@
     <div class="logo">My Courses</div>
     <ul class="nav-links">
       <li><a href="#courses">Courses</a></li>
-      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="dark-toggle" id="darkToggle">🌙 Dark</button>
@@ -358,13 +376,12 @@
   <section class="courses" id="courses">
     <h2>Available Courses</h2>
     <div class="course-container">
-
       <div class="course-card" onclick="openModal('corpus')">
         <span class="badge">Popular</span>
         <img src="images/corpus.png" alt="Corpus Linguistics">
         <h3>Corpus Linguistics</h3>
         <p>Analyze large text datasets to uncover linguistic patterns using corpus tools.</p>
-        <span class="price">6,500 PKR / $23</span>
+        <span class="price">PKR 16,800 / $60</span>
       </div>
 
       <div class="course-card" onclick="openModal('computational')">
@@ -372,7 +389,7 @@
         <img src="images/computational.png" alt="Computational Linguistics">
         <h3>Computational Linguistics</h3>
         <p>Bridge language and AI — learn NLP, tagging, parsing, and ML techniques.</p>
-        <span class="price">19,500 PKR / $70</span>
+        <span class="price">PKR 22,400 / $80</span>
       </div>
 
       <div class="course-card" onclick="openModal('python')">
@@ -380,52 +397,49 @@
         <img src="images/python.png" alt="Python Programming">
         <h3>Python Programming</h3>
         <p>Learn Python from scratch and apply it to data analysis, AI, and linguistics.</p>
-        <span class="price">15,000 PKR / $53</span>
+        <span class="price">PKR 28,000 / $100</span>
       </div>
     </div>
   </section>
 
-  <!-- Course Modals -->
-  <div id="corpus" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('corpus')">&times;</span>
-      <h2>Corpus Linguistics</h2>
-      <p>Explore quantitative and qualitative analysis of linguistic data using corpus tools like AntConc and Python.</p>
-      <table>
-        <tr><th>Price (PKR)</th><th>Price (USD)</th></tr>
-        <tr><td>6,500</td><td>$23</td></tr>
-      </table>
-      <button class="enroll-btn">Enroll Now</button>
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-question">What is Corpus Linguistics and Computational Linguistics?</div>
+      <div class="faq-answer">Corpus Linguistics studies language using large digital text collections, while Computational Linguistics develops computer systems that understand human language — forming the base of NLP (Natural Language Processing).</div>
     </div>
-  </div>
-
-  <div id="computational" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('computational')">&times;</span>
-      <h2>Computational Linguistics</h2>
-      <p>Learn text preprocessing, POS tagging, syntax parsing, and NLP-based AI development.</p>
-      <table>
-        <tr><th>Price (PKR)</th><th>Price (USD)</th></tr>
-        <tr><td>19,500</td><td>$70</td></tr>
-      </table>
-      <button class="enroll-btn">Enroll Now</button>
+    <div class="faq-item">
+      <div class="faq-question">Do I need programming knowledge to join?</div>
+      <div class="faq-answer">No prior programming experience is required. All courses start with Python basics before moving into applied NLP and linguistic analysis.</div>
     </div>
-  </div>
-
-  <div id="python" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('python')">&times;</span>
-      <h2>Python Programming</h2>
-      <p>Learn Python basics, data structures, libraries, and build practical projects step-by-step.</p>
-      <table>
-        <tr><th>Price (PKR)</th><th>Price (USD)</th></tr>
-        <tr><td>15,000</td><td>$53</td></tr>
-      </table>
-      <button class="enroll-btn">Enroll Now</button>
+    <div class="faq-item">
+      <div class="faq-question">What will I learn in each course?</div>
+      <div class="faq-answer"><b>Corpus Linguistics:</b> Learn corpus creation, frequency and collocation analysis, and tagging.<br><b>Computational Linguistics:</b> Focus on NLP, tagging, parsing, and AI text applications.<br><b>Python:</b> Learn Python fundamentals and apply it to data analysis and AI.</div>
     </div>
-  </div>
+    <div class="faq-item">
+      <div class="faq-question">Are classes live or recorded?</div>
+      <div class="faq-answer">Classes are live interactive sessions, but recordings are available after every session for self-paced review.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Do I get a certificate?</div>
+      <div class="faq-answer">Yes! You’ll receive a digital certificate upon completing all modules and assignments.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What are the exact prices?</div>
+      <div class="faq-answer"><b>Corpus Linguistics:</b> $60 ≈ PKR 16,800<br><b>Computational Linguistics:</b> $80 ≈ PKR 22,400<br><b>Python Programming:</b> $100 ≈ PKR 28,000</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Can I pay in installments?</div>
+      <div class="faq-answer">Yes, you can pay in two installments — 50% at registration and 50% in Week 3.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What tools will I learn?</div>
+      <div class="faq-answer">You’ll use Python, NLTK, spaCy, pandas, AntConc, and UAM CorpusTool for corpus analysis and NLP development.</div>
+    </div>
+  </section>
 
-  <!-- Floating Contact Button -->
+  <!-- Floating Contact -->
   <div class="contact-float" onclick="window.location.href='#contact'">
     <i class="fa-solid fa-comment"></i>
   </div>
@@ -445,26 +459,24 @@
 
   <!-- ---------------------- Script ---------------------- -->
   <script>
-    // Open and Close Modals
-    function openModal(id) {
-      document.getElementById(id).style.display = "flex";
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).style.display = "none";
-    }
-
-    window.onclick = function (event) {
-      document.querySelectorAll(".modal").forEach((modal) => {
-        if (event.target === modal) modal.style.display = "none";
-      });
-    };
+    // Open/Close Modals
+    function openModal(id){ document.getElementById(id).style.display="flex"; }
+    function closeModal(id){ document.getElementById(id).style.display="none"; }
+    window.onclick = function(e){ document.querySelectorAll(".modal").forEach(m=>{ if(e.target===m) m.style.display="none"; }); };
 
     // Dark Mode
     const darkToggle = document.getElementById("darkToggle");
-    darkToggle.addEventListener("click", () => {
+    darkToggle.addEventListener("click", ()=> {
       document.body.classList.toggle("dark");
       darkToggle.textContent = document.body.classList.contains("dark") ? "☀️ Light" : "🌙 Dark";
+    });
+
+    // FAQ Accordion
+    document.querySelectorAll(".faq-question").forEach(q=>{
+      q.addEventListener("click",()=>{
+        const ans=q.nextElementSibling;
+        ans.style.display = ans.style.display==="block" ? "none":"block";
+      });
     });
   </script>
 </body>
