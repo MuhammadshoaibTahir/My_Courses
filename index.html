@@ -1,121 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Courses - Muhammad Shoaib Tahir</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    /* Modal styling */
+    /* ---------------------- General Styles ---------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f7f8fa;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ---------------------- Navbar ---------------------- */
+    .navbar {
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #f5b301;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #f5b301;
+    }
+
+    /* Dark Mode Button */
+    .dark-toggle {
+      background: #f5b301;
+      color: #111;
+      padding: 6px 15px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* ---------------------- Hero Section ---------------------- */
+    .hero {
+      height: 60vh;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      color: #fff;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5em;
+    }
+
+    .hero-text p {
+      margin: 10px 0 20px;
+    }
+
+    .btn {
+      background: #f5b301;
+      color: #111;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #ffd43b;
+    }
+
+    /* ---------------------- Courses Section ---------------------- */
+    .courses {
+      text-align: center;
+      padding: 60px 5%;
+    }
+
+    .course-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .course-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .course-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .course-card h3 {
+      margin: 15px 0 5px;
+      color: #111;
+    }
+
+    .course-card p {
+      font-size: 0.9em;
+      padding: 0 10px;
+      color: #555;
+    }
+
+    .price {
+      display: block;
+      margin: 10px 0;
+      font-weight: bold;
+      color: #f5b301;
+    }
+
+    .course-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #f5b301;
+      color: #111;
+      padding: 5px 10px;
+      font-size: 0.8em;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    /* ---------------------- Modal ---------------------- */
     .modal {
       display: none;
       position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.4s ease;
     }
+
     .modal-content {
       background: #fff;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
+      border-radius: 15px;
+      padding: 25px;
+      width: 85%;
       max-width: 600px;
-      text-align: center;
       position: relative;
+      text-align: center;
+      animation: zoomIn 0.4s ease;
     }
-    .modal-content h2 {
-      margin-bottom: 15px;
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
     .close {
       position: absolute;
-      top: 10px;
+      top: 12px;
       right: 20px;
-      font-size: 22px;
-      font-weight: bold;
+      font-size: 25px;
       cursor: pointer;
+      color: #555;
+      transition: color 0.3s;
     }
-    .modal-content table {
+
+    .close:hover {
+      color: #111;
+    }
+
+    table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
+      margin: 20px 0;
     }
-    .modal-content table th, .modal-content table td {
+
+    table, th, td {
       border: 1px solid #ddd;
+    }
+
+    th, td {
       padding: 10px;
+      text-align: center;
     }
-    .modal-content table th {
-      background: #f5f5f5;
+
+    th {
+      background: #f5b301;
+      color: #111;
     }
+
+    .enroll-btn {
+      background: #f5b301;
+      color: #111;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .enroll-btn:hover {
+      background: #ffd43b;
+    }
+
+    /* ---------------------- Footer ---------------------- */
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    footer .socials a {
+      color: #f5b301;
+      margin: 0 10px;
+      font-size: 1.3em;
+      transition: color 0.3s;
+    }
+
+    footer .socials a:hover {
+      color: #fff;
+    }
+
+    /* ---------------------- Floating Contact ---------------------- */
+    .contact-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #f5b301;
+      color: #111;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 1000;
+    }
+
+    .contact-float:hover {
+      background: #ffd43b;
+    }
+
+    /* ---------------------- Dark Mode ---------------------- */
+    body.dark {
+      background: #111;
+      color: #eee;
+    }
+
+    body.dark .navbar {
+      background: #222;
+    }
+
+    body.dark .course-card {
+      background: #1a1a1a;
+      color: #eee;
+    }
+
+    body.dark .modal-content {
+      background: #222;
+      color: #eee;
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">My Courses</div>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
       <li><a href="#courses">Courses</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="dark-toggle" id="darkToggle">🌙 Dark</button>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero" style="background-image: url('Images/header.png');">
+  <!-- Hero -->
+  <header class="hero" style="background-image: url('images/header.png');">
     <div class="overlay"></div>
     <div class="hero-text">
       <h1>Learn with Muhammad Shoaib Tahir</h1>
-      <p>Offering <b>Corpus Linguistics</b>, <b>Computational Linguistics</b>, and <b>Python Programming</b></p>
+      <p>Master <b>Corpus Linguistics</b>, <b>Computational Linguistics</b>, & <b>Python Programming</b></p>
       <a href="#courses" class="btn">Explore Courses</a>
     </div>
   </header>
 
-  <!-- Courses Section -->
+  <!-- Courses -->
   <section class="courses" id="courses">
-    <h2>Our Courses</h2>
+    <h2>Available Courses</h2>
     <div class="course-container">
 
       <div class="course-card" onclick="openModal('corpus')">
+        <span class="badge">Popular</span>
         <img src="images/corpus.png" alt="Corpus Linguistics">
         <h3>Corpus Linguistics</h3>
-        <p>Understand language through large text corpora with modern tools and methods.</p>
-        <span class="price">6500 PKR / $23</span>
+        <p>Analyze large text datasets to uncover linguistic patterns using corpus tools.</p>
+        <span class="price">6,500 PKR / $23</span>
       </div>
 
       <div class="course-card" onclick="openModal('computational')">
+        <span class="badge">Advanced</span>
         <img src="images/computational.png" alt="Computational Linguistics">
         <h3>Computational Linguistics</h3>
-        <p>Explore how computers process and analyze natural language with AI techniques.</p>
-        <span class="price">19500 PKR / $70</span>
+        <p>Bridge language and AI — learn NLP, tagging, parsing, and ML techniques.</p>
+        <span class="price">19,500 PKR / $70</span>
       </div>
 
       <div class="course-card" onclick="openModal('python')">
+        <span class="badge">New</span>
         <img src="images/python.png" alt="Python Programming">
         <h3>Python Programming</h3>
-        <p>Learn Python programming from basics to advanced with practical projects.</p>
-        <span class="price">15000 PKR / $53</span>
+        <p>Learn Python from scratch and apply it to data analysis, AI, and linguistics.</p>
+        <span class="price">15,000 PKR / $53</span>
       </div>
-
     </div>
   </section>
 
-  <!-- Modals for each course -->
+  <!-- Course Modals -->
   <div id="corpus" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('corpus')">&times;</span>
       <h2>Corpus Linguistics</h2>
-      <p>Understand language through large text corpora with modern tools and methods.</p>
+      <p>Explore quantitative and qualitative analysis of linguistic data using corpus tools like AntConc and Python.</p>
       <table>
         <tr><th>Price (PKR)</th><th>Price (USD)</th></tr>
-        <tr><td>6500</td><td>$23</td></tr>
+        <tr><td>6,500</td><td>$23</td></tr>
       </table>
+      <button class="enroll-btn">Enroll Now</button>
     </div>
   </div>
 
@@ -123,11 +403,12 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('computational')">&times;</span>
       <h2>Computational Linguistics</h2>
-      <p>Explore how computers process and analyze natural language with AI techniques.</p>
+      <p>Learn text preprocessing, POS tagging, syntax parsing, and NLP-based AI development.</p>
       <table>
         <tr><th>Price (PKR)</th><th>Price (USD)</th></tr>
-        <tr><td>19500</td><td>$70</td></tr>
+        <tr><td>19,500</td><td>$70</td></tr>
       </table>
+      <button class="enroll-btn">Enroll Now</button>
     </div>
   </div>
 
@@ -135,12 +416,18 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('python')">&times;</span>
       <h2>Python Programming</h2>
-      <p>Learn Python programming from basics to advanced with practical projects.</p>
+      <p>Learn Python basics, data structures, libraries, and build practical projects step-by-step.</p>
       <table>
         <tr><th>Price (PKR)</th><th>Price (USD)</th></tr>
-        <tr><td>15000</td><td>$53</td></tr>
+        <tr><td>15,000</td><td>$53</td></tr>
       </table>
+      <button class="enroll-btn">Enroll Now</button>
     </div>
+  </div>
+
+  <!-- Floating Contact Button -->
+  <div class="contact-float" onclick="window.location.href='#contact'">
+    <i class="fa-solid fa-comment"></i>
   </div>
 
   <!-- Footer -->
@@ -153,25 +440,32 @@
       <a href="https://www.linkedin.com/in/muhammad-shoaib-tahir-3a9103179/"><i class="fab fa-linkedin"></i></a>
       <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555"><i class="fab fa-facebook"></i></a>
     </div>
-    <p>&copy; 2025 Muhammad Shoaib Tahir</p>
+    <p>&copy; 2025 Muhammad Shoaib Tahir | All Rights Reserved</p>
   </footer>
 
+  <!-- ---------------------- Script ---------------------- -->
   <script>
+    // Open and Close Modals
     function openModal(id) {
-      document.getElementById(id).style.display = "block";
+      document.getElementById(id).style.display = "flex";
     }
+
     function closeModal(id) {
       document.getElementById(id).style.display = "none";
     }
-    window.onclick = function(event) {
-      const modals = document.querySelectorAll(".modal");
-      modals.forEach(modal => {
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      });
-    }
-  </script>
 
+    window.onclick = function (event) {
+      document.querySelectorAll(".modal").forEach((modal) => {
+        if (event.target === modal) modal.style.display = "none";
+      });
+    };
+
+    // Dark Mode
+    const darkToggle = document.getElementById("darkToggle");
+    darkToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      darkToggle.textContent = document.body.classList.contains("dark") ? "☀️ Light" : "🌙 Dark";
+    });
+  </script>
 </body>
 </html>
