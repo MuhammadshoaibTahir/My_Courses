@@ -1,278 +1,513 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Courses - Linguistics & Programming</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Corpus & Computational Linguistics | Python | Portfolio Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d6b7b9.js" crossorigin="anonymous"></script>
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* -----------------------------
+       Base / Reset
+    ------------------------------*/
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #6dc6ff;
+      --accent-2: #7c5cff;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 14px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg,#071022 0%, #081428 50%, #04121b 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:80px;
+    }
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    a{color:var(--accent); text-decoration:none}
 
-<style>
-/* --- Reset & Base --- */
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif; scroll-behavior:smooth; }
-body { background:#f9f9f9; color:#333; line-height:1.6; }
-a { text-decoration:none; color:inherit; }
-button { cursor:pointer; border:none; font-family:'Roboto', sans-serif; }
+    /* -----------------------------
+       Layout & Navigation
+    ------------------------------*/
+    .container{max-width:1200px;margin:0 auto;padding:28px}
+    header{position:sticky;top:12px;z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px 18px;border-radius:12px;box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#04121b;font-weight:800;font-size:18px}
+    .brand h1{font-size:16px;margin:0}
+    .nav-links{display:flex;gap:12px;align-items:center}
+    .nav-links a{padding:8px 12px;border-radius:10px;font-weight:600;color:var(--muted)}
+    .nav-links a:hover{color:#fff;background:var(--glass)}
+    .cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 14px;border-radius:10px;color:#04121b;font-weight:700}
 
-/* --- Header --- */
-header { 
-  background:#111827; color:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center;
-  position:sticky; top:0; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,0.3);
-  transition:0.3s;
-}
-header.scrolled { background:#0f172a; box-shadow:0 4px 20px rgba(0,0,0,0.4); }
-header h1 { font-size:1.9rem; color:#facc15; letter-spacing:1px; }
-nav ul { list-style:none; display:flex; gap:2rem; }
-nav ul li a { color:#fff; font-weight:500; position:relative; padding-bottom:2px; }
-nav ul li a::after { content:''; position:absolute; width:0; height:2px; background:#facc15; bottom:0; left:0; transition:0.3s; }
-nav ul li a:hover::after, nav ul li a.active::after { width:100%; }
+    /* Mobile nav */
+    .menu-toggle{display:none}
 
-/* --- Hero Section --- */
-.hero {
-  width:100%; min-height:100vh; display:flex; justify-content:center; align-items:center;
-  text-align:center; color:#fff; position:relative; background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/bg.jpg') center/cover no-repeat;
-  overflow:hidden;
-}
-.hero-content { max-width:900px; padding:0 2rem; position:relative; }
-.hero h2 { font-size:4rem; margin-bottom:1rem; text-shadow:2px 2px 10px rgba(0,0,0,0.7); animation:fadeInDown 1s forwards; }
-.hero p { font-size:1.5rem; margin-bottom:2rem; text-shadow:1px 1px 5px rgba(0,0,0,0.6); animation:fadeIn 1.5s forwards; }
-.hero a { background:linear-gradient(45deg,#facc15,#eab308); color:#111827; padding:1rem 2rem; border-radius:50px; font-weight:bold; font-size:1.2rem; display:inline-block; transition:0.3s; animation:fadeIn 2s forwards; }
-.hero a:hover { transform:scale(1.05); }
+    /* -----------------------------
+       Hero
+    ------------------------------*/
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;margin:36px 0}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;box-shadow:0 8px 40px rgba(3,8,22,0.6)}
+    .hero h2{font-size:28px;margin:0 0 8px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:999px;font-weight:700;color:var(--accent);font-size:13px}
 
-/* --- Sections --- */
-section { padding:5rem 2rem; max-width:1200px; margin:auto; opacity:0; transform:translateY(50px); transition:0.8s; }
-section.visible { opacity:1; transform:translateY(0); }
-h2.section-title { text-align:center; margin-bottom:3rem; font-size:3rem; color:#111827; position:relative; }
-h2.section-title::after { content:""; width:80px; height:4px; background:#facc15; display:block; margin:10px auto 0; border-radius:2px; }
+    /* Features and cards */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+    .course-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px}
+    .course-card h3{margin:6px 0}
+    .course-meta{display:flex;gap:12px;color:var(--muted);font-size:13px}
 
-/* --- Courses --- */
-.courses { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2.5rem; }
-.course-card { background:#fff; border-radius:20px; padding:2rem; box-shadow:0 10px 30px rgba(0,0,0,0.1); transition:0.5s; text-align:center; cursor:pointer; position:relative; overflow:hidden; }
-.course-card:hover { transform:translateY(-15px); box-shadow:0 20px 50px rgba(0,0,0,0.2); }
-.course-card img { width:100px; margin-bottom:1rem; transition:0.5s; }
-.course-card img:hover { transform:scale(1.15); }
-.course-card h3 { color:#facc15; margin-bottom:0.5rem; font-size:1.8rem; }
-.course-card p { color:#555; margin-bottom:1rem; }
-.progress-bar { height:8px; background:#f3f4f6; border-radius:50px; overflow:hidden; margin-top:1rem; }
-.progress-bar span { display:block; height:100%; width:0; background:#facc15; border-radius:50px; animation:loadProgress 2s forwards; }
-@keyframes loadProgress { from {width:0} to {width:80%} }
+    /* Curriculum / Accordion */
+    .accordion{margin-top:18px}
+    .acc-item{background:var(--glass);border-radius:12px;padding:12px;margin-bottom:8px}
+    .acc-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+    .acc-body{max-height:0;overflow:hidden;transition:all .32s ease;padding-top:0}
+    .acc-body.open{padding-top:12px;max-height:600px}
 
-/* --- Modal --- */
-.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:10000; }
-.modal-content { background:#fff; border-radius:15px; padding:2rem; max-width:600px; width:90%; animation:fadeInUp 0.5s forwards; position:relative; }
-.modal-content h3 { color:#facc15; margin-bottom:1rem; text-align:center; }
-.close-modal { position:absolute; top:10px; right:15px; font-size:1.5rem; cursor:pointer; color:#333; transition:0.3s; }
-.close-modal:hover { color:#facc15; }
+    /* Instructor & testimonials */
+    .instructors{display:flex;gap:14px;align-items:center}
+    .ins-card{display:flex;gap:12px;align-items:center;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px}
+    .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#fff2 0%, #fff2 100%);display:flex;align-items:center;justify-content:center;font-weight:700;color:#04121b}
 
-/* --- Pricing --- */
-.pricing { display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; }
-.price-card { background:#fff; border:2px solid #facc15; padding:2rem; border-radius:20px; width:300px; text-align:center; transition:0.5s; position:relative; overflow:hidden; }
-.price-card.best { border-width:4px; transform:scale(1.05); }
-.price-card:hover { transform:translateY(-10px); box-shadow:0 20px 40px rgba(0,0,0,0.2); }
-.price-card h3 { margin-bottom:1rem; color:#111827; font-size:1.6rem; }
-.price-card button { background:linear-gradient(45deg,#facc15,#eab308); color:#111827; padding:0.8rem 1.5rem; border-radius:50px; font-weight:bold; transition:0.3s; }
-.price-card button:hover { transform:scale(1.05); }
+    /* CTA strip */
+    .cta-strip{margin:26px 0;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(124,92,255,0.12), rgba(109,198,255,0.06));display:flex;align-items:center;justify-content:space-between}
 
-/* --- FAQ --- */
-.faq { max-width:800px; margin:auto; }
-.faq-item { margin-bottom:1.5rem; border-bottom:1px solid #ddd; padding-bottom:1rem; }
-.faq-item h4 { cursor:pointer; position:relative; padding-right:25px; color:#111827; }
-.faq-item h4::after { content:'+'; position:absolute; right:0; top:0; font-size:1.5rem; transition:0.3s; }
-.faq-item.active h4::after { transform:rotate(45deg); }
-.faq-item p { display:none; margin-top:0.5rem; color:#555; }
-.faq-item.active p { display:block; }
+    /* Pricing & features */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .price{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));text-align:center}
+    .price h4{margin:0 0 8px}
+    .price .amount{font-size:22px;font-weight:800}
 
-/* --- Contact --- */
-.contact p { text-align:center; margin-bottom:1rem; }
-.social { text-align:center; margin-top:1rem; }
-.social a { color:#111827; margin:0 0.5rem; font-size:1.8rem; transition:0.3s; }
-.social a:hover { color:#facc15; transform:scale(1.3); }
+    /* Portfolio gallery */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .gallery-item{height:140px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;font-weight:700}
 
-/* --- Footer --- */
-footer { background:#111827; color:#fff; padding:2rem; text-align:center; }
+    /* FAQ */
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-/* --- Animations --- */
-@keyframes fadeInUp { 0% {opacity:0; transform:translateY(50px);} 100%{opacity:1; transform:translateY(0);} }
-@keyframes fadeInDown { 0% {opacity:0; transform:translateY(-50px);} 100%{opacity:1; transform:translateY(0);} }
-@keyframes fadeIn { 0% {opacity:0;} 100%{opacity:1;} }
+    /* Footer */
+    footer{margin-top:36px;padding:24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
 
-/* --- Responsive --- */
-@media(max-width:768px){
-  .hero h2 { font-size:2.5rem; }
-  .hero p { font-size:1.2rem; }
-  .courses { grid-template-columns:1fr; }
-  .pricing { flex-direction:column; align-items:center; }
-}
-</style>
+    /* Responsive */
+    @media (max-width: 1000px){
+      .hero{grid-template-columns:1fr;}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+      .pricing{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width: 720px){
+      .nav-links{display:none}
+      .menu-toggle{display:block;background:transparent;border:0;color:var(--muted);font-size:20px}
+      .grid-3{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.03)}
+    button{cursor:pointer}
+
+    /* Tiny form styles */
+    .form-row{display:flex;gap:12px}
+    .form-control{width:100%;padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit}
+
+    /* progress bar modal */
+    .progress-wrap{width:100%;background:rgba(255,255,255,0.03);height:12px;border-radius:999px;overflow:hidden}
+    .progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .6s ease}
+
+    /* accessibility focus */
+    a:focus, button:focus, input:focus{outline:2px dashed rgba(124,92,255,0.22);outline-offset:3px}
+  </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="brand">
+          <div class="logo">CL</div>
+          <div>
+            <h1>Corpus Lab</h1>
+            <div class="small muted">Corpus & Computational Linguistics · Python · Portfolio</div>
+          </div>
+        </div>
 
-<header>
-  <h1>MyCourses</h1>
-  <nav>
-    <ul>
-      <li><a href="#courses" class="active">Courses</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+        <div class="nav-links" aria-hidden="false">
+          <a href="#courses">Courses</a>
+          <a href="#curriculum">Curriculum</a>
+          <a href="#instructors">Instructors</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </div>
 
-<section class="hero">
-  <div class="hero-content">
-    <h2>Learn Linguistics & Programming</h2>
-    <p>Curated courses in Corpus Linguistics, Computational Linguistics, Python Programming & Portfolio Development.</p>
-    <a href="#courses">Explore Courses</a>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="pill" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Ask a question</button>
+          <a class="cta" href="#enroll">Enroll</a>
+          <button class="menu-toggle" aria-expanded="false" aria-controls="mobilenav" onclick="toggleMobile()"><i class="fa fa-bars"></i></button>
+        </div>
+      </nav>
+
+      <!-- Mobile nav (hidden by default) -->
+      <div id="mobilenav" style="display:none;margin-top:12px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <a href="#courses">Courses</a>
+          <a href="#curriculum">Curriculum</a>
+          <a href="#instructors">Instructors</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-card">
+          <div class="badges"><div class="badge">Live & Recorded</div><div class="badge">Certificate</div><div class="badge">Hands-on</div></div>
+          <h2>Learn Corpus & Computational Linguistics — with Python and a Portfolio</h2>
+          <p>Practical, project-based training in corpus construction, annotation, NLP pipelines, and Python programming — designed for linguists, researchers, and developers.</p>
+          <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
+            <a class="cta" href="#enroll">Get Started</a>
+            <button class="pill" onclick="openSyllabus()">Download syllabus</button>
+            <div class="muted small">Next cohort: <strong>Oct 15, 2025</strong></div>
+          </div>
+
+          <div class="grid-3">
+            <div class="course-card">
+              <h3>Corpus & Comp. Linguistics</h3>
+              <div class="course-meta"><span><i class="fa fa-clock"></i> 8 weeks</span><span>·</span><span>Project</span></div>
+              <p class="muted small">Build annotated corpora, learn annotation schema, apply statistical analysis and visualization for linguistic research.</p>
+            </div>
+            <div class="course-card">
+              <h3>Python for NLP</h3>
+              <div class="course-meta"><span><i class="fa fa-code"></i> 6 weeks</span><span>·</span><span>Hands-on</span></div>
+              <p class="muted small">From Python basics to advanced text processing: tokenization, POS, parsing, embeddings, transformers and deployment.</p>
+            </div>
+            <div class="course-card">
+              <h3>Portfolio Development</h3>
+              <div class="course-meta"><span><i class="fa fa-briefcase"></i> 4 weeks</span><span>·</span><span>Career</span></div>
+              <p class="muted small">Turn course projects into a professional portfolio website and GitHub-ready repositories.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside style="position:relative">
+          <div class="hero-card" style="padding:20px;">
+            <h4 style="margin:0 0 8px">Course at a glance</h4>
+            <div class="small muted">Format</div>
+            <ul class="muted small">
+              <li>Live sessions (recorded)</li>
+              <li>Weekly assignments & capstone</li>
+              <li>Certificate on completion</li>
+            </ul>
+
+            <div style="margin-top:12px">
+              <div class="small muted">Your progress</div>
+              <div class="progress-wrap" style="margin-top:8px"><div id="progress" class="progress-bar" style="width:36%"></div></div>
+              <div class="small muted" style="margin-top:8px">36% complete • <button class="pill" onclick="simulateProgress()">Mark lesson done</button></div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+              <button class="pill" onclick="openCourse('corpus')">View Corpus</button>
+              <button class="pill" onclick="openCourse('python')">View Python</button>
+              <button class="pill" onclick="openCourse('portfolio')">View Portfolio</button>
+            </div>
+          </div>
+
+          <div class="hero-card" style="margin-top:12px;padding:12px;">
+            <h4 style="margin:0">Scholarships & Group Discounts</h4>
+            <p class="muted small">Need-based scholarships and team discounts available — contact us for details.</p>
+            <button class="cta" style="margin-top:8px" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Apply</button>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Curriculum -->
+      <section id="curriculum">
+        <div class="hero-card" style="margin-bottom:18px">
+          <h2 style="margin-top:0">Curriculum & Weekly Plan</h2>
+          <p class="muted">A modular curriculum across three specializations. Each module contains lectures, readings, lab assignments and a mini-project.</p>
+
+          <div class="accordion">
+            <div class="acc-item">
+              <div class="acc-head" onclick="toggleAcc(0)">
+                <div><strong>Module 1 — Corpus Creation & Annotation</strong><div class="small muted">Annotation, tools, metadata, formats</div></div>
+                <div><i class="fa fa-chevron-down"></i></div>
+              </div>
+              <div class="acc-body" id="acc-0">
+                <ul class="muted small">
+                  <li>Week 1: Corpus design, sampling, ethics</li>
+                  <li>Week 2: Annotation schema, inter-annotator agreement</li>
+                  <li>Week 3: Tools: ELAN, Praat, WebAnno, INCEpTION</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="acc-item">
+              <div class="acc-head" onclick="toggleAcc(1)">
+                <div><strong>Module 2 — Python for Text</strong><div class="small muted">From basics to NLP pipelines</div></div>
+                <div><i class="fa fa-chevron-down"></i></div>
+              </div>
+              <div class="acc-body" id="acc-1">
+                <ul class="muted small">
+                  <li>Week 4: Python basics, data structures, file I/O</li>
+                  <li>Week 5: Tokenization, normalization, regex</li>
+                  <li>Week 6: POS tagging, parsing, NLTK & spaCy</li>
+                  <li>Week 7: Word embeddings & transformers (Hugging Face)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="acc-item">
+              <div class="acc-head" onclick="toggleAcc(2)">
+                <div><strong>Module 3 — Portfolio & Deployment</strong><div class="small muted">GitHub, demo apps, docs</div></div>
+                <div><i class="fa fa-chevron-down"></i></div>
+              </div>
+              <div class="acc-body" id="acc-2">
+                <ul class="muted small">
+                  <li>Week 8: Project wrap-up, portfolio assembly, CV & LinkedIn</li>
+                  <li>Week 9: Build a demo web app for your project</li>
+                  <li>Week 10: Interview prep and publishing</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Instructors -->
+      <section id="instructors">
+        <div class="hero-card">
+          <h2 style="margin-top:0">Instructors</h2>
+          <div class="instructors">
+            <div class="ins-card">
+              <div class="avatar">AS</div>
+              <div>
+                <div style="font-weight:700">Dr. Ayesha Siddiq</div>
+                <div class="small muted">PhD in Computational Linguistics — Corpus Design & Annotation</div>
+              </div>
+            </div>
+
+            <div class="ins-card">
+              <div class="avatar">SM</div>
+              <div>
+                <div style="font-weight:700">Syed Mahmood</div>
+                <div class="small muted">Senior NLP Engineer — Python, Pipelines & Transformers</div>
+              </div>
+            </div>
+
+            <div class="ins-card">
+              <div class="avatar">RK</div>
+              <div>
+                <div style="font-weight:700">Rana Khan</div>
+                <div class="small muted">Product & Portfolio Coach — Git/GitHub, Deployment</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio gallery -->
+      <section id="portfolio" style="margin-top:18px">
+        <div class="hero-card">
+          <h2 style="margin-top:0">Student Portfolio Gallery</h2>
+          <p class="muted small">Examples of final projects past cohorts have built — click any item to preview.</p>
+          <div class="gallery" role="list">
+            <div class="gallery-item" onclick="previewProject('Fake News Detection')">Fake News Detection</div>
+            <div class="gallery-item" onclick="previewProject('POS Tagger Demo')">POS Tagger Demo</div>
+            <div class="gallery-item" onclick="previewProject('Dialect Analysis')">Dialect Analysis</div>
+            <div class="gallery-item" onclick="previewProject('Speech Corpus')">Speech Corpus</div>
+            <div class="gallery-item" onclick="previewProject('Sentiment App')">Sentiment App</div>
+            <div class="gallery-item" onclick="previewProject('Annotation Tool')">Annotation Tool</div>
+            <div class="gallery-item" onclick="previewProject('Embeddings Viz')">Embeddings Viz</div>
+            <div class="gallery-item" onclick="previewProject('Transformer Fine-tune')">Transformer Fine-tune</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing" style="margin-top:18px">
+        <div class="hero-card">
+          <h2 style="margin-top:0">Pricing & Enrollment</h2>
+          <div class="pricing">
+            <div class="price">
+              <h4>Essential</h4>
+              <div class="amount">$199</div>
+              <div class="muted small">Access to recorded lectures & community</div>
+              <div style="margin-top:12px"><button class="pill" onclick="enroll('Essential')">Enroll</button></div>
+            </div>
+            <div class="price">
+              <h4>Pro</h4>
+              <div class="amount">$499</div>
+              <div class="muted small">Live sessions, assignments, certificate</div>
+              <div style="margin-top:12px"><button class="cta" onclick="enroll('Pro')">Enroll</button></div>
+            </div>
+            <div class="price">
+              <h4>Professional</h4>
+              <div class="amount">$899</div>
+              <div class="muted small">1:1 mentoring, portfolio review, job support</div>
+              <div style="margin-top:12px"><button class="pill" onclick="enroll('Professional')">Enroll</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ & contact -->
+      <section style="margin-top:18px">
+        <div class="hero-card">
+          <h2 style="margin-top:0">Frequently Asked Questions</h2>
+          <div class="faq">
+            <div>
+              <strong>Do I need programming experience?</strong>
+              <div class="muted small">No — the Python track starts from basics and moves to advanced topics with hands-on labs.</div>
+            </div>
+            <div>
+              <strong>Will I get a certificate?</strong>
+              <div class="muted small">Yes. A verified certificate is provided on completion of the Pro and Professional plans.</div>
+            </div>
+            <div>
+              <strong>Are scholarships available?</strong>
+              <div class="muted small">Yes — limited spots. Apply through the contact form.</div>
+            </div>
+            <div>
+              <strong>What is the time commitment?</strong>
+              <div class="muted small">4-8 hours per week on average, depending on the track and assignments.</div>
+            </div>
+          </div>
+
+          <div id="contact" style="margin-top:18px">
+            <h3>Contact & Apply</h3>
+            <form onsubmit="submitForm(event)">
+              <div class="form-row">
+                <input class="form-control" type="text" id="name" placeholder="Your full name" required />
+                <input class="form-control" type="email" id="email" placeholder="Email address" required />
+              </div>
+              <div style="margin-top:8px">
+                <input class="form-control" type="text" id="subject" placeholder="Subject (e.g. Scholarship)" />
+              </div>
+              <div style="margin-top:8px">
+                <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your background & why you want to join"></textarea>
+              </div>
+
+              <div style="display:flex;gap:10px;margin-top:10px;align-items:center">
+                <button class="cta" id="enroll" type="submit">Submit Application</button>
+                <button type="button" class="pill" onclick="saveDraft()">Save draft</button>
+                <div class="muted small" id="form-status"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap">
+          <div>
+            <div style="font-weight:700">Corpus Lab</div>
+            <div class="muted small">Building linguistics-skilled practitioners with engineering-grade skills.</div>
+          </div>
+          <div style="display:flex;gap:18px;align-items:center">
+            <a class="small muted" href="#">Privacy</a>
+            <a class="small muted" href="#">Terms</a>
+            <a class="small muted" href="#">Support</a>
+          </div>
+        </div>
+      </footer>
+
+    </main>
   </div>
-</section>
 
-<section id="courses">
-  <h2 class="section-title">Our Courses</h2>
-  <div class="courses">
-    <div class="course-card" onclick="openModal('modal1')">
-      <img src="images/corpus.png" alt="Corpus Linguistics">
-      <h3>Corpus Linguistics</h3>
-      <p>Text analysis & data-driven language research.</p>
-      <div class="progress-bar"><span></span></div>
-    </div>
-    <div class="course-card" onclick="openModal('modal2')">
-      <img src="images/computational.png" alt="Computational Linguistics">
-      <h3>Computational Linguistics</h3>
-      <p>NLP & AI-based linguistic analysis.</p>
-      <div class="progress-bar"><span></span></div>
-    </div>
-    <div class="course-card" onclick="openModal('modal3')">
-      <img src="images/python.png" alt="Python Programming">
-      <h3>Python Programming</h3>
-      <p>Master Python from basics to advanced.</p>
-      <div class="progress-bar"><span></span></div>
-    </div>
-    <div class="course-card" onclick="openModal('modal4')">
-      <img src="images/github.png" alt="Portfolio Development">
-      <h3>Portfolio Development</h3>
-      <p>Build professional portfolios with projects.</p>
-      <div class="progress-bar"><span></span></div>
-    </div>
-  </div>
-</section>
+  <!-- Light JS for interactions (no dependency) -->
+  <script>
+    function toggleMobile(){
+      const nav=document.getElementById('mobilenav');
+      const btn=document.querySelector('.menu-toggle');
+      if(nav.style.display==='none' || nav.style.display===''){
+        nav.style.display='block'; btn.setAttribute('aria-expanded','true');
+      } else {nav.style.display='none'; btn.setAttribute('aria-expanded','false')}
+    }
 
-<!-- Modals -->
-<div class="modal" id="modal1">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('modal1')">&times;</span>
-    <h3>Corpus Linguistics</h3>
-    <p>Deep dive into corpus creation, annotation, text analysis, and hands-on projects.</p>
-    <p>Duration: 6 weeks | Certificate Provided | Beginner Friendly</p>
-  </div>
-</div>
+    function toggleAcc(i){
+      const el=document.getElementById('acc-'+i);
+      if(!el) return;
+      el.classList.toggle('open');
+    }
 
-<div class="modal" id="modal2">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('modal2')">&times;</span>
-    <h3>Computational Linguistics</h3>
-    <p>Learn NLP, parsing, language modeling, and AI-based linguistic tools.</p>
-    <p>Duration: 8 weeks | Certificate Provided | Basic Knowledge Recommended</p>
-  </div>
-</div>
+    function simulateProgress(){
+      const p=document.getElementById('progress');
+      let current=parseInt(p.style.width)||0;
+      current = Math.min(100,current+12);
+      p.style.width = current + '%';
+    }
 
-<div class="modal" id="modal3">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('modal3')">&times;</span>
-    <h3>Python Programming</h3>
-    <p>Python basics to advanced applications including NLP, data analysis, and automation.</p>
-    <p>Duration: 6 weeks | Certificate Provided | No Prior Knowledge Needed</p>
-  </div>
-</div>
+    function openCourse(slug){
+      alert('Open course details: '+slug+' (This demo page can be wired to modals).');
+    }
 
-<div class="modal" id="modal4">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('modal4')">&times;</span>
-    <h3>Portfolio Development</h3>
-    <p>Build a professional portfolio showcasing your skills and projects.</p>
-    <p>Duration: 4 weeks | Certificate Provided | Beginner Friendly</p>
-  </div>
-</div>
+    function previewProject(name){
+      alert('Preview project: '+name+'. For a live site this would open a project modal or link to the GitHub repo.');
+    }
 
-<section id="pricing">
-  <h2 class="section-title">Pricing</h2>
-  <div class="pricing">
-    <div class="price-card">
-      <h3>Basic</h3>
-      <p>$50 - Single Course</p>
-      <button>Enroll</button>
-    </div>
-    <div class="price-card best">
-      <h3>Standard</h3>
-      <p>$120 - Two Courses</p>
-      <button>Enroll</button>
-    </div>
-    <div class="price-card">
-      <h3>Premium</h3>
-      <p>$200 - All Courses</p>
-      <button>Enroll</button>
-    </div>
-  </div>
-</section>
+    function openSyllabus(){
+      // This is a placeholder for a real download link. Replace with server file when available.
+      const text = `Syllabus - Corpus & Computational Linguistics\n\nModules:\n1) Corpus design\n2) Annotation\n3) Python for NLP\n4) Transformers & Deployment\n`;
+      const blob=new Blob([text],{type:'text/plain'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url; a.download='syllabus.txt'; document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
 
-<section id="faq">
-  <h2 class="section-title">Frequently Asked Questions</h2>
-  <div class="faq">
-    <div class="faq-item">
-      <h4>Do I need prior knowledge?</h4>
-      <p>No prior knowledge is required. Courses start from basics to advanced levels.</p>
-    </div>
-    <div class="faq-item">
-      <h4>Can I get a certificate?</h4>
-      <p>Yes, a digital certificate is provided upon course completion.</p>
-    </div>
-    <div class="faq-item">
-      <h4>How long are the courses?</h4>
-      <p>Courses vary from 4 to 8 weeks depending on content and learning pace.</p>
-    </div>
-  </div>
-</section>
+    function enroll(plan){
+      const name = prompt('Enter your full name to enroll in '+plan+':');
+      if(!name) return alert('Enrollment cancelled');
+      alert('Thanks '+name+'! We received your request to enroll in the '+plan+' plan. We will contact you at the email you provide.');
+    }
 
-<section id="contact">
-  <h2 class="section-title">Contact & Follow Us</h2>
-  <p class="contact">Follow us on social media and stay updated!</p>
-  <div class="social">
-    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-  </div>
-</section>
+    function saveDraft(){
+      const name=document.getElementById('name').value;
+      const msg=document.getElementById('message').value;
+      const draft = {name:name||'', message:msg||'', savedAt: new Date().toISOString()};
+      localStorage.setItem('corpuslab-draft', JSON.stringify(draft));
+      const s=document.getElementById('form-status'); s.textContent='Draft saved locally';
+      setTimeout(()=>s.textContent='',2500);
+    }
 
-<footer>
-  <p>&copy; 2025 MyCourses. All Rights Reserved.</p>
-</footer>
+    function submitForm(e){
+      e.preventDefault();
+      const name=document.getElementById('name').value;
+      const email=document.getElementById('email').value;
+      const subject=document.getElementById('subject').value;
+      const message=document.getElementById('message').value;
+      // In a real website you'd POST this to your server. Here we just simulate success.
+      document.getElementById('form-status').textContent='Sending...';
+      setTimeout(()=>{
+        document.getElementById('form-status').textContent='Application submitted. Check your email: ' + (email||'[no email provided]');
+        document.querySelector('form').reset();
+      },900);
+    }
 
-<script>
-// Header scroll effect
-window.addEventListener('scroll', () => {
-  document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
-});
-
-// FAQ toggle
-document.querySelectorAll('.faq-item').forEach(item => {
-  item.querySelector('h4').addEventListener('click', () => item.classList.toggle('active'));
-});
-
-// Scroll animations
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold:0.1 });
-document.querySelectorAll('section').forEach(section => observer.observe(section));
-
-// Modal functions
-function openModal(id){ document.getElementById(id).style.display='flex'; }
-function closeModal(id){ document.getElementById(id).style.display='none'; }
-window.onclick = e => { if(e.target.classList.contains('modal')) e.target.style.display='none'; }
-</script>
+    // keyboard accessibility for accordions
+    document.querySelectorAll('.acc-head').forEach((h, idx)=>{
+      h.addEventListener('keydown', (e)=>{
+        if(e.key==='Enter' || e.key===' ') { e.preventDefault(); toggleAcc(idx); }
+      });
+    });
+  </script>
 </body>
 </html>
