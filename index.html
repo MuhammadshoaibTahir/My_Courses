@@ -1,649 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Courses</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio & Courses</title>
 
-  <!-- Font Awesome -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" crossorigin="anonymous"></script>
+<!-- Font Awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" crossorigin="anonymous"></script>
 
-  <!-- CSS -->
-  <style>
-    /* =========================
-       Global Variables & Reset
-    ========================= */
-    :root {
-      --primary: #0077cc;
-      --primary-dark: #005fa3;
-      --gold: #FFD700;
-      --gold-dark: #e6c200;
-      --text-dark: #222;
-      --text-light: #555;
-      --bg-light: #f4faff;
-      --bg-dark: #111;
-      --white: #fff;
-      --shadow: 0 8px 20px rgba(0,0,0,0.15);
-      --radius: 12px;
-      --transition: all 0.3s ease;
-    }
+<!-- CSS -->
+<style>
+/* =========================
+   Global Variables & Reset
+========================= */
+:root {
+  --primary:#0077cc;
+  --primary-dark:#005fa3;
+  --gold:#FFD700;
+  --gold-dark:#e6c200;
+  --text-dark:#222;
+  --text-light:#555;
+  --bg-light:#f4faff;
+  --bg-dark:#111;
+  --white:#fff;
+  --shadow:0 8px 20px rgba(0,0,0,0.15);
+  --radius:12px;
+  --transition:all 0.3s ease;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Arial, sans-serif;
-      scroll-behavior: smooth;
-    }
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif;scroll-behavior:smooth;}
 
-    /* =========================
-       Navbar
-    ========================= */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,0.7);
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(8px);
-    }
+/* =========================
+   Navbar
+========================= */
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(0,0,0,0.85);padding:15px 30px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(8px);}
+.navbar .logo{font-size:1.7rem;font-weight:bold;color:var(--gold);letter-spacing:1px;}
+.nav-links{display:flex;list-style:none;gap:25px;}
+.nav-links a{text-decoration:none;color:var(--white);font-weight:500;position:relative;transition:var(--transition);}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--gold);transition:width 0.3s;}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active{color:var(--gold);}
+.burger{display:none;color:#fff;font-size:1.5rem;cursor:pointer;}
 
-    .navbar .logo {
-      font-size: 1.7rem;
-      font-weight: bold;
-      color: var(--gold);
-      letter-spacing: 1px;
-    }
+/* =========================
+   Hero Sections
+========================= */
+.hero{height:90vh;display:flex;justify-content:center;align-items:center;text-align:center;color:var(--white);background-size:cover;background-position:center;position:relative;}
+.hero.large-hero{background-image:url('images/hero-bg-large.jpg');}
+.hero.small-hero{background-image:url('images/hero-bg-small.jpg');height:60vh;}
+.hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);}
+.hero-text{position:relative;z-index:2;padding:0 20px;}
+.hero-text h1{font-size:3.5rem;font-weight:800;line-height:1.3;text-transform:uppercase;margin-bottom:20px;}
+.hero-text p{font-size:1.2rem;}
+.hero-text .btn{display:inline-block;margin-top:30px;padding:14px 32px;background:var(--gold);color:var(--text-dark);border-radius:8px;text-decoration:none;font-weight:600;transition:var(--transition);box-shadow:0 4px 15px rgba(0,0,0,0.3);}
+.hero-text .btn:hover{background:var(--gold-dark);transform:scale(1.05);}
 
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 25px;
-    }
+/* =========================
+   Counters
+========================= */
+.counters{display:flex;justify-content:center;gap:40px;padding:60px 20px;background:var(--bg-light);flex-wrap:wrap;text-align:center;}
+.counter-box{flex:1 1 200px;background:var(--white);padding:25px;border-radius:var(--radius);box-shadow:var(--shadow);transition:var(--transition);}
+.counter-box:hover{transform:translateY(-5px);}
+.counter-box i{font-size:2.5rem;color:var(--primary);margin-bottom:15px;}
+.counter-box h2{font-size:2rem;color:var(--primary-dark);}
+.counter-box p{color:var(--text-light);margin-top:10px;}
 
-    .nav-links a {
-      text-decoration: none;
-      color: var(--white);
-      font-weight: 500;
-      position: relative;
-      transition: var(--transition);
-    }
+/* =========================
+   Courses
+========================= */
+.courses{padding:80px 20px;text-align:center;background:var(--bg-light);}
+.courses h2{font-size:2.5rem;margin-bottom:20px;color:var(--primary-dark);}
+.course-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:30px;}
+.course-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;position:relative;}
+.course-card:hover{transform:translateY(-10px);box-shadow:0 12px 30px rgba(0,0,0,0.25);}
+.course-card img{width:100%;height:220px;object-fit:cover;}
+.course-card h3{margin:15px 0 10px;color:var(--primary);}
+.course-card p{padding:0 15px 20px;font-size:0.95rem;color:var(--text-light);min-height:60px;}
+.course-card button{margin:15px;padding:10px 18px;border:none;border-radius:6px;background:var(--gold);color:var(--text-dark);font-weight:600;font-size:0.95rem;cursor:pointer;transition:var(--transition);}
+.course-card button:hover{background:var(--gold-dark);transform:translateY(-2px);}
+.course-card .badge.new{position:absolute;top:10px;right:10px;background:#ff3e3e;color:#fff;padding:5px 10px;font-size:0.8rem;border-radius:5px;}
 
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -5px;
-      width: 0;
-      height: 2px;
-      background: var(--gold);
-      transition: width 0.3s;
-    }
+/* =========================
+   Modules Grid
+========================= */
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:2rem;text-align:center;}
+.module{background:#e9ecef;padding:1.5rem;border-radius:8px;}
+.module i{font-size:2rem;color:#0d6efd;margin-bottom:0.5rem;}
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+/* =========================
+   Timeline
+========================= */
+.timeline{display:flex;justify-content:space-around;margin:2rem 0;flex-wrap:wrap;}
+.stage{padding:1rem;border-radius:5px;flex:1;text-align:center;margin:0 0.5rem;color:#fff;min-width:120px;}
+.completed{background:#28a745;}
+.current{background:#ffc107;color:#000;}
+.upcoming{background:#6c757d;}
 
-    .nav-links a.active {
-      color: var(--gold);
-    }
+/* =========================
+   Progress Bar
+========================= */
+.progress-bar{margin:2rem 0;}
+.progress-bar .bar{background:#e9ecef;border-radius:10px;overflow:hidden;height:20px;}
+.progress-bar .fill{background:#00aaff;height:100%;width:0;transition:width 1s ease-in-out;}
 
-    /* =========================
-       Hero Section
-    ========================= */
-    .hero {
-      height: 90vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: var(--white);
-      background: url("images/bg.jpg") center/cover no-repeat;
-      position: relative;
-    }
+/* =========================
+   Pricing & Enrollment
+========================= */
+.pricing-section{padding:5rem 2rem;background:var(--bg-light);text-align:center;}
+.pricing-box{background:var(--white);padding:2rem;border-radius:10px;display:inline-block;box-shadow:0 5px 15px rgba(0,0,0,0.1);margin-top:2rem;text-align:left;}
+.pricing-box ul{list-style:none;margin-top:1rem;}
+.pricing-box ul li{margin:0.5rem 0;}
+.pricing-box ul li i{color:green;margin-right:0.5rem;}
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.55);
-    }
+/* =========================
+   Share & WhatsApp
+========================= */
+.share-section{padding:3rem 2rem;background:#0d1b2a;color:#fff;text-align:center;}
+.share-section .social-buttons a{margin:0 0.5rem;color:#fff;font-size:1.5rem;}
+.whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;font-size:2rem;padding:0.5rem 0.7rem;border-radius:50%;z-index:3000;}
 
-    .hero-text {
-      position: relative;
-      z-index: 2;
-      padding: 0 20px;
-    }
+/* =========================
+   Footer
+========================= */
+footer{background:var(--bg-dark);color:var(--white);text-align:center;padding:40px 20px;}
+.footer-socials a{margin:0 0.5rem;color:#fff;font-size:1.5rem;transition:var(--transition);}
+.footer-socials a:hover{color:var(--gold);transform:scale(1.2);}
 
-    .hero-text h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      line-height: 1.3;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .hero-text .btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 14px 32px;
-      background: var(--gold);
-      color: var(--text-dark);
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-
-    .hero-text .btn:hover {
-      background: var(--gold-dark);
-      transform: scale(1.05);
-    }
-
-    /* =========================
-       Counters
-    ========================= */
-    .counters {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 60px 20px;
-      background: var(--bg-light);
-      flex-wrap: wrap;
-      text-align: center;
-    }
-
-    .counter-box {
-      flex: 1 1 200px;
-      background: var(--white);
-      padding: 25px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-
-    .counter-box:hover {
-      transform: translateY(-5px);
-    }
-
-    .counter-box i {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 15px;
-    }
-
-    .counter-box h2 {
-      font-size: 2rem;
-      color: var(--primary-dark);
-    }
-
-    .counter-box p {
-      color: var(--text-light);
-      margin-top: 10px;
-    }
-
-    /* =========================
-       Courses
-    ========================= */
-    .courses {
-      padding: 80px 20px;
-      text-align: center;
-      background: var(--bg-light);
-    }
-
-    .courses h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: var(--primary-dark);
-    }
-
-    .course-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 30px;
-    }
-
-    .course-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      cursor: pointer;
-      position: relative; /* 👈 This anchors the badge inside */
-    }
-
-
-    .course-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-    }
-
-    .course-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-
-    .course-card h3 {
-      margin: 15px 0 10px;
-      color: var(--primary);
-    }
-
-    .course-card p {
-      padding: 0 15px 20px;
-      font-size: 0.95rem;
-      color: var(--text-light);
-      min-height: 60px;
-    }
-
-    .course-card button {
-      margin: 15px;
-      padding: 10px 18px;
-      border: none;
-      border-radius: 6px;
-      background: var(--gold);
-      color: var(--text-dark);
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .course-card button:hover {
-      background: var(--gold-dark);
-      transform: translateY(-2px);
-    }
-
-    /* =========================
-       Modal
-    ========================= */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: var(--white);
-      padding: 30px;
-      border-radius: var(--radius);
-      max-width: 500px;
-      width: 90%;
-      text-align: center;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-
-    .modal-content h3 {
-      margin-bottom: 10px;
-      color: var(--primary-dark);
-    }
-
-    .modal-content p {
-      margin: 10px 0;
-      color: var(--text-light);
-    }
-
-    .modal-content .price {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: var(--primary);
-      margin: 15px 0;
-    }
-
-    .close-btn {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      position: absolute;
-      top: 20px; right: 30px;
-      cursor: pointer;
-      color: var(--text-dark);
-    }
-
-    /* =========================
-       FAQ
-    ========================= */
-    .faq {
-      padding: 80px 20px;
-      background: #fff;
-      text-align: center;
-    }
-
-    .faq h2 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      color: var(--primary);
-    }
-
-    .faq-container {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    .faq-item {
-      border-bottom: 1px solid #ddd;
-      margin-bottom: 15px;
-    }
-
-    .faq-question {
-      width: 100%;
-      background: none;
-      border: none;
-      outline: none;
-      text-align: left;
-      font-size: 1.1rem;
-      font-weight: 600;
-      padding: 15px;
-      cursor: pointer;
-      position: relative;
-      transition: var(--transition);
-    }
-
-    .faq-question::after {
-      content: "+";
-      position: absolute;
-      right: 20px;
-      font-size: 1.2rem;
-      transition: var(--transition);
-    }
-
-    .faq-question.active::after {
-      content: "-";
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      font-size: 0.95rem;
-      color: var(--text-light);
-      line-height: 1.6;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-      padding: 0 15px;
-    }
-
-    .faq-answer.open {
-      max-height: 300px;
-      padding: 15px;
-      background: #f9fcff;
-      border-left: 3px solid var(--primary);
-    }
-
-    /* =========================
-       Footer
-    ========================= */
-    footer {
-      background: var(--bg-dark);
-      color: var(--white);
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .socials {
-      margin: 20px 0;
-    }
-
-    .socials a {
-      margin: 0 12px;
-      font-size: 1.8rem;
-      color: var(--white);
-      transition: var(--transition);
-    }
-
-    .socials a:hover {
-      color: var(--gold);
-      transform: scale(1.2);
-    }
-
-    /* =========================
-       Scroll-to-top Button
-    ========================= */
-    #scrollTopBtn {
-      display: none;
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      z-index: 3000;
-      background: var(--primary);
-      color: var(--white);
-      border: none;
-      padding: 12px 16px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-
-    #scrollTopBtn:hover {
-      background: var(--primary-dark);
-    }
-
-    /* =========================
-       Responsive
-    ========================= */
-    @media (max-width: 768px) {
-      .hero-text h1 {
-        font-size: 2.2rem;
-      }
-      .nav-links {
-        display: none;
-      }
-    }
-  </style>
+/* =========================
+   Responsive
+========================= */
+@media(max-width:768px){
+  .navbar ul{display:none;flex-direction:column;background:#0d1b2a;position:absolute;top:70px;right:0;width:200px;padding:1rem;border-radius:5px;}
+  .navbar ul.show{display:flex;}
+  .burger{display:block;}
+  .counters{flex-direction:column;}
+  .timeline{flex-direction:column;}
+}
+</style>
 </head>
 <body>
 
-  <!-- Navbar -->
+<!-- Navbar -->
+<header>
   <nav class="navbar">
-    <div class="logo">Courses</div>
-    <ul class="nav-links">
+    <div class="logo">My Portfolio</div>
+    <ul>
       <li><a href="#home" class="active">Home</a></li>
-      <li><a href="#counters">Stats</a></li>
-      <li><a href="#courses">Courses</a></li>
-      <li><a href="#faq">FAQs</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#corpus">Corpus</a></li>
+      <li><a href="#computational">Computational</a></li>
+      <li><a href="#python">Python</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
     </ul>
+    <div class="burger"><i class="fas fa-bars"></i></div>
   </nav>
+</header>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-text">
-      <h1>Master New Skills</h1>
-      <p>Upgrade your career with expert-led courses</p>
-      <a href="#courses" class="btn">Explore Courses</a>
-    </div>
-  </section>
+<!-- Hero Section -->
+<section id="home" class="hero large-hero">
+  <div class="hero-text">
+    <h1>Welcome to My Courses</h1>
+    <p>Learn Computational Linguistics, Python, and Corpus Linguistics with practical exercises.</p>
+    <a href="#portfolio" class="btn">Explore Courses</a>
+  </div>
+</section>
 
-  <!-- Counters -->
-  <section id="counters" class="counters">
-    <div class="counter-box">
-      <i class="fas fa-users"></i>
-      <h2 class="counter" data-target="200">0</h2>
-      <p>Students Enrolled</p>
-    </div>
-    <div class="counter-box">
-      <i class="fas fa-project-diagram"></i>
-      <h2 class="counter" data-target="20">0</h2>
-      <p>Projects Completed</p>
-    </div>
-    <div class="counter-box">
-      <i class="fas fa-book"></i>
-      <h2 class="counter" data-target="4">0</h2>
-      <p>Courses Offered</p>
-    </div>
-  </section>
+<!-- Counters -->
+<section id="counters" class="counters">
+  <div class="counter-box">
+    <i class="fas fa-users"></i>
+    <h2 class="counter" data-target="120">0</h2>
+    <p>Students Enrolled</p>
+  </div>
+  <div class="counter-box">
+    <i class="fas fa-book"></i>
+    <h2 class="counter" data-target="25">0</h2>
+    <p>Lessons</p>
+  </div>
+  <div class="counter-box">
+    <i class="fas fa-project-diagram"></i>
+    <h2 class="counter" data-target="10">0</h2>
+    <p>Projects</p>
+  </div>
+</section>
 
-  <!-- Courses -->
-  <section id="courses" class="courses">
-    <h2>Available Courses</h2>
-    <div class="course-container">
-      <div class="course-card" data-course="python">
-        <img src="images/python.png" alt="Python Course">
-        <h3>Python for Beginners</h3>
-        <p>Start your programming journey with Python basics and projects.</p>
-        <button>View Details</button>
-      </div>
-      <div class="course-card" data-course="computational">
-        <img src="images/computational.png" alt="Computational Linguistics">
-        <h3>Computational Linguistics</h3>
-        <p>Explore NLP, tokenization, word embeddings, and practical projects.</p>
-        <button>View Details</button>
-      </div>
-      <div class="course-card" data-course="corpus">
-        <img src="images/corpus.png" alt="Corpus Linguistics">
-        <h3>Corpus Linguistics</h3>
-        <p>Learn corpus creation, annotation, and linguistic data analysis.</p>
-        <button>View Details</button>
-      </div>
-    <div class="course-card" data-course="portfolio">
-      <div class="new-badge">NEW</div>
-      <img src="images/github.png" alt="Portfolio Development">
-      <h3>Portfolio Development</h3>
-      <p>Build a strong portfolio to showcase your programming and NLP skills.</p>
+<!-- Courses Section -->
+<section id="portfolio" class="courses">
+  <h2>Our Courses</h2>
+  <div class="course-container">
+    <div class="course-card" data-course="corpus">
+      <img src="images/corpus.png" alt="Corpus Linguistics">
+      <h3>Corpus Linguistics</h3>
+      <p>Hands-on exercises with real linguistic datasets.</p>
+      <span class="badge new">NEW</span>
       <button>View Details</button>
     </div>
+    <div class="course-card" data-course="computational">
+      <img src="images/computational.png" alt="Computational Linguistics">
+      <h3>Computational Linguistics</h3>
+      <p>Learn algorithms & text processing in Python.</p>
+      <button>View Details</button>
     </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question">How do I enroll in a course?</button>
-        <div class="faq-answer">Click the "View Details" button and follow the process.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Do you offer certificates?</button>
-        <div class="faq-answer">Yes, certificates are provided after successful completion.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Can I access the courses anytime?</button>
-        <div class="faq-answer">Yes, once enrolled, you get lifetime access.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contact">
-    <p>&copy; 2025 Muhammad Shoaib Tahir. All rights reserved.</p>
-    <div class="socials">
-      <a href="https://github.com/MuhammadshoaibTahir" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://youtube.com/@linguistics-k1v" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.linkedin.com/in/muhammad-shoaib-tahir-3a9103179/" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555" target="_blank"><i class="fab fa-facebook"></i></a>
-    </div>
-  </footer>
-
-  <!-- Modal -->
-  <div id="courseModal" class="modal">
-    <div class="modal-content">
-      <button class="close-btn">&times;</button>
-      <h3 id="modalTitle"></h3>
-      <p id="modalDesc"></p>
-      <div class="price" id="modalPrice"></div>
-      <button class="btn">Enroll Now</button>
+    <div class="course-card" data-course="python">
+      <img src="images/python.png" alt="Python Programming">
+      <h3>Python Programming</h3>
+      <p>From basics to advanced coding for NLP & data analysis.</p>
+      <button>View Details</button>
     </div>
   </div>
+</section>
 
-  <!-- Scroll-to-top -->
-  <button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
+<!-- Modules -->
+<section id="corpus" class="modules-grid">
+  <div class="module"><i class="fa-solid fa-database"></i><h4>Module 1: Introduction</h4></div>
+  <div class="module"><i class="fa-solid fa-magnifying-glass"></i><h4>Module 2: Corpus Tools</h4></div>
+  <div class="module"><i class="fa-solid fa-chart-line"></i><h4>Module 3: Analysis</h4></div>
+  <div class="module"><i class="fa-solid fa-file-lines"></i><h4>Module 4: Reporting</h4></div>
+</section>
 
-  <!-- Scripts -->
-  <script>
-    // FAQ
-    document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        q.classList.toggle('active');
-        q.nextElementSibling.classList.toggle('open');
-      });
-    });
+<!-- Timeline & Progress -->
+<section id="python" class="timeline-section">
+  <h2>Python Course Timeline</h2>
+  <div class="timeline">
+    <div class="stage completed">Basics</div>
+    <div class="stage current">Intermediate</div>
+    <div class="stage upcoming">Advanced</div>
+  </div>
+  <div class="progress-bar">
+    <h4>Course Completion: 40%</h4>
+    <div class="bar"><div class="fill" style="width:40%"></div></div>
+  </div>
+</section>
 
-    // Modal Data
-    const courses = {
-      python: { title: "Python for Beginners", desc: "Basics and projects.", price: "$50 (1 Month)" },
-      computational: { title: "Computational Linguistics", desc: "NLP, embeddings, projects.", price: "$75 (1.5 Months)" },
-      corpus: { title: "Corpus Linguistics", desc: "Corpus creation & annotation.", price: "$100 (2 Months)" },
-      portfolio: { title: "Portfolio Development", desc: "Build strong portfolio.", price: "$60 (1 Month)" }
-    };
+<!-- Pricing Section -->
+<section id="pricing" class="pricing-section">
+  <h2>Pricing & Enrollment</h2>
+  <div class="pricing-box">
+    <h3>Python Programming</h3>
+    <p>PKR 15,000 / USD 90</p>
+    <ul>
+      <li><i class="fa-solid fa-check"></i> Certificate of Completion</li>
+      <li><i class="fa-solid fa-check"></i> Hands-on Exercises</li>
+      <li><i class="fa-solid fa-check"></i> Access to Tools & Software</li>
+    </ul>
+    <a href="mailto:example@email.com" class="btn">Enroll Now</a>
+    <a href="brochure.pdf" class="btn"><i class="fa-solid fa-download"></i> Download Brochure</a>
+  </div>
+</section>
 
-    const modal = document.getElementById('courseModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalPrice = document.getElementById('modalPrice');
-    const closeBtn = document.querySelector('.close-btn');
+<!-- Share Section -->
+<section id="share" class="share-section">
+  <h2>Share & Contact</h2>
+  <div class="social-buttons">
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+  </div>
+</section>
 
-    document.querySelectorAll('.course-card button').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const key = e.target.closest('.course-card').dataset.course;
-        modalTitle.textContent = courses[key].title;
-        modalDesc.textContent = courses[key].desc;
-        modalPrice.textContent = courses[key].price;
-        modal.style.display = "flex";
-      });
-    });
+<!-- Footer -->
+<footer>
+  <p>© 2025 My Portfolio & Courses</p>
+  <div class="footer-socials">
+    <a href="#"><i class="fab fa-github"></i></a>
+    <a href="#"><i class="fab fa-google"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+  </div>
+</footer>
 
-    closeBtn.addEventListener('click', () => modal.style.display = "none");
-    window.addEventListener('click', (e) => { if(e.target == modal) modal.style.display = "none"; });
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/923177793105" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
 
-    // Counters
-    const counters = document.querySelectorAll('.counter');
-    const speed = 200;
-    counters.forEach(counter => {
-      const update = () => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-        const inc = target / speed;
-        if (count < target) {
-          counter.innerText = Math.ceil(count + inc);
-          setTimeout(update, 20);
-        } else {
-          counter.innerText = target;
-        }
-      };
-      update();
-    });
+<!-- Scroll-to-top Button -->
+<button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
 
-    // Scroll-to-top
-    const scrollBtn = document.getElementById("scrollTopBtn");
-    window.onscroll = () => {
-      scrollBtn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
-    };
-    scrollBtn.onclick = () => { document.documentElement.scrollTop = 0; document.body.scrollTop = 0; };
+<!-- Scripts -->
+<script>
+// Burger Menu
+const burger = document.querySelector('.burger');
+const navLinks = document.querySelector('.navbar ul');
+burger.addEventListener('click',()=>navLinks.classList.toggle('show'));
 
-    // WhatsApp Button
-    const waBtn = document.createElement("a");
-    waBtn.href = "https://wa.me/923177793105";
-    waBtn.target = "_blank";
-    waBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
-    waBtn.style.position = "fixed";
-    waBtn.style.bottom = "90px";
-    waBtn.style.right = "25px";
-    waBtn.style.background = "#25D366";
-    waBtn.style.color = "#fff";
-    waBtn.style.fontSize = "1.8rem";
-    waBtn.style.padding = "12px 16px";
-    waBtn.style.borderRadius = "50%";
-    waBtn.style.boxShadow = "var(--shadow)";
-    waBtn.style.zIndex = "3000";
-    waBtn.style.transition = "var(--transition)";
-    waBtn.onmouseover = () => waBtn.style.transform = "scale(1.15)";
-    waBtn.onmouseleave = () => waBtn.style.transform = "scale(1)";
-    document.body.appendChild(waBtn);
-  </script>
+// Active link highlight
+const navItems = document.querySelectorAll('.navbar a');
+navItems.forEach(link=>{
+  link.addEventListener('click',()=>{
+    navItems.forEach(i=>i.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+
+// Counters
+const counters = document.querySelectorAll('.counter');
+counters.forEach(counter=>{
+  counter.innerText='0';
+  const updateCounter=()=>{
+    const target=+counter.getAttribute('data-target');
+    const c=+counter.innerText;
+    const increment=target/200;
+    if(c<target){
+      counter.innerText=Math.ceil(c+increment);
+      setTimeout(updateCounter,20);
+    }else{counter.innerText=target;}
+  };
+  updateCounter();
+});
+
+// Scroll-to-top
+const scrollBtn=document.getElementById("scrollTopBtn");
+window.onscroll=()=>{scrollBtn.style.display=(document.body.scrollTop>200||document.documentElement.scrollTop>200)?"block":"none";}
+scrollBtn.onclick=()=>{document.documentElement.scrollTop=0;document.body.scrollTop=0;}
+</script>
 </body>
 </html>
