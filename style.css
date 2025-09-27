@@ -242,6 +242,7 @@
 /* =========================
    Progress Section
 ========================= */
+/* Progress Section */
 .progress-section {
   padding: 50px 20px;
   text-align: center;
@@ -257,10 +258,10 @@
   width: 90%;
   max-width: 800px;
   background: #e0e0e0;
-  border-radius: var(--radius);
+  border-radius: 12px;
   overflow: hidden;
   height: 25px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .progress-bar .fill {
@@ -273,7 +274,7 @@
   font-weight: bold;
   line-height: 25px;
   transition: width 1s ease-in-out;
-  border-radius: var(--radius);
+  border-radius: 12px;
 }
 
 /* =========================
