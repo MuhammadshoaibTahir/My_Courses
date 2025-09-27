@@ -11,11 +11,12 @@
 :root {
   --primary: #0077cc;
   --primary-dark: #005fa3;
-  --secondary: #00bcd4;
-  --text-dark: #333;
+  --gold: #FFD700;
+  --gold-dark: #e6c200;
+  --text-dark: #222;
   --text-light: #555;
   --bg-light: #f4faff;
-  --bg-dark: #222;
+  --bg-dark: #111;
   --white: #fff;
   --shadow: 0 8px 20px rgba(0,0,0,0.15);
   --radius: 12px;
@@ -37,19 +38,18 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--white);
+  background: rgba(0,0,0,0.7);
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: var(--transition);
+  backdrop-filter: blur(8px);
 }
 
 .navbar .logo {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: bold;
-  color: var(--primary);
+  color: var(--gold);
   letter-spacing: 1px;
 }
 
@@ -61,7 +61,7 @@
 
 .nav-links a {
   text-decoration: none;
-  color: var(--text-dark);
+  color: var(--white);
   font-weight: 500;
   position: relative;
   transition: var(--transition);
@@ -74,7 +74,7 @@
   bottom: -5px;
   width: 0;
   height: 2px;
-  background: var(--primary);
+  background: var(--gold);
   transition: width 0.3s;
 }
 
@@ -83,58 +83,67 @@
 }
 
 .nav-links a.active {
-  color: var(--primary);
+  color: var(--gold);
 }
 
 /* =========================
    Hero Section
 ========================= */
 .hero {
-  height: 75vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: var(--white);
-  background: linear-gradient(to right, rgba(0,119,204,0.7), rgba(0,0,0,0.6)),
-              url("images/header.jpg") center/cover no-repeat;
-  animation: fadeIn 1.5s ease-in-out;
+  background: url("images/header.jpg") center/cover no-repeat;
   position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.55);
 }
 
 .hero-text {
   position: relative;
   z-index: 2;
   padding: 0 20px;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
 .hero-text h1 {
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: 3.5rem;
+  font-weight: 800;
   line-height: 1.3;
+  text-transform: uppercase;
   animation: slideInDown 1.2s ease;
 }
 
 .hero-text p {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   margin-top: 15px;
+  font-weight: 400;
   animation: slideInUp 1.2s ease;
 }
 
 .hero-text .btn {
-  margin-top: 25px;
-  padding: 12px 28px;
-  background: var(--primary);
-  color: var(--white);
+  margin-top: 30px;
+  padding: 14px 32px;
+  background: var(--gold);
+  color: var(--text-dark);
   border-radius: 8px;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: var(--transition);
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .hero-text .btn:hover {
-  background: var(--primary-dark);
+  background: var(--gold-dark);
   transform: scale(1.05);
 }
 
@@ -142,13 +151,13 @@
    Courses Section
 ========================= */
 .courses {
-  padding: 70px 20px;
+  padding: 80px 20px;
   text-align: center;
   background: var(--bg-light);
 }
 
 .courses h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 20px;
   color: var(--primary-dark);
 }
@@ -210,15 +219,16 @@
   padding: 10px 18px;
   border: none;
   border-radius: 6px;
-  background: var(--primary);
-  color: var(--white);
-  font-size: 0.9rem;
+  background: var(--gold);
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: var(--transition);
 }
 
 .course-card button:hover {
-  background: var(--primary-dark);
+  background: var(--gold-dark);
   transform: translateY(-2px);
 }
 
@@ -226,13 +236,13 @@
    Pricing Section
 ========================= */
 .pricing {
-  padding: 70px 20px;
+  padding: 80px 20px;
   text-align: center;
   background: linear-gradient(135deg, #eaf6ff, #ffffff);
 }
 
 .pricing h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 20px;
   color: var(--primary-dark);
 }
@@ -269,13 +279,13 @@ tr:hover {
    FAQ Section
 ========================= */
 .faq {
-  padding: 70px 20px;
+  padding: 80px 20px;
   background: #fff;
   text-align: center;
 }
 
 .faq h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 30px;
   color: var(--primary);
 }
@@ -360,7 +370,7 @@ footer {
 }
 
 .socials a:hover {
-  color: var(--primary);
+  color: var(--gold);
   transform: scale(1.2);
 }
 
@@ -393,7 +403,7 @@ footer {
     font-size: 1rem;
   }
   .nav-links {
-    display: none; /* Can be replaced with hamburger later */
+    display: none; /* replace later with hamburger */
   }
   .course-card img {
     height: 180px;
@@ -418,8 +428,8 @@ footer {
   <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="hero-text">
-      <h1>Welcome to My Courses</h1>
-      <p>Learn modern skills with practical examples</p>
+      <h1>Master New Skills Online</h1>
+      <p>Upgrade your career with our expert-led courses</p>
       <a href="#courses" class="btn">Explore Courses</a>
     </div>
   </section>
