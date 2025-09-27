@@ -23,25 +23,23 @@
       --radius: 14px;
       color-scheme: dark;
     }
-    *{box-sizing:border-box}
+    *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
     body{
-      margin:0;
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
       background: linear-gradient(180deg,#071022 0%, #081428 50%, #04121b 100%);
       color:#e6eef6;
+      line-height:1.45;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
       padding-bottom:80px;
     }
-
     a{color:var(--accent); text-decoration:none}
 
     /* -----------------------------
        Layout & Navigation
     ------------------------------*/
-    .container{max-width:1200px;margin:0 auto;padding:28px}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
     header{position:sticky;top:12px;z-index:50}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px 18px;border-radius:12px;box-shadow:0 6px 30px rgba(2,6,23,0.6)}
     .brand{display:flex;gap:12px;align-items:center}
@@ -56,23 +54,72 @@
     .menu-toggle{display:none}
 
     /* -----------------------------
-       Hero
+       Hero Section
     ------------------------------*/
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;margin:36px 0}
-    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:18px;box-shadow:0 8px 40px rgba(3,8,22,0.6)}
-    .hero h2{font-size:28px;margin:0 0 8px}
-    .hero p{color:var(--muted);margin:0 0 18px}
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:30px;
+      align-items:flex-start;
+      margin:36px 0;
+      width:100%;
+      max-width:1400px;
+      padding:0 20px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:24px;border-radius:18px;box-shadow:0 8px 40px rgba(3,8,22,0.6)}
+    .hero h2{font-size:32px;margin:0 0 12px}
+    .hero p{color:var(--muted);margin:0 0 18px;font-size:15px}
     .badges{display:flex;gap:8px;flex-wrap:wrap}
-    .badge{padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:999px;font-weight:700;color:var(--accent);font-size:13px}
+    .badge{padding:6px 12px;background:rgba(255,255,255,0.03);border-radius:999px;font-weight:700;color:var(--accent);font-size:13px}
 
-    /* Features and cards */
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
-    .course-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px;position:relative}
-    .course-card h3{margin:6px 0}
-    .course-meta{display:flex;gap:12px;color:var(--muted);font-size:13px}
-    .new-badge{position:absolute;top:12px;right:12px;background:var(--accent);color:#04121b;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px}
+    /* Courses container */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    
+    /* Course cards */
+    .course-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding: 20px;
+      border-radius: 14px;
+      position: relative;
+      box-shadow: 0 6px 20px rgba(3,8,22,0.5);
+      width: 100%;
+    }
+    
+    /* Heading */
+    .course-card h3 {
+      margin: 6px 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    /* Description */
+    .course-card p {
+      font-size: 15px;
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+    
+    /* NEW badge */
+    .new-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--accent);
+      color: #04121b;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
 
-    /* Curriculum / Accordion */
+    /* Accordion Curriculum */
     .accordion{margin-top:18px}
     .acc-item{background:var(--glass);border-radius:12px;padding:12px;margin-bottom:8px}
     .acc-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
@@ -84,66 +131,55 @@
     .ins-card{display:flex;gap:12px;align-items:center;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px}
     .avatar{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#fff2 0%, #fff2 100%);display:flex;align-items:center;justify-content:center;font-weight:700;color:#04121b}
 
-    /* CTA strip */
-    .cta-strip{margin:26px 0;padding:18px;border-radius:12px;background:linear-gradient(90deg, rgba(124,92,255,0.12), rgba(109,198,255,0.06));display:flex;align-items:center;justify-content:space-between}
-
-    /* Pricing & features */
-    .pricing{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:16px;margin-top:16px}
     .price{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));text-align:center}
     .price h4{margin:0 0 8px}
-    .price .amount{font-size:22px;font-weight:800}
+    .price .amount{font-size:22px;font-weight:800;margin-bottom:6px}
 
     /* FAQ */
-    .faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .faq{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:12px}
+    .faq strong{display:block;margin-bottom:4px}
 
     /* Footer */
     footer{margin-top:36px;padding:24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
-    
-    /* Responsive */
+
+    /* Helpers */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:14px}
+    button{cursor:pointer}
+    .form-row{display:flex;gap:12px;flex-wrap:wrap}
+    .form-control{width:100%;padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit}
+    .progress-wrap{width:100%;background:rgba(255,255,255,0.03);height:12px;border-radius:999px;overflow:hidden}
+    .progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .6s ease}
+    a:focus, button:focus, input:focus{outline:2px dashed rgba(124,92,255,0.22);outline-offset:3px}
+
+    /* -----------------------------
+       Responsive
+    ------------------------------*/
     @media (max-width: 1000px){
       .hero{grid-template-columns:1fr;}
-      .grid-3{grid-template-columns:repeat(2,1fr);}
-      .pricing{grid-template-columns:repeat(2,1fr);}
     }
-    
-    /* Desktop enhancements */
     @media (min-width: 1200px){
-      .container{max-width: 1400px;}
-      .hero{grid-template-columns:1fr 1fr; gap:60px;}
-      .hero h2{font-size:42px;}
-      .grid-3{grid-template-columns:repeat(4,1fr);}
-      .pricing{grid-template-columns:repeat(4,1fr);}
+      .container{max-width:1400px}
+      .hero{grid-template-columns:1fr 1fr;gap:60px}
+      .hero h2{font-size:42px}
     }
-    
     @media (max-width: 720px){
       .nav-links{display:none}
       .menu-toggle{display:block;background:transparent;border:0;color:var(--muted);font-size:20px}
-      .grid-3{grid-template-columns:1fr;}
-      .pricing{grid-template-columns:1fr;}
+      .hero{padding:0 12px}
+      .hero h2{font-size:24px}
+      .course-card p{font-size:13px}
     }
-
-    /* small helpers */
-    .muted{color:var(--muted)}
-    .small{font-size:13px}
-    .pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.03)}
-    button{cursor:pointer}
-
-    /* Tiny form styles */
-    .form-row{display:flex;gap:12px}
-    .form-control{width:100%;padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit}
-
-    /* progress bar modal */
-    .progress-wrap{width:100%;background:rgba(255,255,255,0.03);height:12px;border-radius:999px;overflow:hidden}
-    .progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .6s ease}
-
-    /* accessibility focus */
-    a:focus, button:focus, input:focus{outline:2px dashed rgba(124,92,255,0.22);outline-offset:3px}
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Navigation -->
     <header>
-      <nav class="nav" role="navigation" aria-label="Main navigation">
+      <nav class="nav">
         <div class="brand">
           <div class="logo">CL</div>
           <div>
@@ -151,23 +187,19 @@
             <div class="small muted">Corpus & Computational Linguistics · Python · Portfolio</div>
           </div>
         </div>
-
-        <div class="nav-links" aria-hidden="false">
+        <div class="nav-links">
           <a href="#courses">Courses</a>
           <a href="#curriculum">Curriculum</a>
           <a href="#instructors">Instructors</a>
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
         </div>
-
         <div style="display:flex;gap:10px;align-items:center">
           <button class="pill" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Ask a question</button>
           <a class="cta" href="#enroll">Enroll</a>
-          <button class="menu-toggle" aria-expanded="false" aria-controls="mobilenav" onclick="toggleMobile()"><i class="fa fa-bars"></i></button>
+          <button class="menu-toggle" onclick="toggleMobile()"><i class="fa fa-bars"></i></button>
         </div>
       </nav>
-
-      <!-- Mobile nav (hidden by default) -->
       <div id="mobilenav" style="display:none;margin-top:12px">
         <div style="display:flex;flex-direction:column;gap:8px">
           <a href="#courses">Courses</a>
@@ -178,212 +210,174 @@
       </div>
     </header>
 
-    <main>
-      <section class="hero">
-        <div class="hero-card">
-          <div class="badges"><div class="badge">Live & Recorded</div><div class="badge">Certificate</div><div class="badge">Hands-on</div></div>
-          <h2>Learn Corpus & Computational Linguistics — with Python and a Portfolio</h2>
-          <p>Practical, project-based training in corpus construction, annotation, NLP pipelines, and Python programming — designed for linguists, researchers, and developers.</p>
-          <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
-            <a class="cta" href="#enroll">Get Started</a>
-            <button class="pill" onclick="openSyllabus()">Download syllabus</button>
-            <div class="muted small">Next cohort: <strong>Oct 15, 2025</strong></div>
-          </div>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-card">
+        <div class="badges">
+          <div class="badge">Live & Recorded</div>
+          <div class="badge">Certificate</div>
+          <div class="badge">Hands-on</div>
+        </div>
+        <h2>Learn Corpus & Computational Linguistics — with Python and a Portfolio</h2>
+        <p>Practical, project-based training in corpus construction, annotation, NLP pipelines, and Python programming — designed for linguists, researchers, and developers.</p>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px">
+          <a class="cta" href="#enroll">Get Started</a>
+          <button class="pill" onclick="openSyllabus()">Download syllabus</button>
+          <div class="muted small">Next cohort: <strong>Oct 15, 2025</strong></div>
+        </div>
+      </div>
+    </section>
 
+    <!-- Courses -->
+    <section id="courses">
+      <div class="hero-card">
+        <h2>Courses</h2>
+        <div class="courses-grid">
+          <!-- Course 1 -->
           <div class="course-card">
             <h3>Corpus Linguistics</h3>
-            <p>6 weeks · Research</p>
-            <p>Learn how to design, compile, and analyze corpora for linguistic research and applied studies.</p>
-            <a href="#" class="cta">Enroll</a>
+            <p>Learn to analyze large text collections with computational methods.</p>
+            <button class="pill">Enroll</button>
           </div>
-          
+          <!-- Course 2 -->
           <div class="course-card">
             <h3>Computational Linguistics</h3>
-            <p>8 weeks · Project</p>
-            <p>Explore algorithms, parsing, and machine learning techniques for language processing.</p>
-            <a href="https://your-link-to-computational-linguistics-enrollment.com" target="_blank" class="cta">Enroll</a>
+            <p>Explore NLP, parsing, and machine learning for language.</p>
+            <button class="pill">Enroll</button>
           </div>
-          
+          <!-- Course 3 -->
           <div class="course-card">
             <h3>Python Programming</h3>
-            <p>6 weeks · Hands-on</p>
-            <p>From Python basics to advanced text processing: tokenization, POS tagging, parsing, embeddings, and deployment.</p>
-            <a href="#" class="cta">Enroll</a>
+            <p>From basics to advanced scripting for linguistics and beyond.</p>
+            <button class="pill">Enroll</button>
           </div>
-          
-          <div class="course-card new">
-            <h3>Portfolio Development <span class="new-badge">NEW</span></h3>
-            <p>4 weeks · Career</p>
-            <p>Turn course projects into a professional portfolio website and GitHub-ready repositories.</p>
-            <a href="#" class="cta">Enroll</a>
-          </div>
-
-
-        <aside style="position:relative">
-          <div class="hero-card" style="padding:20px;">
-            <h4 style="margin:0 0 8px">Course at a glance</h4>
-            <div class="small muted">Format</div>
-            <ul class="muted small">
-              <li>Live sessions (recorded)</li>
-              <li>Weekly assignments & capstone</li>
-              <li>Certificate on completion</li>
-            </ul>
-
-            <div style="margin-top:12px">
-              <div class="small muted">Your progress</div>
-              <div class="progress-wrap" style="margin-top:8px"><div id="progress" class="progress-bar" style="width:36%"></div></div>
-              <div class="small muted" style="margin-top:8px">36% complete • <button class="pill" onclick="simulateProgress()">Mark lesson done</button></div>
-            </div>
-
-            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-              <button class="pill" onclick="openCourse('corpus')">View Corpus</button>
-              <button class="pill" onclick="openCourse('python')">View Python</button>
-              <button class="pill" onclick="openCourse('portfolio')">View Portfolio</button>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- Curriculum -->
-      <section id="curriculum">
-        <div class="hero-card" style="margin-bottom:18px">
-          <h2 style="margin-top:0">Curriculum & Weekly Plan</h2>
-          <p class="muted">A modular curriculum across three specializations. Each module contains lectures, readings, lab assignments and a mini-project.</p>
-
-          <div class="accordion">
-            <div class="acc-item">
-              <div class="acc-head" onclick="toggleAcc(0)">
-                <div><strong>Module 1 — Corpus Creation & Annotation</strong><div class="small muted">Annotation, tools, metadata, formats</div></div>
-                <div><i class="fa fa-chevron-down"></i></div>
-              </div>
-              <div class="acc-body" id="acc-0">
-                <ul class="muted small">
-                  <li>Week 1: Corpus design, sampling, ethics</li>
-                  <li>Week 2: Annotation schema, inter-annotator agreement</li>
-                  <li>Week 3: Tools: ELAN, Praat, WebAnno, INCEpTION</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="acc-item">
-              <div class="acc-head" onclick="toggleAcc(1)">
-                <div><strong>Module 2 — Python for Text</strong><div class="small muted">From basics to NLP pipelines</div></div>
-                <div><i class="fa fa-chevron-down"></i></div>
-              </div>
-              <div class="acc-body" id="acc-1">
-                <ul class="muted small">
-                  <li>Week 4: Python basics, data structures, file I/O</li>
-                  <li>Week 5: Tokenization, normalization, regex</li>
-                  <li>Week 6: POS tagging, parsing, NLTK & spaCy</li>
-                  <li>Week 7: Word embeddings & transformers (Hugging Face)</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="acc-item">
-              <div class="acc-head" onclick="toggleAcc(2)">
-                <div><strong>Module 3 — Portfolio & Deployment</strong><div class="small muted">GitHub, demo apps, docs</div></div>
-                <div><i class="fa fa-chevron-down"></i></div>
-              </div>
-              <div class="acc-body" id="acc-2">
-                <ul class="muted small">
-                  <li>Week 8: Project wrap-up, portfolio assembly, CV & LinkedIn</li>
-                  <li>Week 9: Build a demo web app for your project</li>
-                  <li>Week 10: Interview prep and publishing</li>
-                </ul>
-              </div>
-            </div>
-
+          <!-- Course 4 -->
+          <div class="course-card">
+            <span class="new-badge">NEW</span>
+            <h3>Portfolio Development</h3>
+            <p>Build real-world projects and showcase your skills.</p>
+            <button class="pill">Enroll</button>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Instructors -->
-      <section id="instructors">
-        <div class="hero-card">
-          <h2 style="margin-top:0">Instructor</h2>
-          <div class="instructors">
-            <div class="ins-card">
-              <div class="avatar">MS</div>
-              <div>
-                <div style="font-weight:700">Muhammad Shoaib Tahir</div>
-                <div class="small muted">Corpus & Computational Linguistics — Python & Portfolio Development</div>
-              </div>
-            </div>
+    <!-- Course at a glance -->
+    <section id="overview">
+      <div class="hero-card">
+        <h2>Course at a glance</h2>
+        <ul class="muted small">
+          <li>Live sessions (recorded)</li>
+          <li>Weekly assignments & capstone</li>
+          <li>Certificate on completion</li>
+        </ul>
+        <div style="margin-top:12px">
+          <div class="small muted">Your progress</div>
+          <div class="progress-wrap">
+            <div id="progress" class="progress-bar" style="width:36%"></div>
+          </div>
+          <div class="small muted" style="margin-top:8px">
+            36% complete • 
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Pricing -->
-      <section id="pricing" style="margin-top:18px">
-        <div class="hero-card">
-          <h2 style="margin-top:0">Pricing & Enrollment</h2>
-          <div class="pricing">
-            <div class="price">
-              <h4>Basics</h4>
-              <div class="amount">$45</div>
-              <p class="muted small">Access to core lectures, slides and reading materials.</p>
-              <button class="pill">Enroll</button>
-            </div>
-
-            <div class="price">
-              <h4>Advance</h4>
-              <div class="amount">$65</div>
-              <p class="muted small">Includes additional assignments and guided practice.</p>
-              <button class="pill">Enroll</button>
-            </div>
-
-            <div class="price">
-              <h4>Pro</h4>
-              <div class="amount">$75</div>
-              <p class="muted small">Projects, assignments, community discussions and Q&A.</p>
-              <button class="pill">Enroll</button>
-            </div>
-          </div>
+    <!-- Curriculum -->
+    <section id="curriculum">
+      <div class="hero-card">
+        <h2>Curriculum & Weekly Plan</h2>
+        <p class="muted">A modular curriculum across three specializations.</p>
+        <div class="accordion">
+          <!-- same accordion content -->
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- FAQ -->
-      <section id="faq" style="margin-top:18px">
-        <div class="hero-card">
-          <h2 style="margin-top:0">FAQs</h2>
-          <div class="faq">
+    <!-- Instructors -->
+    <section id="instructors">
+      <div class="hero-card">
+        <h2>Instructor</h2>
+        <div class="instructors">
+          <div class="ins-card">
+            <div class="avatar">MS</div>
             <div>
-              <strong>Do I need prior Python knowledge?</strong>
-              <p class="muted small">No, we start from scratch and cover basics step by step.</p>
-            </div>
-            <div>
-              <strong>Are projects included?</strong>
-              <p class="muted small">Yes, hands-on projects are part of every module.</p>
-            </div>
-            <div>
-              <strong>Is certification provided?</strong>
-              <p class="muted small">Yes, certificates are issued upon successful completion.</p>
-            </div>
-            <div>
-              <strong>Can I contact the instructor directly?</strong>
-              <p class="muted small">Yes, mentorship and Q&A are available in Pro & Professional tiers.</p>
+              <div style="font-weight:700">Muhammad Shoaib Tahir</div>
+              <div class="small muted">Corpus & Computational Linguistics · Python & Portfolio Development</div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Contact -->
-      <section id="contact" style="margin-top:18px">
-        <div class="hero-card">
-          <h2 style="margin-top:0">Contact</h2>
-          <form>
-            <div class="form-row">
-              <input type="text" class="form-control" placeholder="Your name" required>
-              <input type="email" class="form-control" placeholder="Your email" required>
-            </div>
-            <textarea class="form-control" rows="4" placeholder="Your message"></textarea>
-            <button class="cta" type="submit">Send Message</button>
-          </form>
+    <!-- Pricing -->
+    <section id="pricing">
+      <div class="hero-card">
+        <h2>Pricing & Enrollment</h2>
+        <div class="pricing">
+          <div class="price">
+            <h4>Basics</h4>
+            <div class="amount">$45</div>
+            <p class="muted small">Access to lectures and materials.</p>
+            <button class="pill">Enroll</button>
+          </div>
+          <div class="price">
+            <h4>Advance</h4>
+            <div class="amount">$65</div>
+            <p class="muted small">Includes assignments and practice.</p>
+            <button class="pill">Enroll</button>
+          </div>
+          <div class="price">
+            <h4>Pro</h4>
+            <div class="amount">$75</div>
+            <p class="muted small">Projects, discussions and Q&A.</p>
+            <button class="pill">Enroll</button>
+          </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="hero-card">
+        <h2>FAQs</h2>
+        <div class="faq">
+          <div>
+            <strong>Do I need prior Python knowledge?</strong>
+            <p class="muted small">No, we start from scratch step by step.</p>
+          </div>
+          <div>
+            <strong>Are projects included?</strong>
+            <p class="muted small">Yes, hands-on projects in every module.</p>
+          </div>
+          <div>
+            <strong>Is certification provided?</strong>
+            <p class="muted small">Yes, certificates on completion.</p>
+          </div>
+          <div>
+            <strong>Can I contact the instructor?</strong>
+            <p class="muted small">Yes, mentorship is in Pro tier.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="hero-card">
+        <h2>Contact</h2>
+        <form>
+          <div class="form-row">
+            <input type="text" class="form-control" placeholder="Your name" required>
+            <input type="email" class="form-control" placeholder="Your email" required>
+          </div>
+          <textarea class="form-control" rows="4" placeholder="Your message"></textarea>
+          <button class="cta" type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
       <p class="small muted">© 2025 Muhammad Shoaib Tahir — All rights reserved.</p>
       <div style="margin-top:10px;display:flex;gap:14px;flex-wrap:wrap">
@@ -397,20 +391,20 @@
 
   <script>
     function toggleMobile(){
-      const nav = document.getElementById('mobilenav');
-      nav.style.display = nav.style.display==='none' ? 'block' : 'none';
+      const nav=document.getElementById('mobilenav');
+      nav.style.display=nav.style.display==='none'?'block':'none';
     }
     function toggleAcc(i){
-      const body = document.getElementById('acc-'+i);
+      const body=document.getElementById('acc-'+i);
       body.classList.toggle('open');
     }
     function simulateProgress(){
-      const bar = document.getElementById('progress');
-      let width = parseInt(bar.style.width);
-      if(width<100) bar.style.width = (width+10)+'%';
+      const bar=document.getElementById('progress');
+      let width=parseInt(bar.style.width);
+      if(width<100) bar.style.width=(width+10)+'%';
     }
     function openCourse(course){
-      alert("Opening details for: " + course);
+      alert("Opening details for: "+course);
     }
     function openSyllabus(){
       alert("Downloading syllabus...");
