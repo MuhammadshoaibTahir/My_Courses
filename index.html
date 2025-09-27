@@ -219,6 +219,141 @@
   transform: translateY(-2px);
 }
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Courses</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">My Courses</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#counters">Stats</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#faq">FAQs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h1>Master New Skills</h1>
+      <p>Upgrade your career with expert-led online courses</p>
+      <a href="#courses" class="btn">Explore Courses</a>
+    </div>
+  </section>
+
+  <!-- Animated Counters -->
+  <section id="counters" class="counters">
+    <div class="counter-box">
+      <i class="fas fa-users"></i>
+      <h2 class="counter" data-target="500">0</h2>
+      <p>Students Enrolled</p>
+    </div>
+    <div class="counter-box">
+      <i class="fas fa-project-diagram"></i>
+      <h2 class="counter" data-target="20">0</h2>
+      <p>Projects Completed</p>
+    </div>
+    <div class="counter-box">
+      <i class="fas fa-book"></i>
+      <h2 class="counter" data-target="4">0</h2>
+      <p>Courses Offered</p>
+    </div>
+  </section>
+
+  <!-- Courses with Timeline -->
+  <section id="courses" class="courses">
+    <h2>Course Roadmap</h2>
+    <div class="timeline">
+      <div class="timeline-item completed" data-course="python">
+        <div class="timeline-content">
+          <h3>Python for Beginners</h3>
+          <p>Start your programming journey with Python basics and projects.</p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+      <div class="timeline-item current" data-course="computational">
+        <div class="timeline-content">
+          <h3>Computational Linguistics</h3>
+          <p>Explore NLP, tokenization, word embeddings, and projects.</p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+      <div class="timeline-item upcoming" data-course="corpus">
+        <div class="timeline-content">
+          <h3>Corpus Linguistics</h3>
+          <p>Learn corpus creation, annotation, and linguistic data analysis.</p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+      <div class="timeline-item upcoming" data-course="portfolio">
+        <div class="timeline-content">
+          <h3>Portfolio Development</h3>
+          <p>Build a strong portfolio to showcase your programming & NLP skills.</p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Modal -->
+  <div id="courseModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="courseTitle"></h2>
+      <p id="courseDescription"></p>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <p id="progressText"></p>
+
+      <!-- Download Brochure -->
+      <button id="downloadBrochure" class="btn">Download Brochure</button>
+
+      <!-- Share Buttons -->
+      <div class="share-buttons">
+        <p>Share this course:</p>
+        <a id="shareWhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a id="shareLinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a id="shareFacebook" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a id="shareTwitter" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/923177793105" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 My Courses | Designed by Muhammad Shoaib Tahir</p>
+    <div class="social-links">
+      <a href="https://github.com/MuhammadshoaibTahir" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://youtube.com/@linguistics-k1v?si=3sn6nnPJV8XPGJb9" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.linkedin.com/in/muhammad-shoaib-tahir-3a9103179/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
+
 /* =========================
    Modal
 ========================= */
