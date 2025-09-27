@@ -98,18 +98,28 @@
 
     /* Footer */
     footer{margin-top:36px;padding:24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
-
+    
     /* Responsive */
     @media (max-width: 1000px){
       .hero{grid-template-columns:1fr;}
-      .grid-3{grid-template-columns:repeat(2,1fr)}
-      .pricing{grid-template-columns:repeat(2,1fr)}
+      .grid-3{grid-template-columns:repeat(2,1fr);}
+      .pricing{grid-template-columns:repeat(2,1fr);}
     }
+    
+    /* Desktop enhancements */
+    @media (min-width: 1200px){
+      .container{max-width: 1400px;}
+      .hero{grid-template-columns:1fr 1fr; gap:60px;}
+      .hero h2{font-size:42px;}
+      .grid-3{grid-template-columns:repeat(4,1fr);}
+      .pricing{grid-template-columns:repeat(4,1fr);}
+    }
+    
     @media (max-width: 720px){
       .nav-links{display:none}
       .menu-toggle{display:block;background:transparent;border:0;color:var(--muted);font-size:20px}
-      .grid-3{grid-template-columns:1fr}
-      .pricing{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr;}
+      .pricing{grid-template-columns:1fr;}
     }
 
     /* small helpers */
