@@ -216,7 +216,9 @@
       box-shadow: var(--shadow);
       transition: var(--transition);
       cursor: pointer;
+      position: relative; /* 👈 This anchors the badge inside */
     }
+
 
     .course-card:hover {
       transform: translateY(-10px);
