@@ -1,430 +1,537 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Courses | Muhammad Shoaib Tahir</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>My Courses</title>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background-color: #f8f8f8;
-      color: #333;
-      scroll-behavior: smooth;
-    }
+/* =========================
+   Global Reset & Variables
+========================= */
+:root {
+  --primary: #0077cc;
+  --primary-dark: #005fa3;
+  --secondary: #00bcd4;
+  --text-dark: #333;
+  --text-light: #555;
+  --bg-light: #f4faff;
+  --bg-dark: #222;
+  --white: #fff;
+  --shadow: 0 8px 20px rgba(0,0,0,0.15);
+  --radius: 12px;
+  --transition: all 0.3s ease;
+}
 
-    /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #000;
-      color: #fff;
-      padding: 15px 60px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .navbar .logo {
-      font-size: 22px;
-      font-weight: bold;
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 25px;
-    }
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover, .nav-links a.active {
-      color: #FFD700;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+  scroll-behavior: smooth;
+}
 
-    /* Hero */
-    .hero {
-      position: relative;
-      height: 100vh;
-      background-image: url('images/bg.jpg');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      text-align: center;
-    }
-    .overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    .hero-text {
-      position: relative;
-      z-index: 2;
-      animation: fadeIn 2s ease;
-      max-width: 700px;
-    }
-    .hero-text h1 {
-      font-size: 2.8em;
-      margin-bottom: 10px;
-    }
-    .hero-text p {
-      font-size: 1.2em;
-      margin-bottom: 25px;
-    }
-    .btn {
-      background-color: #FFD700;
-      color: #000;
-      padding: 12px 30px;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background-color: #fff;
-      color: #000;
-    }
+/* =========================
+   Navbar
+========================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--white);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: var(--transition);
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.navbar .logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
 
-    /* Courses */
-    #courses {
-      padding: 80px 60px;
-      text-align: center;
-      background-color: #fff;
-    }
-    #courses h2 {
-      font-size: 2.2em;
-      margin-bottom: 40px;
-      color: #111;
-    }
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    .course-card {
-      background: #f9f9f9;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-    }
-    .course-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    }
-    .course-card i {
-      font-size: 40px;
-      color: #FFD700;
-      margin-bottom: 15px;
-    }
-    .course-card h3 {
-      margin-bottom: 10px;
-    }
-    .course-card p {
-      font-size: 0.95em;
-    }
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
 
-    /* FAQ Accordion */
-    #faq {
-      padding: 80px 60px;
-      background-color: #f9f9f9;
-    }
-    #faq h2 {
-      text-align: center;
-      font-size: 2em;
-      margin-bottom: 40px;
-      color: #111;
-    }
-    .accordion {
-      background-color: #fff;
-      color: #444;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 1em;
-      transition: 0.4s;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .accordion.active, .accordion:hover {
-      background-color: #FFD700;
-      color: #000;
-    }
-    .panel {
-      padding: 0 18px;
-      background-color: white;
-      display: none;
-      overflow: hidden;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  position: relative;
+  transition: var(--transition);
+}
 
-    /* Testimonials */
-    .testimonials {
-      padding: 80px 60px;
-      background-color: #fff;
-      text-align: center;
-    }
-    .testimonials h2 {
-      font-size: 2em;
-      margin-bottom: 40px;
-    }
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-    }
-    .testimonial {
-      background: #f9f9f9;
-      border-left: 5px solid #FFD700;
-      padding: 25px;
-      border-radius: 10px;
-      font-style: italic;
-    }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s;
+}
 
-    /* Pricing Modal */
-    .pricing-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-    .pricing-content {
-      background: #fff;
-      padding: 40px;
-      border-radius: 15px;
-      text-align: center;
-      width: 90%;
-      max-width: 500px;
-      animation: fadeIn 0.4s ease;
-    }
-    .pricing-content h3 {
-      margin-bottom: 15px;
-    }
-    .pricing-content .price {
-      font-size: 1.6em;
-      color: #FFD700;
-      margin-bottom: 20px;
-    }
-    .pricing-content ul {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-      margin-bottom: 25px;
-    }
-    .pricing-content ul li {
-      margin: 8px 0;
-      font-size: 0.95em;
-    }
-    .enroll-btn {
-      background-color: #FFD700;
-      border: none;
-      color: #000;
-      padding: 10px 25px;
-      border-radius: 25px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .close-btn {
-      background-color: #000;
-      color: #fff;
-      padding: 10px 25px;
-      border-radius: 25px;
-      margin-top: 10px;
-      border: none;
-      cursor: pointer;
-    }
+.nav-links a:hover::after {
+  width: 100%;
+}
 
-    /* Footer */
-    footer {
-      background: #000;
-      color: #fff;
-      text-align: center;
-      padding: 25px 10px;
-      margin-top: 60px;
-    }
-    footer .socials a {
-      color: #FFD700;
-      margin: 0 10px;
-      font-size: 20px;
-    }
+.nav-links a.active {
+  color: var(--primary);
+}
 
-    /* Chat Popup */
-    .chat-popup {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-    .chat-popup a {
-      background-color: #25D366;
-      color: #fff;
-      padding: 15px 20px;
-      border-radius: 50px;
-      font-size: 16px;
-      text-decoration: none;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: 0.3s;
-    }
-    .chat-popup a:hover {
-      background-color: #128C7E;
-    }
+/* =========================
+   Hero Section
+========================= */
+.hero {
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--white);
+  background: linear-gradient(to right, rgba(0,119,204,0.7), rgba(0,0,0,0.6)),
+              url("images/header.jpg") center/cover no-repeat;
+  animation: fadeIn 1.5s ease-in-out;
+  position: relative;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  animation: slideInDown 1.2s ease;
+}
+
+.hero-text p {
+  font-size: 1.3rem;
+  margin-top: 15px;
+  animation: slideInUp 1.2s ease;
+}
+
+.hero-text .btn {
+  margin-top: 25px;
+  padding: 12px 28px;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.hero-text .btn:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+/* =========================
+   Courses Section
+========================= */
+.courses {
+  padding: 70px 20px;
+  text-align: center;
+  background: var(--bg-light);
+}
+
+.courses h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary-dark);
+}
+
+.course-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.course-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.course-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.course-card:hover img {
+  transform: scale(1.05);
+}
+
+.course-card h3 {
+  margin: 15px 0 10px;
+  color: var(--primary);
+}
+
+.course-card p {
+  padding: 0 15px;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  min-height: 60px;
+}
+
+.price {
+  display: block;
+  margin: 15px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+.course-card button {
+  margin: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.course-card button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Pricing Section
+========================= */
+.pricing {
+  padding: 70px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #eaf6ff, #ffffff);
+}
+
+.pricing h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary-dark);
+}
+
+table {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 15px;
+  font-size: 1rem;
+}
+
+th {
+  background: var(--primary);
+  color: var(--white);
+}
+
+tr:hover {
+  background: #f1faff;
+}
+
+/* =========================
+   FAQ Section
+========================= */
+.faq {
+  padding: 70px 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.faq h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: var(--primary);
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 15px;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+}
+
+.faq-question::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  font-size: 1.2rem;
+  transition: var(--transition);
+}
+
+.faq-question.active::after {
+  content: "-";
+}
+
+.faq-question:hover {
+  color: var(--primary);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 15px;
+}
+
+.faq-answer.open {
+  max-height: 300px;
+  padding: 15px;
+  background: #f9fcff;
+  border-left: 3px solid var(--primary);
+}
+
+/* =========================
+   Footer
+========================= */
+footer {
+  background: var(--bg-dark);
+  color: var(--white);
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.socials {
+  margin: 20px 0;
+}
+
+.socials a {
+  margin: 0 12px;
+  font-size: 1.7rem;
+  color: var(--white);
+  transition: var(--transition);
+}
+
+.socials a:hover {
+  color: var(--primary);
+  transform: scale(1.2);
+}
+
+/* =========================
+   Animations
+========================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* =========================
+   Responsive Design
+========================= */
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+  .nav-links {
+    display: none; /* Can be replaced with hamburger later */
+  }
+  .course-card img {
+    height: 180px;
+  }
+}
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">Courses</div>
+    <div class="logo">My Courses</div>
     <ul class="nav-links">
-      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="#home" class="active">Home</a></li>
       <li><a href="#courses">Courses</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#testimonials">Feedback</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQs</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- Hero -->
-  <header class="hero" id="hero">
-    <div class="overlay"></div>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
     <div class="hero-text">
-      <h1>Learn with Muhammad Shoaib Tahir</h1>
-      <p>Master <b>Corpus Linguistics</b>, <b>Computational Linguistics</b>, <b>Python Programming</b>, & <b>Developing Portfolio</b></p>
+      <h1>Welcome to My Courses</h1>
+      <p>Learn modern skills with practical examples</p>
       <a href="#courses" class="btn">Explore Courses</a>
     </div>
-  </header>
+  </section>
 
-  <!-- Courses -->
-  <section id="courses">
+  <!-- Courses Section -->
+  <section id="courses" class="courses">
     <h2>Available Courses</h2>
-    <div class="course-grid">
-      <div class="course-card" onclick="showPricing('Corpus Linguistics', '6,500 PKR / $23')">
-        <i class="fa-solid fa-database"></i>
-        <h3>Corpus Linguistics</h3>
-        <p>Analyze text corpora, extract linguistic patterns, and apply corpus-based approaches in your research.</p>
+    <div class="course-container">
+      <div class="course-card">
+        <img src="images/course1.jpg" alt="Course 1">
+        <h3>Python for Beginners</h3>
+        <p>Start your programming journey with Python basics and projects.</p>
+        <span class="price">$50</span>
+        <button>Enroll Now</button>
       </div>
-      <div class="course-card" onclick="showPricing('Computational Linguistics', '19,500 PKR / $70')">
-        <i class="fa-solid fa-robot"></i>
-        <h3>Computational Linguistics</h3>
-        <p>Work on NLP projects, POS tagging, parsing, embeddings, and real-world AI-based linguistic applications.</p>
+      <div class="course-card">
+        <img src="images/course2.jpg" alt="Course 2">
+        <h3>Web Development Bootcamp</h3>
+        <p>Learn HTML, CSS, and JavaScript to build real-world websites.</p>
+        <span class="price">$75</span>
+        <button>Enroll Now</button>
       </div>
-      <div class="course-card" onclick="showPricing('Python Programming', '15,000 PKR / $53')">
-        <i class="fa-brands fa-python"></i>
-        <h3>Python Programming</h3>
-        <p>Start from basics to advanced — automate tasks, analyze data, and build your own NLP tools.</p>
-      </div>
-      <div class="course-card" onclick="showPricing('Developing Portfolio', '8,500 PKR / $30')">
-        <i class="fa-solid fa-folder-open"></i>
-        <h3>Developing Portfolio</h3>
-        <p>Learn how to create a professional portfolio using GitHub Pages and showcase your projects effectively.</p>
+      <div class="course-card">
+        <img src="images/course3.jpg" alt="Course 3">
+        <h3>Data Science with Python</h3>
+        <p>Master data analysis, visualization, and machine learning tools.</p>
+        <span class="price">$100</span>
+        <button>Enroll Now</button>
       </div>
     </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing">
+    <h2>Pricing</h2>
+    <table>
+      <tr>
+        <th>Course</th>
+        <th>Duration</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td>Python for Beginners</td>
+        <td>1 Month</td>
+        <td>$50</td>
+      </tr>
+      <tr>
+        <td>Web Development Bootcamp</td>
+        <td>1.5 Months</td>
+        <td>$75</td>
+      </tr>
+      <tr>
+        <td>Data Science with Python</td>
+        <td>2 Months</td>
+        <td>$100</td>
+      </tr>
+    </table>
   </section>
 
   <!-- FAQ Section -->
-  <section id="faq">
-    <h2>🧠 Frequently Asked Questions (FAQ)</h2>
-    <button class="accordion">🎓 What topics are covered in each course?</button>
-    <div class="panel"><p>Details of all courses here...</p></div>
-
-    <button class="accordion">Q: What will I be able to do after completing the course?</button>
-    <div class="panel"><p>You’ll be able to design experiments, process language data...</p></div>
-
-    <button class="accordion">Q: Is this course suitable for beginners?</button>
-    <div class="panel"><p>Absolutely! Courses start from zero.</p></div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="testimonials" id="testimonials">
-    <h2>What Students Say</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial">“The best course I’ve taken in computational linguistics!”</div>
-      <div class="testimonial">“Loved the hands-on projects.”</div>
-      <div class="testimonial">“Very clear explanations and practical tasks.”</div>
+  <section id="faq" class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question">How do I enroll in a course?</button>
+        <div class="faq-answer">Simply click the "Enroll Now" button on your desired course and follow the checkout process.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you offer certificates?</button>
+        <div class="faq-answer">Yes, certificates are provided after successfully completing each course.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Are the courses beginner-friendly?</button>
+        <div class="faq-answer">Absolutely! Most courses are designed with step-by-step guidance for beginners.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can I access the course anytime?</button>
+        <div class="faq-answer">Yes, once enrolled, you get lifetime access to the course materials.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What payment methods do you accept?</button>
+        <div class="faq-answer">We accept major credit cards, PayPal, and local payment methods (where available).</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is there any refund policy?</button>
+        <div class="faq-answer">Yes, we offer a 7-day money-back guarantee if you are not satisfied with the course.</div>
+      </div>
     </div>
   </section>
-
-  <!-- Pricing Modal -->
-  <div class="pricing-modal" id="pricingModal">
-    <div class="pricing-content">
-      <h3 id="courseTitle"></h3>
-      <p class="price" id="coursePrice"></p>
-      <ul>
-        <li><i class="fa-solid fa-check"></i> 20+ Hours of Interactive Learning</li>
-        <li><i class="fa-solid fa-check"></i> Hands-on Projects</li>
-        <li><i class="fa-solid fa-check"></i> Certificate of Completion</li>
-      </ul>
-      <a href="https://forms.gle/dc3hJ6NkMPkxtvzv8" target="_blank" class="enroll-btn">Enroll Now</a><br>
-      <button class="close-btn" onclick="closePricing()">Close</button>
-    </div>
-  </div>
-
-  <!-- Chat Popup -->
-  <div class="chat-popup">
-    <a href="https://wa.me/923177793105" target="_blank"><i class="fa-brands fa-whatsapp"></i> Have more questions?</a>
-  </div>
 
   <!-- Footer -->
   <footer id="contact">
-    <p>© 2025 Muhammad Shoaib Tahir | All Rights Reserved</p>
-    <p>📩 <a href="mailto:shoaibtahir410@gmail.com" style="color:#FFD700;">shoaibtahir410@gmail.com</a></p>
+    <p>&copy; 2025 My Courses. All rights reserved.</p>
     <div class="socials">
-      <a href="https://github.com/MuhammadshoaibTahir"><i class="fab fa-github"></i></a>
-      <a href="https://scholar.google.com/citations?user=YNAz_0kAAAAJ"><i class="fa-solid fa-graduation-cap"></i></a>
-      <a href="https://youtube.com/@linguistics"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
     </div>
   </footer>
 
+  <!-- FAQ Accordion Script -->
   <script>
-    // Pricing modal
-    function showPricing(course, price) {
-      document.getElementById('courseTitle').innerText = course;
-      document.getElementById('coursePrice').innerText = price;
-      document.getElementById('pricingModal').style.display = 'flex';
-    }
-    function closePricing() {
-      document.getElementById('pricingModal').style.display = 'none';
-    }
-
-    // FAQ accordion
-    var acc = document.getElementsByClassName("accordion");
-    for (let i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
+    const questions = document.querySelectorAll('.faq-question');
+    questions.forEach(q => {
+      q.addEventListener('click', () => {
+        q.classList.toggle('active');
+        const answer = q.nextElementSibling;
+        answer.classList.toggle('open');
       });
-    }
+    });
   </script>
+  <!-- FontAwesome for social icons -->
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </body>
 </html>
