@@ -156,7 +156,7 @@
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   transition: transform 0.4s, box-shadow 0.4s;
   cursor: pointer;
-  position: relative;
+  position: relative; /* ✅ Important for badge positioning */
 }
 
 .course-card:hover {
@@ -227,9 +227,8 @@
   box-shadow: 0 3px 6px rgba(0,0,0,0.2);
   text-transform: uppercase;
   letter-spacing: 1px;
-  z-index: 5;  /* 👈 Important: keeps it above image */
+  z-index: 5;  /* ✅ Keeps it above image */
 }
-
 
 /* Pricing Section */
 .pricing {
