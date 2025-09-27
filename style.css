@@ -9,11 +9,16 @@
 
 /* Variables */
 :root {
-  --primary: #d4af37; /* Golden color */
+  --primary: #d4af37;   /* Golden */
+  --gold: #d4af37;
+  --gold-dark: #b68b2c;
   --dark: #222;
   --light: #f4faff;
   --text: #333;
   --text-light: #555;
+  --text-dark: #111;
+  --transition: all 0.3s ease;
+  --shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* Navbar */
@@ -90,7 +95,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px; /* 👈 ensures space between h1 and button */
+  gap: 30px; /* space between h1, p, and button */
 }
 
 .hero-text h1 {
@@ -101,7 +106,6 @@
   color: #fff;
 }
 
-
 .hero-text p {
   font-size: 1.4rem;
   font-weight: 400;
@@ -109,10 +113,10 @@
 }
 
 .hero-text .btn {
-  margin-top: 20px; /* 👈 extra space below heading */
+  margin-top: 20px;
   padding: 14px 32px;
-  background: var(--gold);
-  color: var(--text-dark);
+  background: var(--primary);
+  color: #fff;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
@@ -124,7 +128,6 @@
   background: var(--gold-dark);
   transform: scale(1.05);
 }
-
 
 /* Courses Section */
 .courses {
@@ -159,23 +162,6 @@
 .course-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-}
-
-.new-badge {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: var(--gold);
-  color: var(--text-dark);
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-  text-transform: uppercase;
-}
-.course-card {
-  position: relative; /* required for badge positioning */
 }
 
 .course-card img {
@@ -223,8 +209,23 @@
 }
 
 .course-card button:hover {
-  background: #b68b2c;
+  background: var(--gold-dark);
   transform: translateY(-2px);
+}
+
+/* New Badge */
+.new-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  text-transform: uppercase;
 }
 
 /* Pricing Section */
