@@ -3,134 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Portfolio & Courses</title>
+<title>My Courses & Portfolio</title>
 
 <!-- Font Awesome -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" crossorigin="anonymous"></script>
 
-<!-- CSS -->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
 /* =========================
-   Global Variables & Reset
+   Global Styles
 ========================= */
 :root {
-  --primary:#0077cc;
-  --primary-dark:#005fa3;
-  --gold:#FFD700;
-  --gold-dark:#e6c200;
-  --text-dark:#222;
-  --text-light:#555;
-  --bg-light:#f4faff;
-  --bg-dark:#111;
-  --white:#fff;
-  --shadow:0 8px 20px rgba(0,0,0,0.15);
-  --radius:12px;
-  --transition:all 0.3s ease;
+  --primary: #0077cc;
+  --primary-dark: #005fa3;
+  --gold: #FFD700;
+  --gold-dark: #e6c200;
+  --text-dark: #222;
+  --text-light: #555;
+  --bg-light: #f4faff;
+  --bg-dark: #111;
+  --white: #fff;
+  --shadow: 0 8px 20px rgba(0,0,0,0.15);
+  --radius: 12px;
+  --transition: all 0.3s ease;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif;scroll-behavior:smooth;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;scroll-behavior:smooth;}
+body{background:var(--bg-light);color:var(--text-dark);}
 
 /* =========================
    Navbar
 ========================= */
-.navbar{position:sticky;top:0;z-index:1000;background:rgba(0,0,0,0.85);padding:15px 30px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(8px);}
-.navbar .logo{font-size:1.7rem;font-weight:bold;color:var(--gold);letter-spacing:1px;}
-.nav-links{display:flex;list-style:none;gap:25px;}
-.nav-links a{text-decoration:none;color:var(--white);font-weight:500;position:relative;transition:var(--transition);}
-.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--gold);transition:width 0.3s;}
-.nav-links a:hover::after{width:100%;}
+.navbar{
+  position: sticky; top:0; z-index:1000;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:15px 30px; background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(8px);
+}
+.navbar .logo{
+  font-size:1.7rem; font-weight:bold; color:var(--gold); letter-spacing:1px;
+}
+.nav-links{
+  display:flex; list-style:none; gap:25px;
+}
+.nav-links a{
+  text-decoration:none; color:var(--white); font-weight:500; position:relative; transition:var(--transition);
+}
 .nav-links a.active{color:var(--gold);}
-.burger{display:none;color:#fff;font-size:1.5rem;cursor:pointer;}
+.nav-links a::after{
+  content:""; position:absolute; left:0; bottom:-5px; width:0; height:2px; background:var(--gold); transition:width 0.3s;
+}
+.nav-links a:hover::after{width:100%;}
+.burger{display:none; font-size:1.5rem; color:#fff; cursor:pointer;}
 
 /* =========================
-   Hero Sections
+   Hero Section
 ========================= */
-.hero{height:90vh;display:flex;justify-content:center;align-items:center;text-align:center;color:var(--white);background-size:cover;background-position:center;position:relative;}
+.hero{height:90vh; display:flex; justify-content:center; align-items:center; text-align:center; color:var(--white); position:relative; background-size:cover; background-position:center;}
 .hero.large-hero{background-image:url('images/hero-bg-large.jpg');}
-.hero.small-hero{background-image:url('images/hero-bg-small.jpg');height:60vh;}
-.hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);}
-.hero-text{position:relative;z-index:2;padding:0 20px;}
-.hero-text h1{font-size:3.5rem;font-weight:800;line-height:1.3;text-transform:uppercase;margin-bottom:20px;}
-.hero-text p{font-size:1.2rem;}
-.hero-text .btn{display:inline-block;margin-top:30px;padding:14px 32px;background:var(--gold);color:var(--text-dark);border-radius:8px;text-decoration:none;font-weight:600;transition:var(--transition);box-shadow:0 4px 15px rgba(0,0,0,0.3);}
-.hero-text .btn:hover{background:var(--gold-dark);transform:scale(1.05);}
+.hero.small-hero{background-image:url('images/hero-bg-small.jpg'); height:60vh;}
+.hero::after{content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55);}
+.hero-text{position:relative; z-index:2; padding:0 20px;}
+.hero-text h1{font-size:3.5rem; font-weight:800; line-height:1.3; margin-bottom:20px; text-transform:uppercase;}
+.hero-text p{font-size:1.2rem; margin-bottom:20px;}
+.hero-text .btn{display:inline-block; padding:14px 32px; background:var(--gold); color:var(--text-dark); border-radius:8px; text-decoration:none; font-weight:600; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:var(--transition);}
+.hero-text .btn:hover{background:var(--gold-dark); transform:scale(1.05);}
 
 /* =========================
    Counters
 ========================= */
-.counters{display:flex;justify-content:center;gap:40px;padding:60px 20px;background:var(--bg-light);flex-wrap:wrap;text-align:center;}
-.counter-box{flex:1 1 200px;background:var(--white);padding:25px;border-radius:var(--radius);box-shadow:var(--shadow);transition:var(--transition);}
+.counters{display:flex; justify-content:center; gap:40px; padding:60px 20px; flex-wrap:wrap; text-align:center;}
+.counter-box{flex:1 1 200px; background:var(--white); padding:25px; border-radius:var(--radius); box-shadow:var(--shadow); transition:var(--transition);}
 .counter-box:hover{transform:translateY(-5px);}
-.counter-box i{font-size:2.5rem;color:var(--primary);margin-bottom:15px;}
-.counter-box h2{font-size:2rem;color:var(--primary-dark);}
-.counter-box p{color:var(--text-light);margin-top:10px;}
+.counter-box i{font-size:2.5rem; color:var(--primary); margin-bottom:15px;}
+.counter-box h2{font-size:2rem; color:var(--primary-dark);}
+.counter-box p{color:var(--text-light); margin-top:10px;}
 
 /* =========================
-   Courses
+   Courses Section
 ========================= */
-.courses{padding:80px 20px;text-align:center;background:var(--bg-light);}
-.courses h2{font-size:2.5rem;margin-bottom:20px;color:var(--primary-dark);}
-.course-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:30px;}
-.course-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;position:relative;}
-.course-card:hover{transform:translateY(-10px);box-shadow:0 12px 30px rgba(0,0,0,0.25);}
-.course-card img{width:100%;height:220px;object-fit:cover;}
-.course-card h3{margin:15px 0 10px;color:var(--primary);}
-.course-card p{padding:0 15px 20px;font-size:0.95rem;color:var(--text-light);min-height:60px;}
-.course-card button{margin:15px;padding:10px 18px;border:none;border-radius:6px;background:var(--gold);color:var(--text-dark);font-weight:600;font-size:0.95rem;cursor:pointer;transition:var(--transition);}
-.course-card button:hover{background:var(--gold-dark);transform:translateY(-2px);}
-.course-card .badge.new{position:absolute;top:10px;right:10px;background:#ff3e3e;color:#fff;padding:5px 10px;font-size:0.8rem;border-radius:5px;}
+.courses{padding:80px 20px; text-align:center;}
+.courses h2{font-size:2.5rem; margin-bottom:20px; color:var(--primary-dark);}
+.course-container{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; margin-top:30px;}
+.course-card{background:var(--white); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); transition:var(--transition); cursor:pointer; position:relative;}
+.course-card:hover{transform:translateY(-10px); box-shadow:0 12px 30px rgba(0,0,0,0.25);}
+.course-card img{width:100%; height:220px; object-fit:cover;}
+.course-card h3{margin:15px 0 10px; color:var(--primary);}
+.course-card p{padding:0 15px 20px; font-size:0.95rem; color:var(--text-light); min-height:60px;}
+.course-card button{margin:15px; padding:10px 18px; border:none; border-radius:6px; background:var(--gold); color:var(--text-dark); font-weight:600; font-size:0.95rem; cursor:pointer; transition:var(--transition);}
+.course-card button:hover{background:var(--gold-dark); transform:translateY(-2px);}
+.course-card .badge.new{position:absolute; top:10px; right:10px; background:#ff3e3e; color:#fff; padding:5px 10px; font-size:0.8rem; border-radius:5px;}
 
 /* =========================
    Modules Grid
 ========================= */
-.modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:2rem;text-align:center;}
-.module{background:#e9ecef;padding:1.5rem;border-radius:8px;}
-.module i{font-size:2rem;color:#0d6efd;margin-bottom:0.5rem;}
+.modules-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; margin-top:2rem; text-align:center;}
+.module{background:#e9ecef; padding:1.5rem; border-radius:8px; transition:0.3s;}
+.module i{font-size:2rem; color:#0d6efd; margin-bottom:0.5rem;}
+.module:hover{transform:translateY(-5px);}
 
 /* =========================
-   Timeline
+   Timeline & Progress
 ========================= */
-.timeline{display:flex;justify-content:space-around;margin:2rem 0;flex-wrap:wrap;}
-.stage{padding:1rem;border-radius:5px;flex:1;text-align:center;margin:0 0.5rem;color:#fff;min-width:120px;}
+.timeline{display:flex; justify-content:space-around; margin:2rem 0; flex-wrap:wrap;}
+.stage{padding:1rem; border-radius:5px; flex:1; text-align:center; margin:0 0.5rem; color:#fff; min-width:120px;}
 .completed{background:#28a745;}
-.current{background:#ffc107;color:#000;}
+.current{background:#ffc107; color:#000;}
 .upcoming{background:#6c757d;}
-
-/* =========================
-   Progress Bar
-========================= */
 .progress-bar{margin:2rem 0;}
-.progress-bar .bar{background:#e9ecef;border-radius:10px;overflow:hidden;height:20px;}
-.progress-bar .fill{background:#00aaff;height:100%;width:0;transition:width 1s ease-in-out;}
+.progress-bar .bar{background:#e9ecef; border-radius:10px; overflow:hidden; height:20px;}
+.progress-bar .fill{background:#00aaff; height:100%; width:0; transition:width 1s ease-in-out;}
 
 /* =========================
-   Pricing & Enrollment
+   Pricing Section
 ========================= */
-.pricing-section{padding:5rem 2rem;background:var(--bg-light);text-align:center;}
-.pricing-box{background:var(--white);padding:2rem;border-radius:10px;display:inline-block;box-shadow:0 5px 15px rgba(0,0,0,0.1);margin-top:2rem;text-align:left;}
-.pricing-box ul{list-style:none;margin-top:1rem;}
-.pricing-box ul li{margin:0.5rem 0;}
-.pricing-box ul li i{color:green;margin-right:0.5rem;}
+.pricing-section{padding:5rem 2rem; background:var(--bg-light); text-align:center;}
+.pricing-box{background:var(--white); padding:2rem; border-radius:10px; display:inline-block; box-shadow:0 5px 15px rgba(0,0,0,0.1); margin-top:2rem; text-align:left;}
+.pricing-box h3{margin-bottom:1rem; color:var(--primary);}
+.pricing-box ul{list-style:none; margin-top:1rem; padding-left:0;}
+.pricing-box ul li{margin:0.5rem 0; font-weight:500;}
+.pricing-box ul li i{color:green; margin-right:0.5rem;}
+.pricing-box .btn{display:inline-block; margin-top:1rem; margin-right:0.5rem; text-decoration:none;}
 
 /* =========================
    Share & WhatsApp
 ========================= */
-.share-section{padding:3rem 2rem;background:#0d1b2a;color:#fff;text-align:center;}
-.share-section .social-buttons a{margin:0 0.5rem;color:#fff;font-size:1.5rem;}
-.whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;font-size:2rem;padding:0.5rem 0.7rem;border-radius:50%;z-index:3000;}
+.share-section{padding:3rem 2rem; background:#0d1b2a; color:#fff; text-align:center;}
+.share-section .social-buttons a{margin:0 0.5rem; color:#fff; font-size:1.5rem; transition:var(--transition);}
+.share-section .social-buttons a:hover{color:var(--gold); transform:scale(1.2);}
+.whatsapp-float{position:fixed; bottom:20px; right:20px; background:#25d366; color:#fff; font-size:2rem; padding:0.5rem 0.7rem; border-radius:50%; z-index:3000; box-shadow:var(--shadow); transition:var(--transition);}
+.whatsapp-float:hover{transform:scale(1.1);}
 
 /* =========================
    Footer
 ========================= */
-footer{background:var(--bg-dark);color:var(--white);text-align:center;padding:40px 20px;}
-.footer-socials a{margin:0 0.5rem;color:#fff;font-size:1.5rem;transition:var(--transition);}
-.footer-socials a:hover{color:var(--gold);transform:scale(1.2);}
+footer{background:var(--bg-dark); color:var(--white); text-align:center; padding:40px 20px;}
+.footer-socials a{margin:0 0.5rem; color:#fff; font-size:1.5rem; transition:var(--transition);}
+.footer-socials a:hover{color:var(--gold); transform:scale(1.2);}
+
+/* =========================
+   Scroll-to-top Button
+========================= */
+#scrollTopBtn{display:none; position:fixed; bottom:25px; right:25px; z-index:3000; background:var(--primary); color:#fff; border:none; padding:12px 16px; border-radius:50%; font-size:1.2rem; cursor:pointer; box-shadow:var(--shadow); transition:var(--transition);}
+#scrollTopBtn:hover{background:var(--primary-dark);}
 
 /* =========================
    Responsive
 ========================= */
 @media(max-width:768px){
-  .navbar ul{display:none;flex-direction:column;background:#0d1b2a;position:absolute;top:70px;right:0;width:200px;padding:1rem;border-radius:5px;}
+  .navbar ul{display:none; flex-direction:column; background:#0d1b2a; position:absolute; top:70px; right:0; width:200px; padding:1rem; border-radius:5px;}
   .navbar ul.show{display:flex;}
   .burger{display:block;}
   .counters{flex-direction:column;}
@@ -144,7 +167,7 @@ footer{background:var(--bg-dark);color:var(--white);text-align:center;padding:40
 <header>
   <nav class="navbar">
     <div class="logo">My Portfolio</div>
-    <ul>
+    <ul class="nav-links">
       <li><a href="#home" class="active">Home</a></li>
       <li><a href="#corpus">Corpus</a></li>
       <li><a href="#computational">Computational</a></li>
@@ -155,7 +178,7 @@ footer{background:var(--bg-dark);color:var(--white);text-align:center;padding:40
   </nav>
 </header>
 
-<!-- Hero Section -->
+<!-- Hero -->
 <section id="home" class="hero large-hero">
   <div class="hero-text">
     <h1>Welcome to My Courses</h1>
@@ -183,124 +206,122 @@ footer{background:var(--bg-dark);color:var(--white);text-align:center;padding:40
   </div>
 </section>
 
-<!-- Courses Section -->
+<!-- Courses -->
 <section id="portfolio" class="courses">
   <h2>Our Courses</h2>
   <div class="course-container">
     <div class="course-card" data-course="corpus">
       <img src="images/corpus.png" alt="Corpus Linguistics">
       <h3>Corpus Linguistics</h3>
-      <p>Hands-on exercises with real linguistic datasets.</p>
-      <span class="badge new">NEW</span>
+      <p>Learn corpus creation, annotation, and analysis of linguistic data.</p>
       <button>View Details</button>
     </div>
     <div class="course-card" data-course="computational">
       <img src="images/computational.png" alt="Computational Linguistics">
       <h3>Computational Linguistics</h3>
-      <p>Learn algorithms & text processing in Python.</p>
+      <p>Explore NLP, tokenization, embeddings, and practical projects.</p>
       <button>View Details</button>
     </div>
     <div class="course-card" data-course="python">
-      <img src="images/python.png" alt="Python Programming">
+      <img src="images/python.png" alt="Python">
       <h3>Python Programming</h3>
-      <p>From basics to advanced coding for NLP & data analysis.</p>
+      <p>Basics to advanced Python programming with hands-on exercises.</p>
+      <button>View Details</button>
+    </div>
+    <div class="course-card" data-course="portfolio">
+      <div class="badge new">NEW</div>
+      <img src="images/github.png" alt="Portfolio Development">
+      <h3>Portfolio Development</h3>
+      <p>Build a professional portfolio to showcase your skills.</p>
       <button>View Details</button>
     </div>
   </div>
 </section>
 
-<!-- Modules -->
-<section id="corpus" class="modules-grid">
-  <div class="module"><i class="fa-solid fa-database"></i><h4>Module 1: Introduction</h4></div>
-  <div class="module"><i class="fa-solid fa-magnifying-glass"></i><h4>Module 2: Corpus Tools</h4></div>
-  <div class="module"><i class="fa-solid fa-chart-line"></i><h4>Module 3: Analysis</h4></div>
-  <div class="module"><i class="fa-solid fa-file-lines"></i><h4>Module 4: Reporting</h4></div>
+<!-- Modules Grid -->
+<section class="modules-grid">
+  <div class="module"><i class="fas fa-book"></i><h4>Module 1</h4><p>Introduction to Corpus</p></div>
+  <div class="module"><i class="fas fa-laptop-code"></i><h4>Module 2</h4><p>Python Basics</p></div>
+  <div class="module"><i class="fas fa-brain"></i><h4>Module 3</h4><p>Computational Linguistics</p></div>
 </section>
 
-<!-- Timeline & Progress -->
-<section id="python" class="timeline-section">
-  <h2>Python Course Timeline</h2>
-  <div class="timeline">
-    <div class="stage completed">Basics</div>
-    <div class="stage current">Intermediate</div>
-    <div class="stage upcoming">Advanced</div>
-  </div>
-  <div class="progress-bar">
-    <h4>Course Completion: 40%</h4>
-    <div class="bar"><div class="fill" style="width:40%"></div></div>
-  </div>
+<!-- Timeline -->
+<section class="timeline">
+  <div class="stage completed">Completed</div>
+  <div class="stage current">Current</div>
+  <div class="stage upcoming">Upcoming</div>
 </section>
 
-<!-- Pricing Section -->
-<section id="pricing" class="pricing-section">
-  <h2>Pricing & Enrollment</h2>
+<!-- Progress -->
+<section class="progress-bar">
+  <div class="bar"><div class="fill" style="width:65%;"></div></div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing-section">
   <div class="pricing-box">
-    <h3>Python Programming</h3>
-    <p>PKR 15,000 / USD 90</p>
+    <h3>Python for Beginners</h3>
+    <p>Learn Python in 1 Month with practical projects.</p>
     <ul>
-      <li><i class="fa-solid fa-check"></i> Certificate of Completion</li>
-      <li><i class="fa-solid fa-check"></i> Hands-on Exercises</li>
-      <li><i class="fa-solid fa-check"></i> Access to Tools & Software</li>
+      <li><i class="fas fa-check"></i>Hands-on exercises</li>
+      <li><i class="fas fa-check"></i>Certificate of completion</li>
+      <li><i class="fas fa-check"></i>Downloadable materials</li>
     </ul>
+    <a href="brochure.pdf" class="btn" target="_blank">Download Brochure</a>
     <a href="mailto:example@email.com" class="btn">Enroll Now</a>
-    <a href="brochure.pdf" class="btn"><i class="fa-solid fa-download"></i> Download Brochure</a>
   </div>
 </section>
 
-<!-- Share Section -->
-<section id="share" class="share-section">
-  <h2>Share & Contact</h2>
+<!-- Share & WhatsApp -->
+<section class="share-section">
+  <h3>Share & Connect</h3>
   <div class="social-buttons">
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
   </div>
+  <a href="https://wa.me/923177793105" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
 </section>
 
 <!-- Footer -->
 <footer>
-  <p>© 2025 My Portfolio & Courses</p>
+  <p>&copy; 2025 Muhammad Shoaib Tahir. All rights reserved.</p>
   <div class="footer-socials">
-    <a href="#"><i class="fab fa-github"></i></a>
-    <a href="#"><i class="fab fa-google"></i></a>
-    <a href="#"><i class="fab fa-youtube"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="https://github.com/MuhammadshoaibTahir" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://scholar.google.com/" target="_blank"><i class="fas fa-graduation-cap"></i></a>
+    <a href="https://youtube.com/@linguistics-k1v" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://www.linkedin.com/in/muhammad-shoaib-tahir-3a9103179/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555" target="_blank"><i class="fab fa-facebook"></i></a>
   </div>
 </footer>
 
-<!-- WhatsApp Floating Button -->
-<a href="https://wa.me/923177793105" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
-
-<!-- Scroll-to-top Button -->
+<!-- Scroll-to-top -->
 <button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
 
-<!-- Scripts -->
+<!-- JS -->
 <script>
-// Burger Menu
-const burger = document.querySelector('.burger');
-const navLinks = document.querySelector('.navbar ul');
-burger.addEventListener('click',()=>navLinks.classList.toggle('show'));
+// Navbar burger toggle
+const burger=document.querySelector('.burger');
+const nav=document.querySelector('.nav-links');
+burger.addEventListener('click',()=>{nav.classList.toggle('show');});
 
-// Active link highlight
-const navItems = document.querySelectorAll('.navbar a');
-navItems.forEach(link=>{
-  link.addEventListener('click',()=>{
-    navItems.forEach(i=>i.classList.remove('active'));
-    link.classList.add('active');
-  });
-});
+// Active nav link highlight
+const navLinks=document.querySelectorAll('.nav-links a');
+navLinks.forEach(link=>link.addEventListener('click',()=>{
+  navLinks.forEach(l=>l.classList.remove('active'));
+  link.classList.add('active');
+}));
 
 // Counters
-const counters = document.querySelectorAll('.counter');
+const counters=document.querySelectorAll('.counter');
 counters.forEach(counter=>{
   counter.innerText='0';
   const updateCounter=()=>{
     const target=+counter.getAttribute('data-target');
-    const c=+counter.innerText;
-    const increment=target/200;
-    if(c<target){
-      counter.innerText=Math.ceil(c+increment);
+    const count=+counter.innerText;
+    const inc=target/200;
+    if(count<target){
+      counter.innerText=Math.ceil(count+inc);
       setTimeout(updateCounter,20);
     }else{counter.innerText=target;}
   };
@@ -310,7 +331,7 @@ counters.forEach(counter=>{
 // Scroll-to-top
 const scrollBtn=document.getElementById("scrollTopBtn");
 window.onscroll=()=>{scrollBtn.style.display=(document.body.scrollTop>200||document.documentElement.scrollTop>200)?"block":"none";}
-scrollBtn.onclick=()=>{document.documentElement.scrollTop=0;document.body.scrollTop=0;}
+scrollBtn.onclick=()=>{document.documentElement.scrollTop=0;document.body.scrollTop=0;};
 </script>
 </body>
 </html>
