@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Courses | Muhammad Shoaib Tahir</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -137,32 +138,43 @@
       font-size: 0.95em;
     }
 
-    /* Why Learn Section */
-    .why-learn {
-      background-color: #000;
-      color: #fff;
-      text-align: center;
+    /* FAQ Accordion */
+    #faq {
       padding: 80px 60px;
+      background-color: #f9f9f9;
     }
-    .why-learn h2 {
-      color: #FFD700;
+    #faq h2 {
+      text-align: center;
       font-size: 2em;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      color: #111;
     }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .feature-box {
-      background-color: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 10px;
-    }
-    .feature-box i {
-      font-size: 35px;
-      color: #FFD700;
+    .accordion {
+      background-color: #fff;
+      color: #444;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 1em;
+      transition: 0.4s;
+      border-radius: 8px;
       margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .accordion.active, .accordion:hover {
+      background-color: #FFD700;
+      color: #000;
+    }
+    .panel {
+      padding: 0 18px;
+      background-color: white;
+      display: none;
+      overflow: hidden;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     /* Testimonials */
@@ -243,45 +255,6 @@
       margin-top: 10px;
       border: none;
       cursor: pointer;
-    }
-
-    /* FAQ Accordion */
-    #faq {
-      padding: 80px 60px;
-      background-color: #f9f9f9;
-    }
-    #faq h2 {
-      text-align: center;
-      font-size: 2em;
-      margin-bottom: 40px;
-      color: #111;
-    }
-    .accordion {
-      background-color: #fff;
-      color: #444;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 1em;
-      transition: 0.4s;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .accordion.active, .accordion:hover {
-      background-color: #FFD700;
-      color: #000;
-    }
-    .panel {
-      padding: 0 18px;
-      background-color: white;
-      display: none;
-      overflow: hidden;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     /* Footer */
@@ -377,67 +350,23 @@
   <!-- FAQ Section -->
   <section id="faq">
     <h2>🧠 Frequently Asked Questions (FAQ)</h2>
-
     <button class="accordion">🎓 What topics are covered in each course?</button>
-    <div class="panel">
-      <p><b>Corpus Linguistics:</b> Build, analyze, and interpret linguistic corpora using AntConc, Sketch Engine, and Python.<br>
-      <b>Computational Linguistics:</b> NLP, Machine Learning for language, using spaCy, NLTK, Hugging Face.<br>
-      <b>Python Programming:</b> Basics to advanced Python including text processing and small automation projects.<br>
-      <b>Developing Portfolio:</b> Learn GitHub Pages, create professional portfolio, showcase projects.</p>
-    </div>
+    <div class="panel"><p>Details of all courses here...</p></div>
 
     <button class="accordion">Q: What will I be able to do after completing the course?</button>
-    <div class="panel">
-      <p>You’ll be able to design experiments, process language data, write NLP pipelines, develop portfolios, and use programming for linguistic projects.</p>
-    </div>
+    <div class="panel"><p>You’ll be able to design experiments, process language data...</p></div>
 
     <button class="accordion">Q: Is this course suitable for beginners?</button>
-    <div class="panel">
-      <p>Absolutely! Courses start from zero. No prior coding or linguistic background required.</p>
-    </div>
-
-    <button class="accordion">Q: Are the classes live or recorded?</button>
-    <div class="panel">
-      <p>Live interactive sessions on Google Meet. Recordings are provided for revision or missed sessions.</p>
-    </div>
-
-    <button class="accordion">💵 Pricing & Payment</button>
-    <div class="panel">
-      <p>Corpus Linguistics: PKR 6500 / $23<br>
-      Computational Linguistics: PKR 19500 / $70<br>
-      Python Programming: PKR 15000 / $53<br>
-      Developing Portfolio: PKR 8500 / $30</p>
-      <p>Installments available. Pay via Easypaisa, JazzCash, Bank Transfer, or PayPal (for international students).</p>
-    </div>
-
-    <button class="accordion">💰 Refund Policy</button>
-    <div class="panel">
-      <p>If you are not satisfied within the first two sessions, you can request a full refund. After that period, refunds are not available, but you may transfer your enrollment to the next batch.</p>
-    </div>
-
-    <button class="accordion">📜 Certification & Outcomes</button>
-    <div class="panel">
-      <p>Receive a verified digital certificate. Suitable for CV, LinkedIn, and academic portfolio.</p>
-    </div>
-
-    <button class="accordion">🧑‍🏫 Instructor & Support</button>
-    <div class="panel">
-      <p>Courses are taught by Muhammad Shoaib Tahir. Students get direct support and access to private discussion groups.</p>
-    </div>
-
-    <button class="accordion">🚀 Future Opportunities</button>
-    <div class="panel">
-      <p>Prepare for research, PhD, NLP careers, or linguistic publications. Guidance provided for projects and papers.</p>
-    </div>
+    <div class="panel"><p>Absolutely! Courses start from zero.</p></div>
   </section>
 
   <!-- Testimonials -->
   <section class="testimonials" id="testimonials">
     <h2>What Students Say</h2>
     <div class="testimonial-grid">
-      <div class="testimonial">“The best course I’ve taken in computational linguistics! Shoaib Sir makes even complex NLP easy to understand.”</div>
-      <div class="testimonial">“Loved the hands-on projects — especially the text processing and tense detection system!”</div>
-      <div class="testimonial">“Very clear explanations and practical tasks. Great for both linguists and programmers.”</div>
+      <div class="testimonial">“The best course I’ve taken in computational linguistics!”</div>
+      <div class="testimonial">“Loved the hands-on projects.”</div>
+      <div class="testimonial">“Very clear explanations and practical tasks.”</div>
     </div>
   </section>
 
@@ -449,10 +378,7 @@
       <ul>
         <li><i class="fa-solid fa-check"></i> 20+ Hours of Interactive Learning</li>
         <li><i class="fa-solid fa-check"></i> Hands-on Projects</li>
-        <li><i class="fa-solid fa-check"></i> Downloadable Resources</li>
         <li><i class="fa-solid fa-check"></i> Certificate of Completion</li>
-        <li><i class="fa-solid fa-check"></i> One-on-One Mentoring Sessions</li>
-        <li><i class="fa-solid fa-check"></i> Lifetime Access to Recorded Lectures</li>
       </ul>
       <a href="https://forms.gle/dc3hJ6NkMPkxtvzv8" target="_blank" class="enroll-btn">Enroll Now</a><br>
       <button class="close-btn" onclick="closePricing()">Close</button>
@@ -471,5 +397,34 @@
     <div class="socials">
       <a href="https://github.com/MuhammadshoaibTahir"><i class="fab fa-github"></i></a>
       <a href="https://scholar.google.com/citations?user=YNAz_0kAAAAJ"><i class="fa-solid fa-graduation-cap"></i></a>
-      <a href="https://youtube.com/@linguistics
-```
+      <a href="https://youtube.com/@linguistics"><i class="fab fa-youtube"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // Pricing modal
+    function showPricing(course, price) {
+      document.getElementById('courseTitle').innerText = course;
+      document.getElementById('coursePrice').innerText = price;
+      document.getElementById('pricingModal').style.display = 'flex';
+    }
+    function closePricing() {
+      document.getElementById('pricingModal').style.display = 'none';
+    }
+
+    // FAQ accordion
+    var acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+  </script>
+</body>
+</html>
