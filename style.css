@@ -100,21 +100,22 @@
 
 .hero-text .btn {
   display: inline-block;
-  margin-top: 25px;
-  padding: 14px 28px;
-  background: var(--primary);
+  margin-top: 50px;   /* was 20px before */
+  padding: 14px 30px;
+  background: #d4af37; /* golden */
   color: white;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   transition: background 0.3s, transform 0.3s;
 }
 
 .hero-text .btn:hover {
-  background: #b68b2c;
+  background: #b89625;
   transform: translateY(-3px);
 }
+
 
 /* Courses Section */
 .courses {
