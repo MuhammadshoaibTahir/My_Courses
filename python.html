@@ -16,6 +16,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="corpus.html">Corpus Linguistics</a></li>
       <li><a href="computational.html">Computational Linguistics</a></li>
+      <li><a href="portfolio.html">Portfolio Development</a></li>
       <li><a href="python.html" class="active">Python Programming</a></li>
     </ul>
   </nav>
@@ -26,6 +27,7 @@
     <div class="hero-text">
       <h1>Python Programming</h1>
       <p>Hands-on Python for linguistics and general programming</p>
+      <a href="#outline" class="btn">View Course Outline</a>
     </div>
   </header>
 
@@ -37,7 +39,33 @@
       It’s perfect for linguists and beginners who want practical coding skills.
     </p>
 
-    <h3>Course Outline</h3>
+    <!-- Timeline -->
+    <h3>Course Timeline</h3>
+    <div class="timeline">
+      <div class="timeline-item completed">
+        <h4>Week 1</h4>
+        <p>Python Basics: variables, loops, and functions</p>
+      </div>
+      <div class="timeline-item completed">
+        <h4>Week 2</h4>
+        <p>Data Structures: lists, dictionaries, sets</p>
+      </div>
+      <div class="timeline-item current">
+        <h4>Week 3</h4>
+        <p>Text Processing with Python</p>
+      </div>
+      <div class="timeline-item upcoming">
+        <h4>Week 4</h4>
+        <p>Working with Files</p>
+      </div>
+      <div class="timeline-item upcoming">
+        <h4>Week 5</h4>
+        <p>Intro to NLP Libraries (NLTK, spaCy)</p>
+      </div>
+    </div>
+
+    <!-- Course Outline -->
+    <h3 id="outline">Course Outline</h3>
     <ul class="course-outline">
       <li><i class="fa-solid fa-code"></i> Python Basics (variables, loops, functions)</li>
       <li><i class="fa-solid fa-list"></i> Data Structures (lists, dictionaries, sets)</li>
@@ -46,10 +74,52 @@
       <li><i class="fa-solid fa-robot"></i> Intro to NLP Libraries (NLTK, spaCy)</li>
     </ul>
 
+    <!-- Progress Tracker -->
+    <h3>Your Progress</h3>
+    <div class="progress-bar">
+      <div class="progress" style="width: 40%;">40%</div>
+    </div>
+
+    <!-- Course Fee (hidden until user clicks) -->
     <div class="course-price">
-      <p><strong>Course Fee:</strong> 15,000 PKR / $53</p>
+      <button onclick="document.getElementById('price').style.display='block'">Show Course Fee</button>
+      <p id="price" style="display:none;"><strong>Course Fee:</strong> 15,000 PKR / $53</p>
+    </div>
+
+    <!-- Download Brochure -->
+    <div class="brochure">
+      <a href="docs/python-brochure.pdf" download class="btn"><i class="fa-solid fa-download"></i> Download Brochure</a>
+    </div>
+
+    <!-- Share Buttons -->
+    <div class="share-buttons">
+      <p>Share this course:</p>
+      <a href="https://twitter.com/intent/tweet?url=https://yourwebsite.com/python.html&text=Check+out+this+Python+Programming+course!" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com/python.html" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourwebsite.com/python.html" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <!-- Animated Counters -->
+    <div class="counters">
+      <div class="counter">
+        <span class="count" data-target="120">0</span>
+        <p>Students Enrolled</p>
+      </div>
+      <div class="counter">
+        <span class="count" data-target="25">0</span>
+        <p>Lessons</p>
+      </div>
+      <div class="counter">
+        <span class="count" data-target="5">0</span>
+        <p>Projects</p>
+      </div>
     </div>
   </div>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/923177793105" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
   <!-- Footer -->
   <footer>
@@ -63,6 +133,26 @@
     </div>
     <p>&copy; 2025 Muhammad Shoaib Tahir</p>
   </footer>
+
+  <!-- Counter Animation Script -->
+  <script>
+    const counters = document.querySelectorAll('.count');
+    const speed = 200; 
+    counters.forEach(counter => {
+      const animate = () => {
+        const value = +counter.getAttribute('data-target');
+        const data = +counter.innerText;
+        const increment = value / speed;
+        if (data < value) {
+          counter.innerText = Math.ceil(data + increment);
+          setTimeout(animate, 20);
+        } else {
+          counter.innerText = value;
+        }
+      };
+      animate();
+    });
+  </script>
 
 </body>
 </html>
