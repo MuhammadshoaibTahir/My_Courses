@@ -1,4 +1,16 @@
-/* Reset */
+/* =========================
+   Global Reset & Variables
+========================= */
+:root {
+  --primary: #0077cc;
+  --primary-dark: #005fa3;
+  --text-dark: #333;
+  --text-light: #555;
+  --bg-light: #f4faff;
+  --bg-dark: #222;
+  --white: #fff;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,12 +19,14 @@
   scroll-behavior: smooth;
 }
 
-/* Navbar */
+/* =========================
+   Navbar
+========================= */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #ffffff;
+  background: var(--white);
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
@@ -23,71 +37,67 @@
 .navbar .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #0077cc;
+  color: var(--primary);
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
+  list-style: none;
   gap: 20px;
 }
 
-.nav-links li a {
+.nav-links a {
   text-decoration: none;
-  color: #333;
+  color: var(--text-dark);
   font-weight: 500;
   position: relative;
   transition: color 0.3s;
 }
 
-.nav-links li a::after {
+.nav-links a::after {
   content: "";
   position: absolute;
-  width: 0;
-  height: 2px;
   left: 0;
   bottom: -5px;
-  background: #0077cc;
-  transition: 0.3s;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s;
 }
 
-.nav-links li a:hover::after {
+.nav-links a:hover::after {
   width: 100%;
 }
 
-.nav-links li a.active {
-  color: #0077cc;
+.nav-links a.active {
+  color: var(--primary);
 }
 
-/* Shared Hero Section */
+/* =========================
+   Hero Section
+========================= */
 .hero,
 .course-hero {
   height: 70vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: var(--white);
+  background-size: cover;
+  background-position: center;
   animation: fadeIn 1.5s ease-in-out;
+  position: relative;
 }
 
-/* Default Homepage Hero Background */
 .hero {
   background: linear-gradient(to right, rgba(0,119,204,0.6), rgba(0,0,0,0.6)),
-              url("images/header.jpg") no-repeat center center/cover;
+              url("images/header.jpg") center/cover no-repeat;
 }
 
-/* Overlay for Course Pages */
 .course-hero .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0, 0, 0, 0.55);
   z-index: 1;
 }
@@ -109,11 +119,10 @@
 }
 
 .hero-text .btn {
-  display: inline-block;
   margin-top: 20px;
   padding: 12px 24px;
-  background: #0077cc;
-  color: white;
+  background: var(--primary);
+  color: var(--white);
   border-radius: 6px;
   text-decoration: none;
   font-weight: 500;
@@ -121,14 +130,16 @@
 }
 
 .hero-text .btn:hover {
-  background: #005fa3;
+  background: var(--primary-dark);
 }
 
-/* Courses Section */
+/* =========================
+   Courses Section
+========================= */
 .courses {
   padding: 60px 20px;
   text-align: center;
-  background: #f4faff;
+  background: var(--bg-light);
 }
 
 .course-container {
@@ -139,13 +150,12 @@
 }
 
 .course-card {
-  background: #fff;
+  background: var(--white);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   transition: transform 0.4s, box-shadow 0.4s;
   cursor: pointer;
-  position: relative;
 }
 
 .course-card:hover {
@@ -166,13 +176,13 @@
 
 .course-card h3 {
   margin: 15px 0 10px;
-  color: #0077cc;
+  color: var(--primary);
 }
 
 .course-card p {
   padding: 0 15px;
   font-size: 0.95rem;
-  color: #555;
+  color: var(--text-light);
   min-height: 60px;
 }
 
@@ -180,8 +190,8 @@
   display: block;
   margin: 15px;
   font-weight: bold;
-  color: #0077cc;
   font-size: 1.1rem;
+  color: var(--primary);
 }
 
 .course-card button {
@@ -189,18 +199,20 @@
   padding: 10px 18px;
   border: none;
   border-radius: 6px;
-  background: #0077cc;
-  color: white;
+  background: var(--primary);
+  color: var(--white);
   font-size: 0.9rem;
   cursor: pointer;
   transition: background 0.3s;
 }
 
 .course-card button:hover {
-  background: #005fa3;
+  background: var(--primary-dark);
 }
 
-/* Pricing Section */
+/* =========================
+   Pricing Section
+========================= */
 .pricing {
   padding: 60px 20px;
   text-align: center;
@@ -209,11 +221,11 @@
 
 table {
   margin: 20px auto;
-  border-collapse: collapse;
   width: 90%;
   max-width: 800px;
-  overflow: hidden;
+  border-collapse: collapse;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 table, th, td {
@@ -226,18 +238,20 @@ th, td {
 }
 
 th {
-  background: #0077cc;
-  color: white;
+  background: var(--primary);
+  color: var(--white);
 }
 
 tr:hover {
   background: #f1faff;
 }
 
-/* Footer */
+/* =========================
+   Footer
+========================= */
 footer {
-  background: #222;
-  color: white;
+  background: var(--bg-dark);
+  color: var(--white);
   text-align: center;
   padding: 30px 20px;
 }
@@ -248,28 +262,30 @@ footer {
 
 .socials a {
   margin: 0 10px;
-  color: white;
   font-size: 1.6rem;
-  transition: transform 0.3s, color 0.3s;
+  color: var(--white);
+  transition: color 0.3s, transform 0.3s;
 }
 
 .socials a:hover {
-  color: #0077cc;
+  color: var(--primary);
   transform: scale(1.2);
 }
 
-/* Animations */
+/* =========================
+   Animations
+========================= */
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes slideInDown {
-  from {transform: translateY(-40px); opacity: 0;}
-  to {transform: translateY(0); opacity: 1;}
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes slideInUp {
-  from {transform: translateY(40px); opacity: 0;}
-  to {transform: translateY(0); opacity: 1;}
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
