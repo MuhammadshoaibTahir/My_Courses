@@ -3,1146 +3,618 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Corpus & Computational Linguistics • Python — Courses by Muhammad Shoaib Tahir</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
+  <title>Shoaib Tahir — Corpus & Computational Linguistics Courses</title>
+  <meta name="description" content="Practical, project-based training in corpus construction, annotation, NLP pipelines, and Python programming." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ===========================
-       THEME COLORS & BASE
-       =========================== */
     :root{
-      --bg:#0b0d10;
-      --card:#0f1316;
-      --muted:#98a3ad;
-      --accent:#c38f1b; /* golden/amber primary */
-      --accent-2:#2bb3b4; /* teal/cyan secondary */
-      --glass: rgba(255,255,255,0.03);
+      --bg:#06111a;
+      --card:#071426;
+      --muted:#9aa4b2;
+      --accent1:#7c3aed;
+      --accent2:#06b6d4;
+      --glass: rgba(255,255,255,0.04);
       --glass-2: rgba(255,255,255,0.02);
-      --success: #2ecc71;
-      --danger: #ff6b6b;
-      --radius: 14px;
-      --shadow: 0 6px 24px rgba(2,6,10,0.6);
-      --container-width: 1200px;
+      --radius: 12px;
+      --max: 1100px;
+      --success: #10b981;
+      --danger: #ef4444;
+      --gold: #f59e0b;
     }
-
-    /* Reset & base */
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(43,56,60,0.16), transparent 8%),
-                  linear-gradient(180deg, rgba(255,255,255,0.01), transparent 50%),
-                  var(--bg);
+      font-family:"Inter",system-ui,-apple-system,Segoe UI, Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#03111b 0%, #051827 50%, #03111b 100%);
       color:#e6eef6;
-      font-family: "Inter", "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding-bottom:80px;
+      line-height:1.5;
+      padding-bottom:64px;
+    }
+    .wrap{max-width:var(--max);margin:28px auto;padding:24px}
+
+    /* header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:56px;height:56px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;color:white;font-size:20px;box-shadow:0 6px 24px rgba(12, 14, 24, 0.6)
+    }
+    .brand h1{font-size:16px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600;font-size:14px}
+    nav a:hover{color:#fff;background:var(--glass);}
+
+    .cta{
+      background:linear-gradient(90deg,var(--accent2),var(--accent1));
+      padding:10px 14px;border-radius:10px;color:white;font-weight:700;text-decoration:none;
+      box-shadow:0 6px 20px rgba(124,58,237,0.16);
     }
 
-    a{ color:inherit; text-decoration:none; }
-    img{ max-width:100%; display:block; }
-
-    /* Layout container */
-    .container {
-      width: min(94%, var(--container-width));
-      margin: 0 auto;
+    .hamburger{display:none;background:transparent;border:0;color:var(--muted);font-size:20px}
+    @media (max-width:900px){
+      nav{display:none}
+      .hamburger{display:inline-flex;align-items:center;gap:8px}
     }
 
-    /* ===========================
-       HEADER / NAV
-       =========================== */
-    header {
-      position:sticky;
-      top:0;
-      z-index:1000;
-      backdrop-filter: blur(8px);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 8px 24px rgba(2,6,10,0.5);
+    /* hero */
+    .hero{
+      margin-top:22px;
+      display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:28px;border-radius:16px;backdrop-filter: blur(6px);border:1px solid var(--glass-2);
     }
-    .nav {
-      display:flex;
-      align-items:center;
-      gap:1rem;
-      height:72px;
-    }
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:.8rem;
-      font-weight:700;
-      font-size:1.05rem;
-      color:var(--accent);
-    }
-    .brand .logo {
-      width:44px; height:44px; border-radius:10px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-      display:grid; place-items:center;
-      box-shadow: inset 0 -6px 14px rgba(0,0,0,0.4);
-      border:1px solid rgba(255,255,255,0.03);
-    }
-    nav ul { display:flex; gap:1rem; align-items:center; margin-left: 24px; list-style:none; padding:0; }
-    nav li a {
-      color:var(--muted);
-      padding:8px 12px;
-      border-radius:10px;
-      font-weight:500;
-      transition: all .18s ease;
-    }
-    nav li a:hover, nav li a:focus {
-      color: #fff;
-      background: var(--glass);
-      transform: translateY(-2px);
-      outline:none;
-    }
-    .spacer { flex:1; }
-    .cta {
-      background: linear-gradient(90deg, var(--accent), #e7b24e);
-      color: #081014;
-      padding:10px 14px;
-      border-radius:12px;
-      font-weight:700;
-      box-shadow: 0 8px 30px rgba(195,143,27,0.14);
-      border:1px solid rgba(255,255,255,0.04);
-      cursor:pointer;
-    }
-    .mobile-toggle { display:none; background:transparent; border:0; color:var(--muted); font-size:1.2rem; }
+    .tagline{display:inline-block;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--accent2);font-weight:700;font-size:13px}
+    .hero h2{font-size:28px;margin:12px 0 8px}
+    .hero p.lead{color:var(--muted);margin:0 0 18px}
+    .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .btn-outline{background:transparent;border:1px solid var(--glass);color:#fff}
+    .btn-primary{background:linear-gradient(90deg,var(--accent2),var(--accent1));color:white}
 
-    /* ===========================
-       HERO SECTION
-       =========================== */
-    .hero {
-      padding:44px 0;
-      display:grid;
-      grid-template-columns: 1fr 420px;
-      gap:28px;
-      align-items:center;
-    }
-    .hero-left {
-      padding:36px;
-      border-radius:18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-      box-shadow: var(--shadow);
-      border:1px solid rgba(255,255,255,0.03);
-    }
-    .kicker {
-      display:inline-block;
-      background: linear-gradient(90deg, rgba(43,56,60,0.6), transparent);
-      padding:6px 10px;
-      border-radius:999px;
-      color:var(--accent);
-      font-weight:700;
-      font-size:13px;
-      margin-bottom:14px;
-    }
-    .hero h1 {
-      margin:0 0 12px 0;
-      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
-      line-height:1.05;
-      letter-spacing:-0.02em;
-    }
-    .hero p.lead { color:var(--muted); margin:0 0 18px 0; font-size:1rem; max-width:70ch; }
-    .hero .buttons { display:flex; gap:10px; margin-bottom:8px; }
-    .btn {
-      padding:10px 14px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:600;
-      border:1px solid rgba(255,255,255,0.04);
-      transition: transform .18s ease, box-shadow .18s ease;
-      background:var(--glass);
-      color: #fff;
-    }
-    .btn.primary {
-      background: linear-gradient(90deg,var(--accent), #e7b24e);
-      color:#071011;
-      box-shadow: 0 10px 30px rgba(195,143,27,0.12);
-      border:none;
-    }
-    .btn.secondary {
-      background: linear-gradient(90deg, rgba(43,56,60,0.5), transparent);
-      color:var(--accent-2);
-      border:1px solid rgba(43,56,60,0.2);
-    }
-    .btn:hover { transform: translateY(-3px); }
+    .hero-meta{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:18px;border-radius:12px;border:1px solid var(--glass-2)}
+    .meta-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .pill{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px;color:var(--muted)}
 
-    .cohort {
-      margin-top:12px;
-      color:var(--muted);
-      display:flex; gap:12px; align-items:center;
-      font-size:0.95rem;
-    }
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.hero-meta{order:2}}
+    @media (max-width:560px){.hero{padding:18px}}
 
-    /* Floating info card */
-    .hero-right {
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .feature-card {
-      width:100%;
-      max-width:380px;
-      padding:18px;
-      border-radius:18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 20px 40px rgba(2,6,10,0.6);
-      transform: translateY(0);
-      transition: transform .6s cubic-bezier(.2,.9,.2,1), box-shadow .3s;
-    }
-    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 36px 64px rgba(2,6,10,0.7); }
-    .feature-card h3 { margin:0 0 8px 0; color: #fff; }
-    .feature-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:10px; margin-top:12px; }
-    .feature-item {
-      background:var(--glass-2);
-      padding:10px; border-radius:10px; font-size:0.92rem; color:var(--muted);
-    }
+    /* features */
+    .features{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .feature{background:var(--card);padding:16px;border-radius:12px;border:1px solid var(--glass-2)}
+    .feature h4{margin:8px 0 0;font-size:14px}
+    .feature p{color:var(--muted);font-size:13px;margin:6px 0 0}
+    @media (max-width:900px){.features{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.features{grid-template-columns:1fr}}
 
-    /* ===========================
-       COURSES GRID
-       =========================== */
-    .section { padding:64px 0; }
-    .section .title { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:18px;}
-    .cards {
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:18px;
+    /* courses */
+    .section{margin-top:36px}
+    .section h3{margin-bottom:18px;font-size:20px}
+    .courses{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px;border:1px solid var(--glass-2);display:flex;flex-direction:column;gap:10px;position:relative;overflow:visible}
+    .card h4{margin:0}
+    .card p.muted{color:var(--muted);margin:0;font-size:13px}
+    .card .bottom{display:flex;gap:8px;align-items:center}
+    .badge{
+      position:absolute;top:12px;right:12px;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;
+      display:inline-flex;align-items:center;gap:8px;
     }
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent);
-      border-radius: 14px;
-      padding:18px;
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .card:hover { transform: translateY(-6px); box-shadow: 0 26px 60px rgba(0,0,0,0.65); }
-    .card h4 { margin:0 0 8px; }
-    .meta { color:var(--muted); font-size:0.95rem; margin-bottom:12px; }
-    .card .actions { display:flex; gap:8px; margin-top:12px; }
-    .badge-new {
-      display:inline-block;
-      background: linear-gradient(90deg, #ffd57a, #c38f1b);
-      color:#081014;
-      font-weight:800;
-      padding:6px 8px;
-      border-radius:999px;
-      font-size:12px;
-      box-shadow: 0 8px 20px rgba(195,143,27,0.12);
-    }
+    .badge.discount{background:linear-gradient(90deg,var(--danger),#f97316);color:white;}
+    .badge.new{background:linear-gradient(90deg,var(--gold),#f97316);color:#111;}
+    .card-actions{display:flex;gap:8px;margin-top:6px}
+    @media (max-width:900px){.courses{grid-template-columns:1fr}}
 
-    /* ===========================
-       FEATURES / SYLLABUS
-       =========================== */
-    .features-grid {
-      display:grid;
-      grid-template-columns: 1fr 420px;
-      gap:18px;
-      align-items:start;
-    }
-    .feature-list { display:grid; gap:12px; }
-    .feature-card-2 {
-      background:var(--glass);
-      padding:12px; border-radius:12px; color:var(--muted);
-      border:1px solid rgba(255,255,255,0.02);
-    }
-    .syllabus {
-      padding:14px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow: var(--shadow);
-    }
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;padding:24px;z-index:60}
+    .modal{max-width:760px;width:100%;background:linear-gradient(180deg,#071127,#081426);padding:20px;border-radius:12px;border:1px solid var(--glass-2);box-shadow:0 30px 80px rgba(3,6,23,0.6)}
+    .modal h4{margin-top:0}
+    .modal .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:680px){.modal .row{grid-template-columns:1fr}}
 
-    /* ===========================
-       FAQ ACCORDION
-       =========================== */
-    .accordion { display:grid; gap:10px; }
-    .acc-item { background:var(--glass-2); border-radius:12px; padding:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.02); }
-    .acc-head { display:flex; justify-content:space-between; align-items:center; cursor:pointer; color:#fff; font-weight:600; }
-    .acc-body { margin-top:10px; color:var(--muted); max-height:0; transition: max-height .28s ease; overflow:hidden; }
+    /* syllabus */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .syll-box{background:var(--card);padding:14px;border-radius:10px;border:1px solid var(--glass-2)}
+    @media(max-width:980px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.grid-3{grid-template-columns:1fr}}
 
-    /* ===========================
-       INSTRUCTOR & CONTACT
-       =========================== */
-    .instructor {
-      display:flex;
-      gap:18px;
-      align-items:center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-      padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.03);
-    }
-    .instructor .avatar {
-      width:110px; height:110px; border-radius:18px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      display:grid; place-items:center; font-size:2.2rem; font-weight:800; color:var(--accent);
-      border:1px solid rgba(255,255,255,0.03);
-    }
-    .socials { display:flex; gap:10px; margin-top:8px; }
+    /* faq */
+    .faq .q{background:var(--card);padding:12px;border-radius:10px;border:1px solid var(--glass-2);margin-bottom:10px}
+    .q button{width:100%;text-align:left;background:transparent;border:0;color:inherit;padding:0;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:space-between}
+    .q .a{color:var(--muted);margin-top:8px;display:none}
 
-    /* Contact form */
-    form.contact { display:grid; gap:10px; }
-    input, textarea, select {
-      background: transparent;
-      border:1px solid rgba(255,255,255,0.04);
-      padding:10px 12px;
-      border-radius:10px;
-      color:#eaf3ff;
-      font-size:0.96rem;
-    }
+    /* instructor */
+    .instructor{display:flex;gap:16px;align-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:18px;border-radius:12px;border:1px solid var(--glass-2)}
+    .avatar{width:96px;height:96px;border-radius:14px;background:linear-gradient(180deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:28px}
+    .socials{display:flex;gap:8px;margin-top:8px}
 
-    /* Footer */
-    footer {
-      margin-top:40px;
-      padding:24px 0;
-      border-top:1px solid rgba(255,255,255,0.03);
-      color:var(--muted);
-    }
-    .footer-grid { display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    /* contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:16px}
+    .form-row{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+    input,textarea,select{background:transparent;border:1px solid var(--glass);padding:10px;border-radius:8px;color:#eaf2ff}
+    textarea{min-height:120px;resize:vertical}
+    .phone{font-weight:700;color:var(--muted)}
+    @media(max-width:980px){.contact-grid{grid-template-columns:1fr}}
 
-    /* ===========================
-       MODALS
-       =========================== */
-    .modal-backdrop {
-      position:fixed; inset:0; display:none; z-index:2000;
-      align-items:center; justify-content:center;
-      background: linear-gradient(180deg, rgba(2,6,10,0.6), rgba(2,6,10,0.9));
-      padding:24px;
-    }
-    .modal {
-      width:100%;
-      max-width:920px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent);
-      border-radius:14px;
-      box-shadow: 0 40px 90px rgba(2,6,10,0.8);
-      border:1px solid rgba(255,255,255,0.03);
-      padding:20px;
-      transform: translateY(20px) scale(.98);
-      opacity:0;
-      transition: all .28s cubic-bezier(.2,.9,.2,1);
-    }
-    .modal.open { transform:none; opacity:1; }
-    .modal-grid { display:grid; grid-template-columns: 1fr 320px; gap:18px; align-items:start; }
-    .modal .levels { display:grid; gap:10px; }
-    .level {
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-      padding:12px; border-radius:10px;
-      display:flex; justify-content:space-between; align-items:center; gap:10px;
-      border:1px solid rgba(255,255,255,0.02);
-    }
-    .level .price { font-weight:800; color:var(--accent); }
+    /* footer */
+    footer{margin-top:40px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .small{font-size:13px;color:var(--muted)}
+    a.social{color:var(--muted);text-decoration:none;padding:8px;border-radius:8px}
 
-    .close-btn {
-      background:transparent; border:0; color:var(--muted); font-size:1.1rem; cursor:pointer;
-    }
-
-    /* Modal visible */
-    .modal-backdrop.show { display:flex; }
-
-    /* ===========================
-       SMALL SCREENS
-       =========================== */
-    @media (max-width:1100px){
-      .hero { grid-template-columns: 1fr; }
-      .features-grid { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: repeat(2,1fr); }
-      .modal-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width:720px){
-      nav ul { display:none; }
-      .mobile-toggle { display:inline-block; }
-      .cards { grid-template-columns: 1fr; }
-      .testimonials { grid-template-columns: 1fr; }
-      .hero-left { padding:18px; border-radius:12px; }
-      .hero { padding:24px 0; }
-    }
-
-    /* small niceties */
-    .muted { color:var(--muted); }
-    .tiny { font-size:0.85rem; color:var(--muted); }
-    .pill { padding:6px 10px; border-radius:999px; background:var(--glass-2); color:var(--muted); font-weight:600; font-size:0.92rem; }
+    /* utilities */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   </style>
 </head>
 <body>
-
-  <!-- ===========================
-       HEADER / NAV
-       =========================== -->
-  <header>
-    <div class="container nav" role="navigation" aria-label="Main navigation">
-      <div class="brand" aria-hidden="false">
-        <div class="logo" aria-hidden="true">
-          <!-- minimal icon -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" stroke="rgba(255,255,255,0.06)" stroke-width="1.2"/><path d="M7 12h10M7 8h10" stroke="white" stroke-opacity="0.9" stroke-width="1.2" stroke-linecap="round"/></svg>
-        </div>
+  <div class="wrap">
+    <!-- header -->
+    <header>
+      <div class="brand" aria-label="brand">
+        <div class="logo" aria-hidden>ST</div>
         <div>
-          <div style="font-size:0.95rem">Shoaib Tahir</div>
-          <div style="font-size:0.78rem; color:var(--muted); margin-top:2px">Corpus • Computational Linguistics</div>
+          <h1>Shoaib Tahir</h1>
+          <p>Corpus • Computational Linguistics</p>
         </div>
       </div>
 
-      <nav aria-label="Top">
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#courses">Courses</a></li>
-          <li><a href="#instructor">Instructor</a></li>
-          <li><a href="#faqs">FAQs</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+      <nav aria-label="Primary navigation">
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#instructor">Instructor</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#enroll">Enroll Now</a>
       </nav>
 
-      <div class="spacer" aria-hidden="true"></div>
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileNav">☰</button>
+    </header>
 
-      <button class="cta" id="enrollTopBtn">Enroll Now</button>
-      <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="mobileMenu" title="Open menu">☰</button>
+    <!-- mobile nav -->
+    <div id="mobileNav" style="display:none;margin-top:10px">
+      <nav style="display:flex;flex-direction:column;gap:8px">
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#instructor">Instructor</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#enroll">Enroll Now</a>
+      </nav>
     </div>
-
-    <!-- simple mobile menu -->
-    <div id="mobileMenu" style="display:none; padding:12px; border-top:1px solid rgba(255,255,255,0.02);">
-      <div class="container">
-        <a href="#home" style="display:block;padding:10px 0">Home</a>
-        <a href="#courses" style="display:block;padding:10px 0">                   Courses</a>
-        <a href="#instructor" style="display:block;padding:10px 0">Instructor</a>
-        <a href="#faqs" style="display:block;padding:10px 0">FAQs</a>
-        <a href="#contact" style="display:block;padding:10px 0">Contact</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container" id="home">
 
     <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-heading" style="margin-top:18px;">
-      <div class="hero-left">
-        <div class="kicker">Live & Recorded • Certificate • Hands-on</div>
-        <h1 id="hero-heading">Learn Computational & Corpus Linguistics — with Practical Python</h1>
+    <section class="hero" id="home" aria-labelledby="hero-heading">
+      <div>
+        <span class="tagline">Live & Recorded • Certificate • Hands-on</span>
+        <h2 id="hero-heading">Learn Computational & Corpus Linguistics — with Practical Python</h2>
         <p class="lead">Practical, project-based training in corpus construction, annotation, NLP pipelines, and Python programming — designed for linguists, researchers, and developers. Build a portfolio-ready project and receive mentoring.</p>
-
-        <div class="buttons" role="group" aria-label="Hero actions">
-          <button class="btn" id="viewSyllabusBtn">View Syllabus</button>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="scrollToSection('courses')">View Syllabus</button>
+          <button class="btn btn-outline" onclick="openContact('General inquiry')">Contact & Enrollment</button>
         </div>
 
-        <div class="cohort">
-          <div class="pill">Next cohort: <strong style="margin-left:6px">Oct 15, 2025</strong></div>
-          <div class="tiny">Limited seats available • Hands-on projects</div>
-        </div>
+        <p style="margin-top:12px;color:var(--muted)"><strong>Next cohort:</strong> Oct 15, 2025 • <span style="color:#ffd700;font-weight:800">Limited seats available</span></p>
       </div>
 
-      <div class="hero-right">
-        <div class="feature-card" role="region" aria-label="Course highlights">
-          <h3>What you'll get</h3>
-          <div class="tiny">A compact, intensive course path combining linguistics theory with practical Python-based workflows.</div>
+      <aside class="hero-meta" aria-label="course highlights">
+        <div class="meta-row"><div><strong>What you'll get</strong></div><div class="pill">Portfolio-ready • Mentoring</div></div>
+        <ul style="margin:10px 0 0;padding-left:18px;color:var(--muted)">
+          <li>Real datasets</li>
+          <li>Hands-on projects</li>
+          <li>Mentoring & feedback</li>
+        </ul>
+        <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:14px 0">
+        <div style="font-size:13px;color:var(--muted)">Compact intensive track • 8 weeks suggested • 4–6 hrs/week</div>
+      </aside>
+    </section>
 
-          <div class="feature-grid">
-            <div class="feature-item">Real datasets</div>
-            <div class="feature-item">Hands-on projects</div>
-            <div class="feature-item">Portfolio-ready</div>
-            <div class="feature-item">Mentoring & feedback</div>
-          </div>
-        </div>
+    <!-- features -->
+    <section class="section" aria-labelledby="what-heading">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 id="what-heading">What you'll learn</h3>
+        <div class="muted">Hands-on datasets • Real projects • Portfolio-focused</div>
+      </div>
+
+      <div class="features" role="list">
+        <div class="feature" role="listitem"><strong>Project-centered</strong><p>Build real corpora and research projects.</p></div>
+        <div class="feature" role="listitem"><strong>Annotation & Pipelines</strong><p>Annotation schemas, POS, parsing, NER & more.</p></div>
+        <div class="feature" role="listitem"><strong>Python for Research</strong><p>Scripting, reproducible workflows, and visualization.</p></div>
+        <div class="feature" role="listitem"><strong>Mentoring</strong><p>Code reviews & portfolio guidance.</p></div>
       </div>
     </section>
 
     <!-- COURSES -->
-    <section class="section" id="courses" aria-labelledby="coursesHeading">
-      <div class="title">
-        <h2 id="coursesHeading">Courses</h2>
-        <div class="tiny">Choose a course and explore three learning levels</div>
-      </div>
+    <section id="courses" class="section" aria-labelledby="courses-heading">
+      <h3 id="courses-heading">Courses — Choose a course and explore three learning levels</h3>
 
-      <div class="cards" role="list">
-        <!-- Course 1 -->
-        <article class="card" role="listitem" data-course="Computational Linguistics">
-          <h4>Computational Linguistics</h4>
-          <div class="meta">NLP pipelines, parsing, tagging, and applied research.</div>
-          <p class="muted">Integrate linguistic theory with computational tools to analyze language data and build experiments.</p>
-        
-          <div class="actions">
-            <button class="btn" data-action="details" data-course="Computational Linguistics">View Details</button>
-            <a href="https://forms.gle/74QAPxUfMnyAgELu5" target="_blank" class="btn primary" data-course="Computational Linguistics">Enroll</a>
+      <div class="courses">
+        <!-- course 1: Computational Linguistics (has discount badge) -->
+        <article class="card" data-course="Computational Linguistics" aria-labelledby="c1">
+          <div class="badge discount" title="Discount available">Discount</div>
+          <h4 id="c1">Computational Linguistics</h4>
+          <p class="muted">NLP pipelines, parsing, tagging, and applied research. Integrate linguistic theory with computational tools to analyze language data and build experiments.</p>
+          <div class="card-actions">
+            <button class="btn btn-outline" onclick="openDetailsFromCard('Computational Linguistics')">View Details</button>
+            <button class="btn btn-primary" onclick="enroll('Computational Linguistics')">Enroll</button>
           </div>
         </article>
 
-
-        <!-- Course 2 -->
-      <article class="card" role="listitem" data-course="Corpus Linguistics">
-        <h4>Corpus Linguistics</h4>
-        <div class="meta">Corpus design, annotation, concordancing, and analysis.</div>
-        <p class="muted">Learn to assemble corpora, annotate linguistic phenomena, and extract insights using reproducible workflows.</p>
-      
-        <div class="actions">
-          <button class="btn" data-action="details" data-course="Corpus Linguistics">View Details</button>
-          <a href="https://forms.gle/wY1rb4YqsHSzNQw99" target="_blank" class="btn primary" data-course="Corpus Linguistics">Enroll</a>
-        </div>
-      </article>
-
-
-        <!-- Course 3 -->
-        <article class="card" role="listitem" data-course="Python Programming">
-          <h4>Python Programming</h4>
-          <div class="meta">From basics to advanced scripting for linguistics.</div>
-          <p class="muted">Python for text processing, data analysis, visualization, and building NLP tools and experiments.</p>
-
-          <div class="actions">
-            <button class="btn" data-action="details" data-course="Python Programming">View Details</button>
-            <button class="btn primary" data-action="enroll" data-course="Python Programming">Enroll</button>
+        <!-- course 2: Corpus Linguistics (has discount badge) -->
+        <article class="card" data-course="Corpus Linguistics" aria-labelledby="c2">
+          <div class="badge discount" title="Discount available">Discount</div>
+          <h4 id="c2">Corpus Linguistics</h4>
+          <p class="muted">Corpus design, annotation, concordancing, and analysis. Learn to assemble corpora, annotate linguistic phenomena, and extract insights using reproducible workflows.</p>
+          <div class="card-actions">
+            <button class="btn btn-outline" onclick="openDetailsFromCard('Corpus Linguistics')">View Details</button>
+            <button class="btn btn-primary" onclick="enroll('Corpus Linguistics')">Enroll</button>
           </div>
         </article>
 
-        <!-- Course 4 -->
-        <article class="card" role="listitem" data-course="Portfolio Development">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
-            <h4>Portfolio Development</h4>
-            <span class="badge-new" aria-hidden="true">NEW</span>
+        <!-- course 3: Python Programming for CL (has discount badge) -->
+        <article class="card" data-course="Python Programming for Computational Linguistics" aria-labelledby="c3">
+          <div class="badge discount" title="Discount available">Discount</div>
+          <h4 id="c3">Python Programming for Computational Linguistics</h4>
+          <p class="muted">From basics to advanced scripting for linguistics: text processing, data analysis, visualization, and building NLP tools and experiments.</p>
+          <div class="card-actions">
+            <button class="btn btn-outline" onclick="openDetailsFromCard('Python Programming for Computational Linguistics')">View Details</button>
+            <button class="btn btn-primary" onclick="enroll('Python Programming for Computational Linguistics')">Enroll</button>
           </div>
-          <div class="meta">Design, polish, and present your projects to showcase skills.</div>
-          <p class="muted">Guided project curation, presentation-ready notebooks, GitHub portfolio, and demo walkthroughs.</p>
+        </article>
 
-          <div class="actions">
-            <button class="btn" data-action="details" data-course="Portfolio Development">View Details</button>
-            <button class="btn primary" data-action="enroll" data-course="Portfolio Development">Enroll</button>
+        <!-- course 4: Portfolio Development (NEW badge, NO discount) -->
+        <article class="card" data-course="Portfolio Development (NEW)" aria-labelledby="c4">
+          <div class="badge new" title="New course">NEW</div>
+          <h4 id="c4">Portfolio Development (NEW)</h4>
+          <p class="muted">Design, polish, and present your projects to showcase skills. Guided project curation, presentation-ready notebooks, GitHub portfolio, and demo walkthroughs.</p>
+          <div class="card-actions">
+            <button class="btn btn-outline" onclick="openDetailsFromCard('Portfolio Development (NEW)')">View Details</button>
+            <button class="btn btn-primary" onclick="enroll('Portfolio Development (NEW)')">Enroll</button>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- FEATURES & SYLLABUS -->
-    <section class="section" aria-labelledby="featuresHeading">
-      <div class="title">
-        <h2 id="featuresHeading">Features & Sample Syllabus</h2>
-        <div class="tiny">Hands-on datasets • Real projects • Portfolio-focused</div>
+    <!-- Features & Syllabus -->
+    <section class="section" aria-labelledby="syllabus-heading">
+      <h3 id="syllabus-heading">Features & Sample Syllabus</h3>
+      <div class="grid-3" style="margin-top:12px">
+        <div class="syll-box">
+          <strong>Highlights</strong>
+          <p class="muted" style="margin-top:8px">Project-centered learning with real corpora, annotation, reproducible NLP pipelines, mentoring, and a certificate upon completion.</p>
+        </div>
+        <div class="syll-box">
+          <strong>Quick facts</strong>
+          <p class="muted" style="margin-top:8px">Duration: 8 weeks (suggested) • Time: 4–6 hours/week • Format: Live + Recorded</p>
+        </div>
+        <div class="syll-box">
+          <strong>Certificate</strong>
+          <p class="muted" style="margin-top:8px">Certificate of completion after submission and review of the final project.</p>
+        </div>
       </div>
 
-      <div class="features-grid">
-        <div>
-          <div class="feature-card-2">
-            <h3>Highlights</h3>
-            <ul style="margin:8px 0 0 18px; color:var(--muted)">
-              <li>Project-centered learning with real corpora</li>
-              <li>Annotation, preprocessing, and NLP pipelines</li>
-              <li>Python scripting for reproducible research</li>
-              <li>Mentoring, code reviews, and portfolio guidance</li>
-              <li>Certificate upon completion</li>
-            </ul>
-          </div>
+      <div style="margin-top:16px">
+        <strong>Sample 8-week syllabus (overview)</strong>
+        <ol style="color:var(--muted);margin-top:8px">
+          <li>Week 1: Corpus design, sampling & metadata</li>
+          <li>Week 2: Text preprocessing & tokenization</li>
+          <li>Week 3: POS tagging, parsing, and annotation schemas</li>
+          <li>Week 4: Corpus query, concordances, and frequency analysis</li>
+          <li>Week 5: NLP pipelines — NER, lemmatization, and embeddings</li>
+          <li>Week 6: Project planning — research question & dataset</li>
+          <li>Week 7: Implementation — coding & experiments</li>
+          <li>Week 8: Portfolio polish & demo presentation</li>
+        </ol>
 
-          <div style="height:16px"></div>
-
-          <div class="syllabus">
-            <h4>Sample 8-week syllabus (overview)</h4>
-            <ol style="color:var(--muted); margin-top:8px;">
-              <li>Week 1: Corpus design, sampling & metadata</li>
-              <li>Week 2: Text preprocessing & tokenization</li>
-              <li>Week 3: POS tagging, parsing, and annotation schemas</li>
-              <li>Week 4: Corpus query, concordances, and frequency analysis</li>
-              <li>Week 5: NLP pipelines — NER, lemmatization, and embeddings</li>
-              <li>Week 6: Project planning — research question & dataset</li>
-              <li>Week 7: Implementation — coding & experiments</li>
-              <li>Week 8: Portfolio polish & demo presentation</li>
-            </ol>
-            <div style="margin-top:12px; display:flex; gap:10px;">
-              <button class="btn" id="downloadSyllabus">Download Syllabus</button>
-              <button class="btn secondary" id="syllabusPreview">Preview</button>
-            </div>
-          </div>
+        <div style="margin-top:12px">
+          <button class="btn btn-primary" onclick="downloadSyllabus()">Download Syllabus</button>
+          <button class="btn btn-outline" onclick="previewSyllabus()">Preview</button>
         </div>
-
-        <aside>
-          <div style="position:sticky; top:88px;">
-            <div class="feature-card" style="padding:16px;">
-              <h4>Why this path?</h4>
-              <p class="muted" style="margin-top:6px;">Focus on building transferable projects, documenting your process, and placing your work on GitHub & personal websites for recruiters and academic audiences.</p>
-              <div style="margin-top:12px; display:flex; gap:8px;">
-                <div class="pill">Datasets</div><div class="pill">Projects</div><div class="pill">Mentoring</div>
-              </div>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <div class="feature-card-2">
-              <h4>Quick facts</h4>
-              <div class="tiny" style="margin-top:6px;">
-                Duration: 8 weeks (suggested) • Time: 4–6 hours/week • Format: Live + Recorded
-              </div>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
+    <!-- Why this path -->
+    <section class="section">
+      <h3>Why this path?</h3>
+      <p class="muted">Focus on building transferable projects, documenting your process, and placing your work on GitHub & personal websites for recruiters and academic audiences.</p>
+    </section>
 
     <!-- FAQ -->
-    <section class="section" id="faqs" aria-labelledby="faqHeading">
-      <div class="title">
-        <h2 id="faqHeading">Frequently Asked Questions</h2>
-        <div class="tiny">Common queries answered</div>
-      </div>
-
-      <div class="accordion" id="faqAccordion">
-        <div class="acc-item">
-          <div class="acc-head">Who is this course for? <span aria-hidden="true">+</span></div>
-          <div class="acc-body">Students, researchers, and professionals who want practical skills in corpus construction, annotation, and building NLP pipelines using Python.</div>
+    <section id="faq" class="section">
+      <h3>Frequently Asked Questions</h3>
+      <div class="faq">
+        <div class="q">
+          <button aria-expanded="false">Q1: Who is this course for?</button>
+          <div class="a">Students, researchers, and professionals who want practical skills in corpus construction, annotation, and building NLP pipelines using Python.</div>
         </div>
 
-        <div class="acc-item">
-          <div class="acc-head">Do I get a certificate? <span aria-hidden="true">+</span></div>
-          <div class="acc-body">Yes — a certificate of completion is provided after submission and review of the final project.</div>
+        <div class="q">
+          <button aria-expanded="false">Q2: Do I get a certificate?</button>
+          <div class="a">Yes — a certificate of completion is provided after submission and review of the final project.</div>
         </div>
 
-        <div class="acc-item">
-          <div class="acc-head">Can I pay in installments? <span aria-hidden="true">+</span></div>
-          <div class="acc-body">We offer flexible payment plans in many regions. Contact us to discuss options.</div>
+        <div class="q">
+          <button aria-expanded="false">Q3: Can I pay in installments?</button>
+          <div class="a">We offer flexible payment plans in many regions. Contact us to discuss options.</div>
         </div>
       </div>
     </section>
 
-    <!-- INSTRUCTOR -->
-    <section class="section" id="instructor" aria-labelledby="instructorHeading">
-      <div class="title">
-        <h2 id="instructorHeading">Instructor</h2>
-        <div class="tiny">Meet Muhammad Shoaib Tahir</div>
-      </div>
-
-      <div class="instructor">
-        <div class="avatar" aria-hidden="true">ST</div>
+    <!-- Instructor -->
+    <section id="instructor" class="section">
+      <h3>Instructor</h3>
+      <div class="instructor" role="article">
+        <div class="avatar" aria-hidden>ST</div>
         <div>
-          <h3>Muhammad Shoaib Tahir</h3>
-          <p class="muted">Expert in Corpus & Computational Linguistics and Python — experienced in corpus design, annotation, NLP pipelines, and mentoring research projects for students and industry professionals.</p>
-
-          <div class="socials" role="list">
-            <a class="pill" href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
-            <a class="pill" href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
-            <a class="pill" href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
-            <a class="pill" href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+          <strong>Muhammad Shoaib Tahir</strong>
+          <p class="muted" style="margin:6px 0">Expert in Corpus & Computational Linguistics and Python — experienced in corpus design, annotation, NLP pipelines, and mentoring research projects for students and industry professionals.</p>
+          <div class="socials" aria-label="Social links">
+            <a class="social" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a class="social" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a class="social" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="social" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section" id="contact" aria-labelledby="contactHeading">
-      <div class="title">
-        <h2 id="contactHeading">Contact & Enrollment</h2>
-        <div class="tiny">Questions? Send a message or enroll directly.</div>
-      </div>
-
-      <div style="display:grid; grid-template-columns: 1fr 420px; gap:18px;">
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <h3>Contact & Enrollment</h3>
+      <div class="contact-grid">
         <div>
-          <form class="contact" id="contactForm" aria-label="Contact form">
-            <input type="text" id="contactName" placeholder="Your name" required />
-            <input type="email" id="contactEmail" placeholder="Your email" required />
-            <textarea id="contactMessage" rows="6" placeholder="Your message"></textarea>
-            <div style="display:flex; gap:8px; margin-top:6px;">
-              <button class="btn primary" type="submit">Send Message</button>
-              <button class="btn" type="button" id="enrollContactBtn">Enroll</button>
+          <form id="contactForm" onsubmit="submitContactForm(event)" aria-label="Contact form">
+            <div class="form-row">
+              <label for="name">Your name</label>
+              <input id="name" name="name" required placeholder="Full name" />
             </div>
-            <div id="contactStatus" class="tiny" style="margin-top:10px; display:none;"></div>
+            <div class="form-row">
+              <label for="email">Your email</label>
+              <input id="email" name="email" type="email" required placeholder="you@example.com" />
+            </div>
+            <div class="form-row">
+              <label for="message">Your message</label>
+              <textarea id="message" name="message" placeholder="Questions or enrollment request"></textarea>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-primary" type="submit">Send Message</button>
+              <button class="btn btn-outline" type="button" onclick="clearForm()">Clear</button>
+            </div>
           </form>
         </div>
 
-        <aside>
-          <div class="feature-card-2">
-            <h4>Quick Enrollment</h4>
-            <div class="tiny" style="margin-top:8px;">Click enroll on any course card or use the form to request more info. We'll confirm seat availability and next steps.</div>
-            <div style="margin-top:12px;">
-              <strong>Phone</strong><div class="tiny">+92 300 0000000</div>
-              <strong style="margin-top:8px; display:block;">Email</strong><div class="tiny">shoaib@example.com</div>
-            </div>
+        <aside style="background:var(--card);padding:18px;border-radius:10px;border:1px solid var(--glass-2)">
+          <h4>Quick Enrollment</h4>
+          <p class="muted">Click enroll on any course card or use the form to request more info. We'll confirm seat availability and next steps.</p>
+          <div style="margin-top:12px">
+            <div class="phone">Phone: +92 317-7793105</div>
+            <div style="margin-top:6px">Email: <a href="mailto:shoaibtahir411@gmail.com">shoaibtahir411@gmail.com</a></div>
+            <div style="margin-top:12px"><strong>Office hours:</strong> By appointment</div>
           </div>
         </aside>
       </div>
     </section>
 
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-grid">
-      <div>
-        <strong style="color:var(--accent)">Muhammad Shoaib Tahir</strong> <div class="tiny">© <span id="year"></span> All rights reserved.</div>
-      </div>
-
-      <div style="display:flex; gap:12px; align-items:center;">
-        <a class="tiny" href="#">Privacy Policy</a>
-        <a class="tiny" href="#">Terms</a>
-        <div style="width:12px"></div>
-        <a class="tiny" href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        <a class="tiny" href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
-        <a class="tiny" href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+    <!-- Modal backdrop -->
+    <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal" id="modalContent">
+        <button id="modalClose" style="float:right;background:transparent;border:0;color:var(--muted);font-weight:800;font-size:18px" onclick="closeModal()">✕</button>
+        <h4 id="modalTitle">Course details</h4>
+        <div id="modalBody" style="margin-top:8px"></div>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+          <button class="btn btn-outline" onclick="closeModal()">Close</button>
+          <button class="btn btn-primary" id="modalEnroll">Enroll</button>
+        </div>
       </div>
     </div>
-  </footer>
 
-  <!-- ===========================
-       MODAL BACKDROPS
-       =========================== -->
-  <div class="modal-backdrop" id="courseModalBackdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Course details modal">
-    <div class="modal" role="document" id="courseModal">
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
-        <h3 id="courseModalTitle">Course Title</h3>
-        <div>
-          <button class="close-btn" data-close="courseModalBackdrop" aria-label="Close course details">✕</button>
-        </div>
+    <!-- footer -->
+    <footer>
+      <div class="small">Muhammad Shoaib Tahir © <span id="year"></span> All rights reserved.</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a href="#" class="small">Privacy Policy</a>
+        <a href="#" class="small">Terms</a>
+        <a class="small" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a class="small" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a class="small" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
-
-      <div class="modal-grid" style="margin-top:10px;">
-        <div>
-          <p id="courseModalDesc" class="muted">Course description placeholder.</p>
-
-          <div style="margin-top:16px;">
-            <h4>Levels</h4>
-            <div class="levels" id="levelsList">
-              <!-- Levels populated dynamically -->
-            </div>
-          </div>
-        </div>
-
-        <aside>
-          <div style="display:flex; flex-direction:column; gap:10px;">
-            <div style="padding:12px; border-radius:10px; background:var(--glass);">
-              <div class="tiny">Includes</div>
-              <ul style="margin:8px 0 0 16px; color:var(--muted)">
-                <li>Recorded lectures</li>
-                <li>Projects & assignments</li>
-                <li>Certificate</li>
-                <li>Mentor feedback (Pro)</li>
-              </ul>
-            </div>
-
-            <div style="display:flex; gap:8px;">
-              <button class="btn primary" id="modalEnrollBtn">Enroll</button>
-              <button class="btn" data-close="courseModalBackdrop">Close</button>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </div>
-
-  <!-- Enrollment Modal -->
-  <div class="modal-backdrop" id="enrollModalBackdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Enrollment form">
-    <div class="modal" role="document" id="enrollModal">
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
-        <h3>Enroll — <span id="selectedCourseText">Course</span></h3>
-        <div>
-          <button class="close-btn" data-close="enrollModalBackdrop" aria-label="Close enrollment">✕</button>
-        </div>
-      </div>
-
-      <form id="enrollForm" style="margin-top:12px;" autocomplete="on">
-        <div style="display:grid; gap:10px; grid-template-columns: 1fr 1fr;">
-          <input type="text" id="enrollName" placeholder="Full name" required />
-          <input type="email" id="enrollEmail" placeholder="Email address" required />
-        </div>
-
-        <div style="display:grid; gap:10px; grid-template-columns: 1fr 1fr; margin-top:8px;">
-          <select id="enrollCourse" required>
-            <option>Computational Linguistics</option>
-            <option>Corpus Linguistics</option>
-            <option>Python Programming</option>
-            <option>Portfolio Development</option>
-          </select>
-
-          <select id="enrollLevel" required>
-            <option>Basic</option>
-            <option>Intermediate</option>
-            <option>Pro</option>
-          </select>
-        </div>
-
-        <textarea id="enrollNotes" rows="4" placeholder="Notes (optional)"></textarea>
-
-        <div style="display:flex; gap:8px; margin-top:8px;">
-          <button class="btn primary" type="submit">Submit Enrollment</button>
-          <button class="btn" type="button" data-close="enrollModalBackdrop">Cancel</button>
-        </div>
-
-        <div id="enrollStatus" class="tiny" style="margin-top:10px; display:none;"></div>
-      </form>
-    </div>
+    </footer>
   </div>
 
   <script>
-    /* ===========================
-       Utility & state
-       =========================== */
-    const yearEl = document.getElementById('year');
-    yearEl.textContent = new Date().getFullYear();
+    // dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Course data (placeholder content and pricing)
-    const COURSES = {
+    // mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', ()=> {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !expanded);
+      mobileNav.style.display = expanded ? 'none' : 'block';
+    });
+
+    // smooth scrolling helper
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    // Course data (fees intentionally not shown on cards — only in modal)
+    const courseData = {
       "Computational Linguistics": {
-        desc: "Dive deep into NLP pipelines, parsing, tagging, and research workflows. Blend linguistics theory with applied computation.",
-        levels: {
-          Basic: {desc: "Introductory topics and foundations. Ideal for beginners.", price: "USD 149"},
-          Intermediate: {desc: "Tools, pipelines, and practical exercises.", price: "USD 299"},
-          Pro: {desc: "Full project, mentoring, and review. Portfolio-ready.", price: "USD 699"}
-        }
+        subtitle: "NLP pipelines, parsing, tagging, and applied research.",
+        syllabus: [
+          "NLP pipelines & preprocessing",
+          "POS tagging, parsing, and evaluation",
+          "Sequence labeling (NER) and practical projects",
+          "Evaluation & experiment design"
+        ],
+        fees: {international: "$90 (group of 4 – $320)", local: "18,000 PKR (group of 4 – 65,000 PKR)"}
       },
       "Corpus Linguistics": {
-        desc: "Corpus design, annotation, concordancing, and statistical analysis workflows using reproducible pipelines.",
-        levels: {
-          Basic: {desc: "Corpus basics and sampling strategies.", price: "USD 129"},
-          Intermediate: {desc: "Annotation schemas, concordances, and analysis.", price: "USD 279"},
-          Pro: {desc: "Advanced annotation, project supervision, and presentation.", price: "USD 649"}
-        }
+        subtitle: "Corpus design, annotation, concordancing, and analysis.",
+        syllabus: [
+          "Corpus design & sampling",
+          "Annotation schemas & tools",
+          "Concordancing & frequency analysis",
+          "Corpus-driven research projects"
+        ],
+        fees: {international: "$60 (group of 4 – $200)", local: "10,000 PKR (group of 4 – 35,000 PKR)"}
       },
-      "Python Programming": {
-        desc: "From Python basics to scripting and libraries used in linguistics: file I/O, regex, NLP libs, and visualization.",
-        levels: {
-          Basic: {desc: "Syntax, data types, and simple scripting.", price: "USD 99"},
-          Intermediate: {desc: "Text processing, data handling, libraries.", price: "USD 229"},
-          Pro: {desc: "Applied NLP projects, packaging, and deployment.", price: "USD 599"}
-        }
+      "Python Programming for Computational Linguistics": {
+        subtitle: "Text processing, data analysis, visualization, and building NLP tools.",
+        syllabus: [
+          "Python basics & scripting",
+          "Text processing & tokenization",
+          "Data visualization & analysis",
+          "Building reproducible NLP experiments"
+        ],
+        fees: {international: "$110 (group of 4 – $380)", local: "20,000 PKR (group of 4 – 68,000 PKR)"}
       },
-      "Portfolio Development": {
-        desc: "Curate and polish projects for GitHub/website; Git workflows, README, demo notebooks, and presentation skills.",
-        levels: {
-          Basic: {desc: "Project structuring & versioning basics.", price: "USD 79"},
-          Intermediate: {desc: "Documentation, notebooks, visualizations.", price: "USD 199"},
-          Pro: {desc: "Full portfolio polish, career guidance, mock interviews.", price: "USD 399"}
-        }
+      "Portfolio Development (NEW)": {
+        subtitle: "Design, polish, and present your projects to showcase skills.",
+        syllabus: [
+          "Project curation & narrative",
+          "GitHub portfolio & README best practices",
+          "Preparing notebooks & demos",
+          "Presentation & interviewing walkthroughs"
+        ],
+        fees: {international: "$40 (group of 4 – $120)", local: "6,500 PKR (group of 4 – 22,000 PKR)"}
       }
     };
 
-    /* ===========================
-       Simple helpers
-       =========================== */
-    function qs(sel, root=document) { return root.querySelector(sel); }
-    function qsa(sel, root=document) { return Array.from(root.querySelectorAll(sel)); }
+    // Modal elements
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalEnroll = document.getElementById('modalEnroll');
 
-    /* ===========================
-       Mobile toggle
-       =========================== */
-    const mobileToggle = qs('#mobileToggle');
-    mobileToggle?.addEventListener('click', () => {
-      const menu = qs('#mobileMenu');
-      const expanded = menu.style.display !== 'none';
-      menu.style.display = expanded ? 'none' : 'block';
-      mobileToggle.setAttribute('aria-expanded', String(!expanded));
-    });
-
-    /* ===========================
-       Course details modal logic
-       =========================== */
-    const courseButtons = qsa('[data-action="details"]');
-    const enrollButtons = qsa('[data-action="enroll"]');
-    const courseModalBackdrop = qs('#courseModalBackdrop');
-    const courseModalTitle = qs('#courseModalTitle');
-    const courseModalDesc = qs('#courseModalDesc');
-    const levelsList = qs('#levelsList');
-    const modalEnrollBtn = qs('#modalEnrollBtn');
-
-    function openCourseModal(courseName){
-      const data = COURSES[courseName];
-      courseModalTitle.textContent = courseName;
-      courseModalDesc.textContent = data.desc;
-      levelsList.innerHTML = ''; // fill levels
-      Object.entries(data.levels).forEach(([level, info])=>{
-        const el = document.createElement('div');
-        el.className = 'level';
-        el.innerHTML = `<div>
-                          <div style="font-weight:700">${level}</div>
-                          <div class="tiny">${info.desc}</div>
-                        </div>
-                        <div style="text-align:right">
-                          <div class="price">${info.price}</div>
-                          <div class="tiny" style="text-align:right">per learner</div>
-                        </div>`;
-        levelsList.appendChild(el);
-      });
-      // set data on enroll button to prefill
-      modalEnrollBtn.dataset.course = courseName;
-      modalEnrollBtn.addEventListener('click', ()=> openEnrollModal(courseName, 'Intermediate'));
-      showModal(courseModalBackdrop);
+    // Open details from card (shows modal with pricing)
+    function openDetailsFromCard(course){
+      const data = courseData[course] || {};
+      modalTitle.textContent = course;
+      modalBody.innerHTML = `
+        <p class="muted">${data.subtitle || ''}</p>
+        <div style="margin-top:10px">
+          <strong>Fees</strong>
+          <div class="muted" style="margin-top:6px">
+            International: ${data.fees?.international || '-'} <br>
+            Local: ${data.fees?.local || '-'}
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <strong>Sample modules</strong>
+          <ul style="color:var(--muted);margin-top:6px">
+            ${(data.syllabus || []).map(s=>`<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+        <div style="margin-top:10px" class="muted">Next cohort: Oct 15, 2025 • Limited seats available</div>
+      `;
+      modalEnroll.onclick = ()=> enroll(course);
+      openModal();
     }
 
-    courseButtons.forEach(btn=>{
-      btn.addEventListener('click', (e)=>{
-        const courseName = btn.dataset.course;
-        openCourseModal(courseName);
-      });
-    });
-
-    /* ===========================
-       Enroll flows
-       =========================== */
-    const enrollTopBtn = qs('#enrollTopBtn');
-    const heroEnroll = qs('#heroEnroll');
-    const enrollContactBtn = qs('#enrollContactBtn');
-    const enrollModalBackdrop = qs('#enrollModalBackdrop');
-    const enrollCourseSelect = qs('#enrollCourse');
-    const enrollLevelSelect = qs('#enrollLevel');
-    const selectedCourseText = qs('#selectedCourseText');
-
-    function openEnrollModal(courseName = null, level = 'Basic'){
-      if (courseName) {
-        enrollCourseSelect.value = courseName;
-        selectedCourseText.textContent = courseName;
-      } else {
-        selectedCourseText.textContent = enrollCourseSelect.value;
-      }
-      enrollLevelSelect.value = level || 'Basic';
-      showModal(enrollModalBackdrop);
-      // focus name field
-      setTimeout(()=> qs('#enrollName').focus(), 120);
-    }
-
-    enrollTopBtn?.addEventListener('click', ()=> openEnrollModal());
-    heroEnroll?.addEventListener('click', ()=> openEnrollModal());
-    enrollContactBtn?.addEventListener('click', ()=> openEnrollModal());
-
-    enrollButtons.forEach(btn=>{
-      btn.addEventListener('click', ()=> {
-        const courseName = btn.dataset.course;
-        openEnrollModal(courseName, 'Basic');
-      });
-    });
-
-    // prefill enrollCourse options from course data
-    (function fillEnrollCourses(){
-      enrollCourseSelect.innerHTML = Object.keys(COURSES).map(c => `<option>${c}</option>`).join('');
-    })();
-
-    // When user changes course select in enroll modal update displayed name
-    enrollCourseSelect.addEventListener('change', ()=>{
-      selectedCourseText.textContent = enrollCourseSelect.value;
-    });
-
-    // Enrollment form submission (mock)
-    qs('#enrollForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name = qs('#enrollName').value.trim();
-      const email = qs('#enrollEmail').value.trim();
-      const course = enrollCourseSelect.value;
-      const level = enrollLevelSelect.value;
-      const notes = qs('#enrollNotes').value.trim();
-
-      const status = qs('#enrollStatus');
-      status.style.display = 'block';
-      status.style.color = 'var(--accent)';
-      status.textContent = 'Submitting...';
-
-      // simulate async process (mock)
-      setTimeout(()=>{
-        status.textContent = `Thank you, ${name || 'Learner'}! Your request for ${course} (${level}) has been received. We will contact ${email}.`;
-        // auto close after short delay (non-blocking)
-        setTimeout(()=> hideModal(enrollModalBackdrop), 2000);
-      }, 700);
-    });
-
-    /* ===========================
-       Contact form mock submission
-       =========================== */
-    qs('#contactForm').addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name = qs('#contactName').value.trim();
-      const email = qs('#contactEmail').value.trim();
-      const message = qs('#contactMessage').value.trim();
-      const status = qs('#contactStatus');
-      status.style.display = 'block';
-      status.style.color = 'var(--accent)';
-      status.textContent = 'Sending message...';
-
-      setTimeout(()=>{
-        status.textContent = `Thanks, ${name || 'Friend'}. Message received — we'll reply to ${email} soon.`;
-        qs('#contactForm').reset();
-      }, 700);
-    });
-
-    /* ===========================
-       Modal helpers: show/hide
-       =========================== */
-    // Show modal
-    function showModal(backdrop){
-      backdrop.classList.add('show');
-      const modal = backdrop.querySelector('.modal');
-      setTimeout(()=> modal.classList.add('open'), 18);
-      backdrop.setAttribute('aria-hidden','false');
-      // lock body scroll
+    function openModal(){
+      modalBackdrop.style.display = 'flex';
+      modalBackdrop.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
-      // trap focus loosely
-      lastFocused = document.activeElement;
-      const focusable = backdrop.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-      if (focusable.length) focusable[0].focus();
     }
-
-    function hideModal(backdrop){
-      const modal = backdrop.querySelector('.modal');
-      if (!modal) return;
-      modal.classList.remove('open');
-      setTimeout(()=>{
-        backdrop.classList.remove('show');
-        backdrop.setAttribute('aria-hidden','true');
-        document.body.style.overflow = '';
-        // restore last focused
-        if (lastFocused) lastFocused.focus();
-      }, 220);
+    function closeModal(){
+      modalBackdrop.style.display = 'none';
+      modalBackdrop.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
     }
+    modalBackdrop.addEventListener('click', (e)=>{
+      if(e.target === modalBackdrop) closeModal();
+    });
 
-    // global close buttons by data-close attr
-    qsa('[data-close]').forEach(btn=>{
-      btn.addEventListener('click', (ev)=>{
-        const target = btn.dataset.close;
-        const el = qs('#'+target);
-        if (el) hideModal(el);
+    // FAQ accordion
+    document.querySelectorAll('.faq .q').forEach(q=>{
+      const btn = q.querySelector('button');
+      btn.addEventListener('click', ()=>{
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        const ans = q.querySelector('.a');
+        if(!expanded){ ans.style.display = 'block'; } else { ans.style.display = 'none'; }
       });
     });
 
-    // close when clicking backdrop
-    [courseModalBackdrop, enrollModalBackdrop].forEach(back => {
-      back.addEventListener('click', (e)=>{
-        if (e.target === back) hideModal(back);
-      });
-    });
+    // contact form handling (mailto fallback)
+    function submitContactForm(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim() || 'Enquiry about courses';
+      const subject = encodeURIComponent('Course inquiry from ' + name);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+      const mailto = `mailto:shoaibtahir411@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = mailto;
+      showToast('Mail client opened — if not, please email shoaibtahir411@gmail.com');
+    }
 
-    // global ESC handler to close any open modal
+    function clearForm(){
+      document.getElementById('contactForm').reset();
+    }
+
+    // quick enrollment (prefill)
+    function enroll(course){
+      openContact(`I want to enroll in: ${course}`);
+    }
+
+    function openContact(prefill = ''){
+      scrollToSection('contact');
+      setTimeout(()=> {
+        const msg = document.getElementById('message');
+        msg.value = prefill;
+        msg.focus();
+      }, 450);
+    }
+
+    // Syllabus actions (simple preview and download)
+    function previewSyllabus(){
+      const w = window.open('', '_blank', 'noopener');
+      w.document.write(`<html><head><title>Syllabus Preview</title></head><body style="font-family:Inter,Arial;padding:24px;color:#111"><h2>Sample 8-week Syllabus</h2><ol><li>Week 1: Corpus design, sampling & metadata</li><li>Week 2: Text preprocessing & tokenization</li><li>Week 3: POS tagging, parsing, and annotation schemas</li><li>Week 4: Corpus query, concordances, and frequency analysis</li><li>Week 5: NLP pipelines — NER, lemmatization, embeddings</li><li>Week 6: Project planning — research question & dataset</li><li>Week 7: Implementation — coding & experiments</li><li>Week 8: Portfolio polish & demo presentation</li></ol><p>Next cohort: Oct 15, 2025</p></body></html>`);
+      w.document.close();
+    }
+    function downloadSyllabus(){
+      const text = `Sample 8-week Syllabus\n\n1. Week 1: Corpus design, sampling & metadata\n2. Week 2: Text preprocessing & tokenization\n3. Week 3: POS tagging, parsing, and annotation schemas\n4. Week 4: Corpus query, concordances, and frequency analysis\n5. Week 5: NLP pipelines — NER, lemmatization, and embeddings\n6. Week 6: Project planning — research question & dataset\n7. Week 7: Implementation — coding & experiments\n8. Week 8: Portfolio polish & demo presentation\n\nNext cohort: Oct 15, 2025\n\nContact: shoaibtahir411@gmail.com`;
+      const blob = new Blob([text], {type: 'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Syllabus.txt'; document.body.appendChild(a); a.click();
+      URL.revokeObjectURL(url); a.remove();
+    }
+
+    // simple toast
+    function showToast(msg){
+      const t = document.createElement('div');
+      t.textContent = msg;
+      t.style.position = 'fixed';
+      t.style.right = '18px';
+      t.style.bottom = '18px';
+      t.style.padding = '12px 14px';
+      t.style.background = 'linear-gradient(90deg,var(--accent2),var(--accent1))';
+      t.style.color = '#fff';
+      t.style.borderRadius = '10px';
+      t.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)';
+      t.style.zIndex = 1000;
+      document.body.appendChild(t);
+      setTimeout(()=> t.style.opacity = '0', 2600);
+      setTimeout(()=> t.remove(), 3000);
+    }
+
+    // accessibility: keyboard close modal with Esc
     document.addEventListener('keydown', (e)=>{
-      if (e.key === 'Escape') {
-        qsa('.modal-backdrop.show').forEach(b => hideModal(b));
+      if(e.key === 'Escape') {
+        closeModal();
+        const openNav = hamburger.getAttribute('aria-expanded') === 'true';
+        if(openNav) { hamburger.click(); }
       }
     });
-
-    /* ===========================
-       FAQ accordion
-       =========================== */
-    qsa('.acc-item').forEach(item=>{
-      const head = item.querySelector('.acc-head');
-      const body = item.querySelector('.acc-body');
-      head.addEventListener('click', ()=>{
-        const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
-        // close all
-        qsa('.acc-body').forEach(b => { b.style.maxHeight = null; });
-        if (!isOpen){
-          body.style.maxHeight = body.scrollHeight + 'px';
-        }
-      });
-      // start closed
-      body.style.maxHeight = null;
-    });
-
-    /* ===========================
-       Download Syllabus (.txt)
-       =========================== */
-    qs('#downloadSyllabus').addEventListener('click', ()=>{
-      const text = [
-        "Sample Syllabus - Corpus & Computational Linguistics with Python",
-        "--------------------------------------------------------------",
-        "1. Week 1: Corpus design, sampling & metadata",
-        "2. Week 2: Text preprocessing & tokenization",
-        "3. Week 3: POS tagging, parsing, and annotation schemas",
-        "4. Week 4: Concordancing and frequency analysis",
-        "5. Week 5: NLP pipelines — NER, lemmatization, embeddings",
-        "6. Week 6: Project planning — research question & dataset",
-        "7. Week 7: Implementation — coding & experiments",
-        "8. Week 8: Portfolio polish & demo presentation",
-        "",
-        "Instructor: Muhammad Shoaib Tahir",
-        "Contact: shoaib@example.com",
-        "Next cohort: Oct 15, 2025"
-      ].join("\\n");
-
-      const blob = new Blob([text], { type: 'text/plain' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'syllabus_corpus_computational_linguistics.txt';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(()=> URL.revokeObjectURL(link.href), 2000);
-    });
-
-    /* ===========================
-       Simple syllabus preview
-       =========================== */
-    qs('#syllabusPreview').addEventListener('click', ()=>{
-      alert('Syllabus preview:\\n\\nOpen the downloaded .txt for the full syllabus.\\n(Download triggers the complete syllabus file.)');
-    });
-
-    /* ===========================
-       Small UI interactions: course cards -> prefill levels in course modal
-       =========================== */
-    let lastFocused = null;
-
-    // clicking on modal enroll pre-fills enroll modal with chosen course
-    modalEnrollBtn.addEventListener('click', ()=>{
-      const courseName = modalEnrollBtn.dataset.course;
-      hideModal(courseModalBackdrop);
-      setTimeout(()=> openEnrollModal(courseName, 'Intermediate'), 300);
-    });
-
-    /* ===========================
-       Accessibility & progressive enhancements
-       =========================== */
-    // Add keyboard hints to buttons
-    qsa('.btn').forEach(b => {
-      b.addEventListener('keydown', e => {
-        if (e.key === 'Enter') b.click();
-      });
-    });
-
-    /* ===========================
-       Initialize small animations on scroll (fade-in)
-       =========================== */
-    const revealTargets = qsa('.section, .testimonial, .card, .feature-card, .feature-card-2');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(en => {
-        if (en.isIntersecting) {
-          en.target.style.transition = 'opacity .9s ease, transform .9s ease';
-          en.target.style.opacity = 1;
-          en.target.style.transform = 'none';
-          io.unobserve(en.target);
-        } else {
-          en.target.style.opacity = 0;
-          en.target.style.transform = 'translateY(10px)';
-        }
-      });
-    }, { threshold: 0.08 });
-
-    revealTargets.forEach(t => io.observe(t));
-
-    // Initialize: make cards slightly invisible for animation
-    revealTargets.forEach(t => { t.style.opacity = 0; t.style.transform = 'translateY(10px)'; });
-
-    /* ===========================
-       Smooth scroll behavior for header links (offset for sticky header)
-       =========================== */
-    qsa('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const href = a.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          const el = document.querySelector(href);
-          if (el) {
-            e.preventDefault();
-            const topOffset = 82; // header height
-            const rect = el.getBoundingClientRect();
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const target = rect.top + scrollTop - topOffset;
-            window.scrollTo({ top: target, behavior: 'smooth' });
-            // close mobile menu if open
-            if (qs('#mobileMenu').style.display !== 'none') qs('#mobileMenu').style.display = 'none';
-          }
-        }
-      });
-    });
-
-    /* ===========================
-       Defensive: open course modal via keyboard or programmatically
-       =========================== */
-    // Expose function globally for quick testing in console (if needed)
-    window.openCourseModal = openCourseModal;
-    window.openEnrollModal = openEnrollModal;
-
-    /* ===========================
-       Small polish: set ARIA attributes
-       =========================== */
-    courseModalBackdrop.setAttribute('aria-hidden','true');
-    enrollModalBackdrop.setAttribute('aria-hidden','true');
-
-    /* End of script */
   </script>
 </body>
 </html>
