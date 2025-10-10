@@ -491,14 +491,12 @@
         <article class="card" role="article" tabindex="0" data-id="${c.id}" aria-labelledby="t${c.id}">
           <div class="course-head">
             <div class="course-thumb" aria-hidden="true">
-              <img src="${escapeHtml(uni.img)}" alt="${escapeHtml(uni.name)} logo" onerror="this.style.objectFit='contain';">
             </div>
             <div class="course-meta">
               <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
                 <div style="min-width:0">
                   <h3 id="t${c.id}" style="margin:0;font-size:16px">${escapeHtml(c.title)}</h3>
                   <div class="instructor" style="margin-top:6px;color:var(--muted)"> 
-                    <img src="${escapeHtml(uni.img)}" alt="Instructor avatar" onerror="this.style.objectFit='contain';">
                     <div>
                       <div style="font-size:13px;font-weight:700">Muhammad Shoaib Tahir</div>
                       <div style="font-size:12px;color:var(--muted)">${escapeHtml(uni.name)}</div>
@@ -511,7 +509,6 @@
                 </div>
               </div>
               <div class="uni-row" style="margin-top:8px">
-                <img src="${escapeHtml(uni.img)}" alt="${escapeHtml(uni.name)} logo" onerror="this.style.objectFit='contain';">
                 <div style="font-size:13px;color:var(--muted)">${escapeHtml(uni.name)}</div>
               </div>
             </div>
