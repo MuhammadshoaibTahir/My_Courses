@@ -1,64 +1,786 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Muhammad Shoaib Tahir | Computational Linguist</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learn Linguistics — Modern Courses (Enhanced)</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="dark light">
+  <style>
+    /* =========================
+       Variables & Base
+       ========================= */
+    :root{
+      --radius:14px;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --shadow-dark: 0 10px 30px rgba(2,6,23,0.6);
+      --transition-fast: 180ms cubic-bezier(.2,.9,.2,1);
+      --transition: 280ms cubic-bezier(.2,.9,.2,1);
+      --max-width:1200px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      --safe-bg: #071226;
+    }
+
+    /* DARK THEME (default) */
+    body.dark-theme{
+      --bg:#0f1724; /* deep */
+      --card:#0b1720;
+      --muted:#9aa8b2;
+      --accent:#6ee7b7; /* mint */
+      --accent-2:#60a5fa; /* blue */
+      --text:#e6eef6;
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      color-scheme: dark;
+      background: linear-gradient(180deg,#071226 0%, #071a2a 60%);
+      color:var(--text);
+    }
+
+    /* LIGHT THEME */
+    body.light-theme{
+      --bg: #f6fafb;
+      --card: #ffffff;
+      --muted: #5b6770;
+      --accent: #2563eb; /* blue */
+      --accent-2: #06b6d4; /* teal */
+      --text: #071225;
+      --glass: rgba(2,6,23,0.03);
+      --glass-2: rgba(2,6,23,0.02);
+      color-scheme: light;
+      background: linear-gradient(180deg,#f8fbfd 0%, #eef6f8 60%);
+      color:var(--text);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      line-height:1.5;font-size:16px;transition:background var(--transition), color var(--transition);
+      background-repeat:no-repeat; background-attachment:fixed;
+    }
+
+    /* =========================
+       Layout
+       ========================= */
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:28px}
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px 0;
+      position:sticky;top:12px;z-index:50;backdrop-filter: blur(6px);
+      transition:transform 260ms,box-shadow 260ms,background 260ms;
+      border-radius:12px;
+    }
+    header.scrolled{box-shadow:0 8px 30px rgba(0,0,0,0.08);transform:translateY(-2px)}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo-ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--accent-2),var(--accent));
+      box-shadow:0 8px 30px rgba(32,40,60,0.15);flex-shrink:0}
+    .brand h1{margin:0;font-size:18px;letter-spacing:-0.2px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav{display:flex;gap:16px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a:hover{color:var(--accent-2);background:var(--glass)}
+
+    .actions{display:flex;gap:10px;align-items:center}
+    .btn{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:10px 14px;border-radius:12px;color:var(--accent-2);cursor:pointer;font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:var(--bg);border:0}
+    .theme-toggle{display:flex;align-items:center;gap:8px;padding:8px;border-radius:10px;background:var(--glass-2);border:1px solid rgba(0,0,0,0.03);cursor:pointer}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* =========================
+       Hero
+       ========================= */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start;margin-top:18px}
+    .hero .left{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:28px;border-radius:16px;box-shadow:var(--shadow-dark);border:1px solid rgba(255,255,255,0.02);
+      transition:transform var(--transition), box-shadow var(--transition);
+    }
+    .hero h2{margin:0 0 8px;font-size:34px}
+    .hero p{margin:0 0 18px;color:var(--muted)}
+    .searchbar{display:flex;gap:10px;align-items:center}
+    .searchbar input{flex:1;padding:14px;border-radius:12px;border:0;background:var(--glass);color:inherit;font-size:15px;outline:0}
+    .chip-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .chip{padding:8px 12px;background:transparent;border:1px solid rgba(0,0,0,0.05);border-radius:999px;color:var(--muted);cursor:pointer;transition:all var(--transition)}
+    .chip.active{background:linear-gradient(90deg, rgba(96,165,250,0.07), rgba(110,231,183,0.04));color:var(--accent-2);border-color:rgba(96,165,250,0.18);transform:translateY(-4px)}
+
+    .aside{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .stat{display:flex;justify-content:space-between;padding:8px 0;color:var(--muted)}
+
+    /* =========================
+       Controls
+       ========================= */
+    .controls{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:18px 0;flex-wrap:wrap}
+    .filters{display:flex;gap:8px;align-items:center}
+    .sort{padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--muted)}
+    .view-toggle{display:flex;gap:6px;padding:6px;border-radius:8px;background:var(--glass-2)}
+    .view-toggle button{padding:8px;border-radius:8px;border:0;background:transparent;cursor:pointer}
+
+    /* =========================
+       Grid / Cards
+       ========================= */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .list-view .grid{grid-template-columns:1fr}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);
+      box-shadow:0 8px 24px rgba(2,6,23,0.5);transition:transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s,filter .22s;
+      position:relative;overflow:hidden;min-height:140px;display:flex;flex-direction:column;
+    }
+    .card::after{
+      content:'';position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,0.03));
+      opacity:0;transition:opacity var(--transition);
+    }
+    .card:hover{transform:translateY(-10px) scale(1.01);box-shadow:0 22px 40px rgba(2,6,23,0.6);filter:brightness(1.02)}
+    .card:hover::after{opacity:1}
+    .card .meta{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:13px;margin-bottom:10px}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .card p{margin:0 0 12px;color:var(--muted);font-size:14px}
+    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+    .badge{padding:6px 10px;border-radius:999px;background:rgba(96,165,250,0.07);color:var(--accent-2);font-weight:700;font-size:13px}
+    .meta .pill{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+
+    .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
+    .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden;flex:1;margin-right:12px}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
+
+    /* small course header row (logo/instructor/time) */
+    .course-head{display:flex;align-items:center;gap:12px;margin:8px 0 12px}
+    .course-thumb{width:64px;height:64px;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+    .course-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .course-meta{flex:1;min-width:0}
+    .course-meta .instructor{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+    .course-meta .instructor img{width:28px;height:28px;border-radius:50%;object-fit:cover}
+
+    .uni-row{display:flex;align-items:center;gap:8px;margin-top:8px}
+    .uni-row img{width:36px;height:36px;border-radius:8px;object-fit:cover}
+
+    .card .actions{display:flex;gap:8px;margin-top:12px}
+    .card .actions .btn{padding:8px 10px;border-radius:10px;font-size:13px}
+    .btn-visit{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    .btn-visit:hover{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:var(--bg);border:0}
+    .btn-more{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--accent-2);font-weight:800}
+    .btn-wish{background:transparent;border:0;font-size:18px;cursor:pointer;color:var(--muted)}
+
+    /* pagination */
+    .pager{display:flex;gap:8px;align-items:center;justify-content:center;margin:22px 0;flex-wrap:wrap}
+    .page{padding:9px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.02);cursor:pointer}
+    .page.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:var(--bg);border:0}
+    .pager .nav{padding:9px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.02);cursor:pointer}
+
+    /* modal/backdrop */
+    .backdrop{position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.8));display:none;align-items:center;justify-content:center;z-index:60}
+    .backdrop.show{display:flex}
+    .modal{
+      background:var(--card);border-radius:12px;padding:22px;max-width:980px;width:96%;border:1px solid rgba(255,255,255,0.03);transform:translateY(18px) scale(.98);opacity:0;transition:transform 360ms cubic-bezier(.2,.9,.2,1),opacity 260ms;
+      box-shadow:0 30px 80px rgba(2,6,23,0.6);max-height:86vh;overflow:auto;
+    }
+    .backdrop.show .modal{transform:none;opacity:1}
+    .modal .modal-grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
+    .modal .modal-grid img{width:100%;border-radius:10px;object-fit:cover}
+    .modal h2{margin-top:0}
+
+    /* toast & top button */
+    .toast{position:fixed;right:20px;bottom:22px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:var(--bg);padding:12px 16px;border-radius:12px;box-shadow:0 12px 40px rgba(2,6,23,0.28);z-index:120;opacity:0;transform:translateY(8px);transition:opacity 260ms,transform 260ms;}
+    .toast.show{opacity:1;transform:none}
+    .top-btn{position:fixed;right:22px;bottom:90px;width:48px;height:48px;border-radius:10px;background:var(--glass-2);display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 30px rgba(2,6,23,0.35);opacity:0;transform:translateY(8px);transition:opacity 220ms,transform 220ms}
+    .top-btn.show{opacity:1;transform:none}
+    .socials{display:flex;gap:8px;align-items:center}
+
+    /* responsive */
+    @media (max-width:980px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:720px){.grid{grid-template-columns:1fr}.wrap{padding:16px}.hero h2{font-size:22px}.modal .modal-grid{grid-template-columns:1fr}}
+    @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  </style>
 </head>
-<body>
-  <header>
-    <div class="logo">Muhammad Shoaib Tahir</div>
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropbtn">Courses ▾</a>
-          <div class="dropdown-content">
-            <a href="courses.html#full-courses">Full Courses</a>
-            <a href="courses.html#short-courses">Short Courses</a>
-          </div>
-        </li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<body class="dark-theme">
+  <div class="wrap">
+    <header id="header" aria-live="polite">
+      <div class="brand" style="gap:12px">
+        <div class="logo-ico" aria-hidden>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9-4.03 9-9 9-9-4.03-9-9z" fill="white" opacity="0.06"/><path d="M7 12c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5-5-2.24-5-5z" fill="white"/></svg>
+        </div>
+        <div>
+          <h1>LearnLinguistics</h1>
+          <p>Curated courses — modern UI, real projects</p>
+        </div>
+      </div>
 
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Empowering Linguistic Innovation</h1>
-      <p>Explore the bridge between language, computation, and real-world technology.</p>
-      <button id="browseBtn">Browse Courses</button>
+      <nav aria-label="Primary navigation">
+        <a href="#subjects" data-scroll>Subjects</a>
+        <a href="#programs" data-scroll>Programs</a>
+        <a href="#partners" data-scroll>Partners</a>
+      </nav>
+
+      <div class="actions" role="group" aria-label="Header actions">
+        <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-pressed="false" title="Toggle theme">
+          <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4M12 7a5 5 0 100 10 5 5 0 000-10z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline-block"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="themeLabel" style="font-weight:700;font-size:13px">Dark</span>
+        </div>
+        <button class="btn primary" id="getStarted">Get Started</button>
+      </div>
+    </header>
+
+    <section class="hero" aria-label="Hero">
+      <div class="left slide-up" id="heroLeft">
+        <h2>Advance your career with top Linguistics courses</h2>
+        <p>From phonetics to computational linguistics — hands-on projects, peer discussion, and recognized certificates. Updated UI, powerful filters and rich previews.</p>
+
+        <div class="searchbar" role="search">
+          <input id="q" placeholder="Search courses, instructors, topics..." aria-label="Search courses" />
+          <button class="btn" id="searchBtn">Search</button>
+        </div>
+
+        <div class="chip-list" id="chipList" aria-hidden="false" style="margin-top:12px">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="beginner">Beginner</button>
+          <button class="chip" data-filter="intermediate">Intermediate</button>
+          <button class="chip" data-filter="advanced">Advanced</button>
+          <button class="chip" data-filter="free">Free</button>
+          <button class="chip" data-filter="cert">Certificate</button>
+        </div>
+      </div>
+
+      <aside class="aside fade-in" aria-labelledby="feat">
+        <h3 id="feat">Featured Tracks</h3>
+        <div class="stat"><span>Top Courses</span><strong id="countCourses">60+</strong></div>
+        <div class="stat"><span>University Partners</span><strong id="countPartners">20</strong></div>
+        <div class="stat"><span>Avg. duration</span><strong id="countDuration">6 weeks</strong></div>
+        <div style="height:12px"></div>
+        <div style="font-size:13px;color:var(--muted)">Tip: Click Preview on any course to open a rich modal with syllabus, instructors, and enrollment options.</div>
+      </aside>
+    </section>
+
+    <div class="controls">
+      <div class="filters" role="region" aria-label="Filters">
+        <label for="sort" class="sr-only">Sort by</label>
+        <select id="sort" class="sort" aria-label="Sort courses">
+          <option value="relevance">Relevance</option>
+          <option value="newest">Newest</option>
+          <option value="popular">Most popular</option>
+          <option value="alpha">A → Z</option>
+        </select>
+
+        <div class="view-toggle" role="tablist" aria-label="View toggle">
+          <button id="gridViewBtn" aria-pressed="true" title="Grid view">Grid</button>
+          <button id="listViewBtn" aria-pressed="false" title="List view">List</button>
+        </div>
+
+        <button class="chip" id="viewAll">View all</button>
+      </div>
+
+      <div style="color:var(--muted);font-weight:600">Showing <span id="total">9</span> courses</div>
     </div>
-  </section>
 
-  <section class="about">
-    <h2>About the Instructor</h2>
-    <p><strong>Muhammad Shoaib Tahir</strong> is a <em>Computational Linguist</em> and <em>Corpus & Computational Linguistics Trainer</em>. He currently serves as the <strong>Assistant Manager HR</strong> at the <em>Linguistic Association of Pakistan</em> and as a <strong>National Resource Person</strong> at the <em>Pakistan Corpus Studio</em>.</p>
+    <main>
+      <section class="grid stagger" id="grid" aria-live="polite" aria-label="Course results">
+        <!-- cards injected by JS -->
+      </section>
 
-    <p>He has served as a <strong>Visiting Lecturer</strong> at:</p>
-    <ul>
-      <li>Government College University, Faisalabad</li>
-      <li>University of Education, Lahore – Faisalabad Campus</li>
-      <li>University of Agriculture, Faisalabad</li>
-    </ul>
+      <div class="pager" id="pager" aria-label="Pagination">
+        <!-- pages injected -->
+      </div>
+    </main>
 
-    <p>He has also been a <strong>Resource Person</strong> at numerous conferences, seminars, and workshops on Corpus and Computational Linguistics at:</p>
-    <ul>
-      <li>UMT Lahore</li>
-      <li>UMT – Sialkot Campus</li>
-      <li>The University of Faisalabad</li>
-      <li>University of Agriculture Faisalabad</li>
-      <li>NUML Faisalabad Campus</li>
-      <li>Air University Islamabad</li>
-    </ul>
+    <footer style="margin-top:28px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>© <span id="yr"></span> LearnLinguistics — All rights reserved</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="socials" aria-hidden>
+          <!-- small inline icons -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5V9.1c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12H19l-.5 3h-2v7A10 10 0 0022 12z" fill="currentColor"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M22 4.01H2v15.98A2 2 0 004 22h16a2 2 0 002-2V4.01zM8.46 18H6.62V9.9h1.84V18zM7.54 8.67a1.07 1.07 0 110-2.14 1.07 1.07 0 010 2.14zM18 18h-1.84v-4.34c0-1.03-.37-1.73-1.3-1.73-.71 0-1.13.48-1.32.95-.07.17-.09.41-.09.65V18h-1.84s.02-8.46 0-9.34h1.84v1.32c.24-.37.68-.9 1.66-.9 1.2 0 2.1.78 2.1 2.45V18z" fill="currentColor"/></svg>
+        </div>
+        <div style="display:flex;gap:10px"><a href="#" style="color:var(--muted);text-decoration:none">Privacy</a><a href="#" style="color:var(--muted);text-decoration:none">Terms</a></div>
+      </div>
+    </footer>
+  </div>
 
-    <p>Through his work, he bridges academic linguistics and computational tools, inspiring learners to explore language data and digital applications in real-world contexts.</p>
-  </section>
+  <!-- Modal / Backdrop -->
+  <div class="backdrop" id="backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" tabindex="-1">
+      <button id="closeModal" style="float:right;background:none;border:0;color:var(--muted);font-size:20px;cursor:pointer" aria-label="Close modal">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
 
-  <footer>
-    <p>© 2025 Muhammad Shoaib Tahir | Linguistic Association of Pakistan</p>
-  </footer>
+  <!-- Toast & Top button -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <button class="top-btn" id="topBtn" aria-label="Scroll to top" title="Scroll to top">↑</button>
+
+  <script>
+    /***********************
+     * DATASET
+     ***********************/
+    // Each course includes a uniKey that we map to your images + display name.
+    const UNIS = {
+      'UAF': {name:'University of Agriculture Faisalabad', img:'images/agri.png', url:'#'},
+      'AIR': {name:'Air University Islamabad', img:'images/air.png', url:'#'},
+      'NUMLF': {name:'National University of Modern Languages (Faisalabad Campus)', img:'images/numl.png', url:'#'},
+      'TUF': {name:'The University of Faisalabad', img:'images/tuf.jpg', url:'#'},
+      'UMT_LAH': {name:'University of Management and Technology (Lahore)', img:'images/umt.png', url:'#'},
+      'UMT_SKT': {name:'University of Management and Technology (Sialkot Campus)', img:'images/umt.png', url:'#'}
+    };
+
+    const COURSES = [
+      {id:1, title:'Introduction to Linguistics: Language & Mind', level:'beginner', weeks:6, uniKey:'UMT_LAH', price:'Free', tags:['Phonetics','Syntax'], desc:'Foundational course on sounds, words, and sentence structure.', rating:4.8, reviews:1245, featured:true, thumbnail:''},
+      {id:2, title:'Phonetics: How Speech Works', level:'intermediate', weeks:5, uniKey:'UAF', price:'Paid', tags:['Phonetics','Lab'], desc:'Articulation, acoustic analysis and lab exercises.', rating:4.6, reviews:518, thumbnail:''},
+      {id:3, title:'Computational Linguistics Essentials', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Parsing'], desc:'Practical parsing, corpora and Python projects.', rating:4.7, reviews:930, thumbnail:''},
+      {id:4, title:'Sign Language Linguistics', level:'beginner', weeks:4, uniKey:'NUMLF', price:'Free', tags:['Sign','Sociolinguistics'], desc:'Structure of signed languages.', rating:4.5, reviews:230, thumbnail:''},
+      {id:5, title:'Sociolinguistics: Language in Society', level:'intermediate', weeks:7, uniKey:'TUF', price:'Paid', tags:['Sociolinguistics','Variation'], desc:'Variation, identity and social context.', rating:4.7, reviews:412, thumbnail:''},
+      {id:6, title:'Intro to Syntax: Building Sentences', level:'beginner', weeks:6, uniKey:'UMT_LAH', price:'Paid', tags:['Syntax','Theory'], desc:'Phrase structure, movement and constituency.', rating:4.9, reviews:860, thumbnail:''},
+      {id:7, title:'Field Methods in Linguistics', level:'advanced', weeks:10, uniKey:'UAF', price:'Paid', tags:['Fieldwork','Documentation'], desc:'Elicitation and documentation techniques.', rating:4.6, reviews:210, thumbnail:''},
+      {id:8, title:'Semantics & Pragmatics', level:'intermediate', weeks:6, uniKey:'NUMLF', price:'Free', tags:['Semantics','Pragmatics'], desc:'Meaning, reference and context.', rating:4.4, reviews:330, thumbnail:''},
+      {id:9, title:'Corpus Linguistics for Beginners', level:'beginner', weeks:4, uniKey:'TUF', price:'Free', tags:['Corpus','Methods'], desc:'Practical corpus exercises.', rating:4.6, reviews:180, thumbnail:''},
+      {id:10, title:'Psycholinguistics: Language & Mind', level:'advanced', weeks:8, uniKey:'UMT_LAH', price:'Paid', tags:['Psycholinguistics','Research'], desc:'Cognitive processes behind language acquisition and comprehension.', rating:4.5, reviews:142, thumbnail:''},
+      {id:11, title:'Language Documentation & Revitalization', level:'advanced', weeks:10, uniKey:'UAF', price:'Paid', tags:['Documentation','Fieldwork'], desc:'Hands-on documentation exercises for endangered languages.', rating:4.6, reviews:85, thumbnail:''},
+      {id:12, title:'Discourse Analysis', level:'intermediate', weeks:6, uniKey:'NUMLF', price:'Free', tags:['Discourse','Critical'], desc:'Analyzing spoken and written discourse in context.', rating:4.3, reviews:98, thumbnail:''},
+      {id:13, title:'NLP with Python: Practical Projects', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Python'], desc:'Python-based NLP projects: tokenization, embeddings, models.', rating:4.7, reviews:410, thumbnail:''},
+      {id:14, title:'Language Teaching Methodologies', level:'beginner', weeks:5, uniKey:'TUF', price:'Paid', tags:['Teaching','Applied'], desc:'Effective methodologies for language classrooms.', rating:4.5, reviews:62, thumbnail:''},
+      {id:15, title:'Research Methods in Linguistics', level:'intermediate', weeks:6, uniKey:'UMT_LAH', price:'Paid', tags:['Research','Methods'], desc:'Designing studies, data collection and analysis.', rating:4.6, reviews:170, thumbnail:''}
+    ];
+
+    /***********************
+     * STATE
+     ***********************/
+    let state = {filter:'all', q:'', sort:'relevance', page:1, perPage:6, view:'grid', wishlist: new Set()};
+
+    // Persisted keys
+    const LS = {
+      THEME: 'learnling-theme',
+      WISH: 'learnling-wishlist',
+    };
+
+    // DOM refs
+    const grid = document.getElementById('grid');
+    const totalEl = document.getElementById('total');
+    const yr = document.getElementById('yr'); yr.textContent = new Date().getFullYear();
+    const toastEl = document.getElementById('toast');
+    const topBtn = document.getElementById('topBtn');
+
+    // Load wishlist from localStorage
+    (function loadWishlist(){
+      try{
+        const raw = localStorage.getItem(LS.WISH);
+        if(raw){
+          const arr = JSON.parse(raw);
+          state.wishlist = new Set(arr);
+        }
+      }catch(e){ state.wishlist = new Set(); }
+    })();
+
+    function saveWishlist(){
+      try{
+        const arr = Array.from(state.wishlist);
+        localStorage.setItem(LS.WISH, JSON.stringify(arr));
+      }catch(e){}
+    }
+
+    // escape
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m])); }
+
+    /***********************
+     * RENDERING
+     ***********************/
+    function cardHTML(c){
+      // render thumbnail if available, otherwise show uni logo
+      const uni = UNIS[c.uniKey] || {name:c.uniKey, img:'images/umt.png', url:'#'};
+      const seed = (c.id * 47) % 77 + 15;
+      const isWished = state.wishlist.has(String(c.id));
+      return `
+        <article class="card" role="article" tabindex="0" data-id="${c.id}" aria-labelledby="t${c.id}">
+          <div class="course-head">
+            <div class="course-thumb" aria-hidden="true">
+              <img src="${escapeHtml(uni.img)}" alt="${escapeHtml(uni.name)} logo" onerror="this.style.objectFit='contain';">
+            </div>
+            <div class="course-meta">
+              <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
+                <div style="min-width:0">
+                  <h3 id="t${c.id}" style="margin:0;font-size:16px">${escapeHtml(c.title)}</h3>
+                  <div class="instructor" style="margin-top:6px;color:var(--muted)"> 
+                    <img src="${escapeHtml(uni.img)}" alt="Instructor avatar" onerror="this.style.objectFit='contain';">
+                    <div>
+                      <div style="font-size:13px;font-weight:700">Muhammad Shoaib Tahir</div>
+                      <div style="font-size:12px;color:var(--muted)">${escapeHtml(uni.name)}</div>
+                    </div>
+                  </div>
+                </div>
+                <div style="text-align:right;color:var(--muted);font-size:13px">
+                  <div style="font-weight:800">${c.weeks} wk</div>
+                  <div style="font-size:12px">${escapeHtml(c.level)}</div>
+                </div>
+              </div>
+              <div class="uni-row" style="margin-top:8px">
+                <img src="${escapeHtml(uni.img)}" alt="${escapeHtml(uni.name)} logo" onerror="this.style.objectFit='contain';">
+                <div style="font-size:13px;color:var(--muted)">${escapeHtml(uni.name)}</div>
+              </div>
+            </div>
+          </div>
+
+          <p style="margin-top:12px">${escapeHtml(c.desc)}</p>
+
+          <div class="badges" aria-hidden="${c.tags.length===0}">
+            ${c.tags.map(t=>`<span class="badge">${escapeHtml(t)}</span>`).join('')}
+          </div>
+
+          <div class="actions" style="margin-top:12px">
+            <a href="${escapeHtml(uni.url)}" class="btn btn-visit" target="_blank" rel="noopener noreferrer" aria-label="Visit ${escapeHtml(uni.name)}">Visit University</a>
+            <button class="btn btn-more" data-action="preview" data-id="${c.id}" aria-label="More info about ${escapeHtml(c.title)}">More Info</button>
+            <button class="btn-wish" data-action="wishlist" data-id="${c.id}" title="${isWished? 'Remove from wishlist' : 'Add to wishlist'}" aria-pressed="${isWished? 'true':'false'}">${isWished? '❤️' : '♡'}</button>
+          </div>
+
+          <div class="foot" aria-hidden="false" style="margin-top:12px">
+            <div style="display:flex;align-items:center;gap:12px;flex:1">
+              <div style="font-weight:800;font-size:13px">${escapeHtml(c.price)}</div>
+              <div style="font-size:13px;color:var(--muted)">⭐ ${c.rating} · ${c.reviews} reviews</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div class="progress" style="width:140px"><i style="width:${seed}%"></i></div>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function applyFilters(){
+      let out = COURSES.filter(c=>{
+        if(state.filter!=='all'){
+          if(state.filter==='free' && c.price.toLowerCase()!=='free') return false;
+          if(state.filter==='cert' && c.price.toLowerCase()==='free') return false;
+          if(['beginner','intermediate','advanced'].includes(state.filter) && c.level!==state.filter) return false;
+        }
+        if(state.q){
+          const hay = (c.title+' '+c.desc+' '+(UNIS[c.uniKey]?.name||'')+' '+c.tags.join(' ')).toLowerCase();
+          if(hay.indexOf(state.q.toLowerCase())===-1) return false;
+        }
+        return true;
+      });
+
+      // sort
+      if(state.sort==='alpha') out.sort((a,b)=>a.title.localeCompare(b.title));
+      if(state.sort==='newest') out = out.slice().reverse();
+      if(state.sort==='popular') out.sort((a,b)=>b.reviews - a.reviews);
+
+      return out;
+    }
+
+    function render(){
+      const all = applyFilters();
+      const start = (state.page-1)*state.perPage;
+      const pageItems = all.slice(start, start+state.perPage);
+
+      grid.innerHTML = pageItems.map(cardHTML).join('');
+      totalEl.textContent = all.length;
+      renderPager(Math.max(1, Math.ceil(all.length/state.perPage)));
+      animateCards();
+      attachCardEventHandlers(); // attach events after render
+    }
+
+    function renderPager(pages){
+      const pager = document.getElementById('pager');
+      pager.innerHTML = '';
+      // prev
+      const prev = document.createElement('button');
+      prev.className = 'nav';
+      prev.textContent = 'Prev';
+      prev.disabled = state.page<=1;
+      prev.addEventListener('click', ()=>{ if(state.page>1) { state.page--; render(); window.scrollTo({top:320,behavior:'smooth'}); }});
+      pager.appendChild(prev);
+      for(let i=1;i<=pages;i++){
+        const btn = document.createElement('button');
+        btn.className='page'+(i===state.page? ' active':'');
+        btn.textContent = i;
+        btn.addEventListener('click', ()=>{ state.page=i; render(); window.scrollTo({top:320,behavior:'smooth'}); });
+        pager.appendChild(btn);
+      }
+      const next = document.createElement('button');
+      next.className = 'nav';
+      next.textContent = 'Next';
+      next.disabled = state.page>=pages;
+      next.addEventListener('click', ()=>{ if(state.page<pages){ state.page++; render(); window.scrollTo({top:320,behavior:'smooth'}); }});
+      pager.appendChild(next);
+    }
+
+    /***********************
+     * ANIMATIONS / INTERACTIONS
+     ***********************/
+    function animateCards(){
+      const cards = Array.from(document.querySelectorAll('.card'));
+      cards.forEach((c, i) => {
+        c.style.animationDelay = (i*60)+'ms';
+        c.classList.add('stagger-child');
+        const bar = c.querySelector('.progress > i');
+        if(bar){
+          const w = bar.style.width;
+          bar.style.width = '0%';
+          requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ bar.style.width = w; })});
+        }
+      });
+
+      const parent = document.querySelector('.stagger');
+      if(parent){
+        Array.from(parent.children).forEach((el, idx)=>el.style.animation = `staggerIn .55s cubic-bezier(.2,.9,.2,1) both ${idx*0.06}s`);
+      }
+    }
+
+    // Debounce helper
+    function debounce(fn,ms){ let t; return function(...a){ clearTimeout(t); t=setTimeout(()=>fn.apply(this,a),ms); }; }
+
+    /***********************
+     * EVENT ATTACHMENTS
+     ***********************/
+    // Search & sort
+    document.getElementById('q').addEventListener('input', debounce((e)=>{
+      state.q = e.target.value; state.page=1; render(); highlightSearch(state.q);
+    }, 220));
+    document.getElementById('sort').addEventListener('change', (e)=>{ state.sort=e.target.value; state.page=1; render(); });
+
+    // chip filters
+    document.querySelectorAll('#chipList .chip').forEach(ch=>{
+      ch.addEventListener('click', (e)=>{
+        document.querySelectorAll('#chipList .chip').forEach(x=>x.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        state.filter = e.currentTarget.dataset.filter;
+        state.page=1; render();
+      });
+    });
+
+    // view toggle
+    document.getElementById('gridViewBtn').addEventListener('click', ()=>{ document.body.classList.remove('list-view'); state.view='grid'; document.getElementById('gridViewBtn').setAttribute('aria-pressed','true'); document.getElementById('listViewBtn').setAttribute('aria-pressed','false'); document.querySelector('.wrap').classList.remove('list-view'); });
+    document.getElementById('listViewBtn').addEventListener('click', ()=>{ document.body.classList.add('list-view'); state.view='list'; document.getElementById('gridViewBtn').setAttribute('aria-pressed','false'); document.getElementById('listViewBtn').setAttribute('aria-pressed','true'); document.querySelector('.wrap').classList.add('list-view'); });
+
+    // keyboard / Enter opens preview
+    grid.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ const id = e.target.dataset.id; if(id){ const c = COURSES.find(x=>x.id==id); openModal(c); } } });
+
+    // global click: preview / wishlist handled after render via attachCardEventHandlers
+
+    function attachCardEventHandlers(){
+      // preview buttons
+      document.querySelectorAll('[data-action="preview"]').forEach(btn=>{
+        btn.removeEventListener('click', previewHandler);
+        btn.addEventListener('click', previewHandler);
+      });
+      // wishlist buttons
+      document.querySelectorAll('[data-action="wishlist"]').forEach(btn=>{
+        btn.removeEventListener('click', wishlistHandler);
+        btn.addEventListener('click', wishlistHandler);
+      });
+    }
+
+    function previewHandler(e){
+      const id = +e.currentTarget.dataset.id;
+      const c = COURSES.find(x=>x.id===id);
+      if(c) openModal(c);
+    }
+
+    function wishlistHandler(e){
+      const id = String(e.currentTarget.dataset.id);
+      if(state.wishlist.has(id)){
+        state.wishlist.delete(id);
+        toast('Removed from wishlist');
+      } else {
+        state.wishlist.add(id);
+        toast('Added to wishlist');
+      }
+      saveWishlist();
+      render(); // re-render to update icons/aria-pressed
+    }
+
+    /***********************
+     * MODAL
+     ***********************/
+    const backdrop = document.getElementById('backdrop');
+    const modalBody = document.getElementById('modalBody');
+    const closeModalBtn = document.getElementById('closeModal');
+
+    closeModalBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+    function openModal(c){
+      const uni = UNIS[c.uniKey] || {name:c.uniKey, img:'images/umt.png', url:'#'};
+      modalBody.innerHTML = `
+        <div class="modal-grid">
+          <div>
+            <h2 id="mTitle">${escapeHtml(c.title)}</h2>
+            <div style="color:var(--muted);margin-bottom:8px">${escapeHtml(uni.name)} · ${c.weeks} weeks · ${escapeHtml(c.level)} · ${escapeHtml(c.price)}</div>
+            <p style="margin:10px 0">${escapeHtml(c.desc)}</p>
+
+            <div style="display:flex;gap:12px;align-items:center;margin:8px 0">
+              <div style="flex:1">
+                <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Course progress preview</div>
+                <div class="progress" style="height:12px"><i style="width:0%"></i></div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-weight:800">${c.rating} ★</div>
+                <div style="font-size:13px;color:var(--muted)">${c.reviews} reviews</div>
+              </div>
+            </div>
+
+            <h4 style="margin:8px 0">Syllabus snapshot</h4>
+            <ol style="margin:0 0 12px;padding-left:18px;color:var(--muted)">
+              <li>Week 1: Introduction & key concepts</li>
+              <li>Week 2–3: Core methods and labs</li>
+              <li>Week 4: Project work and assessment</li>
+            </ol>
+
+            <h4 style="margin:8px 0">Instructor</h4>
+            <div style="display:flex;gap:12px;align-items:center">
+              <img src="${escapeHtml(uni.img)}" alt="Instructor avatar" style="width:72px;height:72px;border-radius:12px;object-fit:cover" onerror="this.style.objectFit='contain'">
+              <div>
+                <div style="font-weight:800">Muhammad Shoaib Tahir</div>
+                <div style="color:var(--muted);font-size:13px">${escapeHtml(uni.name)}</div>
+                <div style="margin-top:6px;color:var(--muted);font-size:13px">Instructor profile, contact and office hours will be shown here.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:12px">
+              <button class="btn primary" id="enrollBtn">Enroll now</button>
+              <button class="btn" id="wishModalBtn">Add to wishlist</button>
+              <a href="${escapeHtml(uni.url)}" class="btn btn-visit" target="_blank" rel="noopener noreferrer">Visit University</a>
+            </div>
+          </div>
+
+          <aside style="padding:8px;border-left:1px solid rgba(255,255,255,0.02)">
+            <img src="${escapeHtml(uni.img)}" alt="${escapeHtml(uni.name)}" style="width:100%;border-radius:8px;margin-bottom:12px;object-fit:cover" onerror="this.style.objectFit='contain'">
+            <div style="font-size:13px;color:var(--muted)"><strong>Course details</strong></div>
+            <ul style="padding-left:18px;color:var(--muted);margin-top:8px">
+              <li>Level: ${escapeHtml(c.level)}</li>
+              <li>Duration: ${c.weeks} weeks</li>
+              <li>Price: ${escapeHtml(c.price)}</li>
+              <li>Language: English</li>
+            </ul>
+          </aside>
+        </div>
+      `;
+      backdrop.classList.add('show'); backdrop.setAttribute('aria-hidden','false');
+      requestAnimationFrame(()=>{ const bar = modalBody.querySelector('.progress > i'); if(bar){ bar.style.width = '62%'; }});
+      const modal = backdrop.querySelector('.modal');
+      modal.focus();
+
+      // attach enroll/wishlist inside modal
+      const enrollBtn = document.getElementById('enrollBtn');
+      const wishModalBtn = document.getElementById('wishModalBtn');
+      enrollBtn.addEventListener('click', ()=>{ toast('Enrollment successful — confirmation sent to your email'); });
+      wishModalBtn.addEventListener('click', ()=>{ 
+        state.wishlist.add(String(c.id)); saveWishlist(); render(); toast('Added to wishlist'); 
+      });
+    }
+
+    function closeModal(){ backdrop.classList.remove('show'); backdrop.setAttribute('aria-hidden','true'); }
+
+    /***********************
+     * THEME TOGGLE
+     ***********************/
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+    const iconSun = document.getElementById('iconSun');
+    const iconMoon = document.getElementById('iconMoon');
+
+    function setTheme(name){
+      document.body.classList.remove('dark-theme','light-theme');
+      document.body.classList.add(name+'-theme');
+      themeLabel.textContent = name==='dark' ? 'Dark' : 'Light';
+      themeToggle.setAttribute('aria-pressed', name==='light');
+      if(name==='dark'){ iconMoon.style.display='inline-block'; iconSun.style.display='none'; }
+      else { iconSun.style.display='inline-block'; iconMoon.style.display='none'; }
+      try{ localStorage.setItem(LS.THEME, name); }catch(e){}
+    }
+
+    (function initTheme(){
+      const saved = localStorage.getItem(LS.THEME);
+      if(saved) setTheme(saved);
+      else {
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        setTheme(prefersLight ? 'light' : 'dark');
+      }
+    })();
+
+    themeToggle.addEventListener('click', ()=>{ const isDark = document.body.classList.contains('dark-theme'); setTheme(isDark ? 'light' : 'dark'); });
+    themeToggle.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') themeToggle.click(); });
+
+    /***********************
+     * TOASTS
+     ***********************/
+    let toastTimer = null;
+    function toast(msg, ms=2600){
+      toastEl.textContent = msg; toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>{ toastEl.classList.remove('show'); }, ms);
+    }
+
+    /***********************
+     * COUNTERS (animate)
+     ***********************/
+    function animateCounter(node, from, to, ms=900){
+      let start = null;
+      function step(ts){
+        if(!start) start = ts;
+        const p = Math.min(1, (ts-start)/ms);
+        const val = Math.floor(from + (to-from)*p);
+        node.textContent = (to>=100? val+'+' : val);
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const asideObserver = new IntersectionObserver((entries)=>{ entries.forEach(ent=>{ if(ent.isIntersecting){ animateCounter(document.getElementById('countCourses'), 0, 60); animateCounter(document.getElementById('countPartners'), 0, 20); asideObserver.disconnect(); } }); }, {threshold:0.4});
+    asideObserver.observe(document.querySelector('.aside'));
+
+    /***********************
+     * SCROLL / HEADER / TOP BUTTON
+     ***********************/
+    const hdr = document.getElementById('header');
+    window.addEventListener('scroll', debounce(()=>{
+      const y = window.scrollY;
+      if(y>60) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
+      if(y>420) topBtn.classList.add('show'); else topBtn.classList.remove('show');
+    }, 80));
+    topBtn.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // highlight search terms inside results
+    function highlightSearch(q){
+      document.querySelectorAll('.card h3, .card p, .card .badge').forEach(n=>{
+        const txt = n.textContent;
+        if(!q){ n.innerHTML = escapeHtml(txt); return; }
+        const re = new RegExp(`(${escapeRegExp(q)})`, 'ig');
+        n.innerHTML = txt.replace(re, '<span style="background:var(--accent-2);color:var(--bg);padding:0 4px;border-radius:4px">$1</span>');
+      });
+    }
+    function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+    // smooth scroll for nav anchors data-scroll
+    document.querySelectorAll('[data-scroll]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const target = a.getAttribute('href');
+        if(!target || target==='') return;
+        const el = document.querySelector(target);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // Get Started click
+    document.getElementById('getStarted').addEventListener('click', ()=>{ toast('Welcome! Explore courses and preview syllabi.'); window.scrollTo({top:370,behavior:'smooth'}); });
+
+    // demo search button: focus input
+    document.getElementById('searchBtn').addEventListener('click', ()=>{ document.getElementById('q').focus(); });
+
+    // View all quick filter resets
+    document.getElementById('viewAll').addEventListener('click', ()=>{ document.querySelectorAll('#chipList .chip').forEach(x=>x.classList.remove('active')); document.querySelector('#chipList .chip[data-filter="all"]').classList.add('active'); state.filter='all'; state.page=1; render(); });
+
+    /***********************
+     * Initial render + debugging
+     ***********************/
+    render();
+    console.log('LearnLinguistics enhanced UI loaded — theme:', document.body.className);
+
+    // expose some helpers for dev console (optional)
+    window.__LL = {COURSES, UNIS, state, render, toast};
+
+  </script>
 </body>
 </html>
