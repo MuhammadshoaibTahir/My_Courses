@@ -339,7 +339,7 @@
       <h3 id="aboutInstructor">About Instructor</h3>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <div style="width:72px;height:72px;border-radius:12px;overflow:hidden;flex-shrink:0">
-          <img src="images/umt.png" alt="Instructor photo" style="width:100%;height:100%;object-fit:cover" onerror="this.style.objectFit='contain'">
+          <img src="images/file.jpg" alt="Instructor photo" style="width:100%;height:100%;object-fit:cover" onerror="this.style.objectFit='contain'">
         </div>
         <div style="min-width:0">
           <div style="font-weight:800">Muhammad Shoaib Tahir</div>
@@ -422,23 +422,23 @@
       'UMT_SKT': {name:'University of Management and Technology (Sialkot Campus)', img:'images/umt.png', url:'#'}
     };
 
-    const COURSES = [
-      {id:1, title:'Introduction to Linguistics: Language & Mind', level:'beginner', weeks:6, uniKey:'UMT_LAH', price:'Free', tags:['Phonetics','Syntax'], desc:'Foundational course on sounds, words, and sentence structure.', rating:4.8, reviews:1245, featured:true, thumbnail:''},
-      {id:2, title:'Phonetics: How Speech Works', level:'intermediate', weeks:5, uniKey:'UAF', price:'Paid', tags:['Phonetics','Lab'], desc:'Articulation, acoustic analysis and lab exercises.', rating:4.6, reviews:518, thumbnail:''},
-      {id:3, title:'Computational Linguistics Essentials', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Parsing'], desc:'Practical parsing, corpora and Python projects.', rating:4.7, reviews:930, thumbnail:''},
-      {id:4, title:'Sign Language Linguistics', level:'beginner', weeks:4, uniKey:'NUMLF', price:'Free', tags:['Sign','Sociolinguistics'], desc:'Structure of signed languages.', rating:4.5, reviews:230, thumbnail:''},
-      {id:5, title:'Sociolinguistics: Language in Society', level:'intermediate', weeks:7, uniKey:'TUF', price:'Paid', tags:['Sociolinguistics','Variation'], desc:'Variation, identity and social context.', rating:4.7, reviews:412, thumbnail:''},
-      {id:6, title:'Intro to Syntax: Building Sentences', level:'beginner', weeks:6, uniKey:'UMT_LAH', price:'Paid', tags:['Syntax','Theory'], desc:'Phrase structure, movement and constituency.', rating:4.9, reviews:860, thumbnail:''},
-      {id:7, title:'Field Methods in Linguistics', level:'advanced', weeks:10, uniKey:'UAF', price:'Paid', tags:['Fieldwork','Documentation'], desc:'Elicitation and documentation techniques.', rating:4.6, reviews:210, thumbnail:''},
-      {id:8, title:'Semantics & Pragmatics', level:'intermediate', weeks:6, uniKey:'NUMLF', price:'Free', tags:['Semantics','Pragmatics'], desc:'Meaning, reference and context.', rating:4.4, reviews:330, thumbnail:''},
-      {id:9, title:'Corpus Linguistics for Beginners', level:'beginner', weeks:4, uniKey:'TUF', price:'Free', tags:['Corpus','Methods'], desc:'Practical corpus exercises.', rating:4.6, reviews:180, thumbnail:''},
-      {id:10, title:'Psycholinguistics: Language & Mind', level:'advanced', weeks:8, uniKey:'UMT_LAH', price:'Paid', tags:['Psycholinguistics','Research'], desc:'Cognitive processes behind language acquisition and comprehension.', rating:4.5, reviews:142, thumbnail:''},
-      {id:11, title:'Language Documentation & Revitalization', level:'advanced', weeks:10, uniKey:'UAF', price:'Paid', tags:['Documentation','Fieldwork'], desc:'Hands-on documentation exercises for endangered languages.', rating:4.6, reviews:85, thumbnail:''},
-      {id:12, title:'Discourse Analysis', level:'intermediate', weeks:6, uniKey:'NUMLF', price:'Free', tags:['Discourse','Critical'], desc:'Analyzing spoken and written discourse in context.', rating:4.3, reviews:98, thumbnail:''},
-      {id:13, title:'NLP with Python: Practical Projects', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Python'], desc:'Python-based NLP projects: tokenization, embeddings, models.', rating:4.7, reviews:410, thumbnail:''},
-      {id:14, title:'Language Teaching Methodologies', level:'beginner', weeks:5, uniKey:'TUF', price:'Paid', tags:['Teaching','Applied'], desc:'Effective methodologies for language classrooms.', rating:4.5, reviews:62, thumbnail:''},
-      {id:15, title:'Research Methods in Linguistics', level:'intermediate', weeks:6, uniKey:'UMT_LAH', price:'Paid', tags:['Research','Methods'], desc:'Designing studies, data collection and analysis.', rating:4.6, reviews:170, thumbnail:''}
-    ];
+const AVAILABLE_TAGS = ['Corpus','Computational','Python','Portfolio'];
+
+const COURSES = [
+  {id:3, title:'Computational Linguistics Essentials', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Parsing'], desc:'Practical parsing, corpora and Python projects.', rating:4.7, reviews:930, thumbnail:''},
+  {id:6, title:'Intro to Syntax: Building Sentences', level:'beginner', weeks:6, uniKey:'UMT_LAH', price:'Paid', tags:['Syntax','Theory'], desc:'Phrase structure, movement and constituency.', rating:4.9, reviews:860, thumbnail:''},
+  {id:7, title:'Field Methods in Linguistics', level:'advanced', weeks:10, uniKey:'UAF', price:'Paid', tags:['Fieldwork','Documentation'], desc:'Elicitation and documentation techniques.', rating:4.6, reviews:210, thumbnail:''},
+  {id:9, title:'Corpus Linguistics for Beginners', level:'beginner', weeks:4, uniKey:'TUF', price:'Free', tags:['Corpus','Methods'], desc:'Practical corpus exercises.', rating:4.6, reviews:180, thumbnail:''},
+  {id:13, title:'NLP with Python: Practical Projects', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Python'], desc:'Python-based NLP projects: tokenization, embeddings, models.', rating:4.7, reviews:410, thumbnail:''},
+];
+
+
+// Filter available courses
+const availableCourses = COURSES.filter(course =>
+  course.status === 'available' || course.tags.some(tag => AVAILABLE_TAGS.includes(tag))
+);
+
+console.log('Available Courses:', availableCourses);
 
     /***********************
      * STATE
@@ -483,14 +483,20 @@
      * RENDERING
      ***********************/
     function cardHTML(c){
-      // render thumbnail if available, otherwise show uni logo
       const uni = UNIS[c.uniKey] || {name:c.uniKey, img:'images/umt.png', url:'#'};
       const seed = (c.id * 47) % 77 + 15;
       const isWished = state.wishlist.has(String(c.id));
       return `
         <article class="card" role="article" tabindex="0" data-id="${c.id}" aria-labelledby="t${c.id}">
           <div class="course-head">
-            <div class="course-thumb" aria-hidden="true">
+            <div class="course-thumb" aria-hidden="true" style="
+              width: 80px; 
+              height: 80px; 
+              border-radius: 6px; 
+              background-size: cover; 
+              background-position: center; 
+              background-image: url('${c.thumbnail || uni.img}');
+            ">
             </div>
             <div class="course-meta">
               <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
@@ -513,19 +519,20 @@
               </div>
             </div>
           </div>
-
+    
           <p style="margin-top:12px">${escapeHtml(c.desc)}</p>
-
+    
           <div class="badges" aria-hidden="${c.tags.length===0}">
             ${c.tags.map(t=>`<span class="badge">${escapeHtml(t)}</span>`).join('')}
           </div>
-
+    
           <div class="actions" style="margin-top:12px">
-            <a href="${escapeHtml(uni.url)}" class="btn btn-visit" target="_blank" rel="noopener noreferrer" aria-label="Visit ${escapeHtml(uni.name)}">Visit University</a>
             <button class="btn btn-more" data-action="preview" data-id="${c.id}" aria-label="More info about ${escapeHtml(c.title)}">More Info</button>
-            <button class="btn-wish" data-action="wishlist" data-id="${c.id}" title="${isWished? 'Remove from wishlist' : 'Add to wishlist'}" aria-pressed="${isWished? 'true':'false'}">${isWished? '❤️' : '♡'}</button>
+            <button class="btn-wish" data-action="wishlist" data-id="${c.id}" title="${isWished? 'Remove from wishlist' : 'Add to wishlist'}" aria-pressed="${isWished? 'true':'false'}">
+              ${isWished? '❤️' : '♡'}
+            </button>
           </div>
-
+    
           <div class="foot" aria-hidden="false" style="margin-top:12px">
             <div style="display:flex;align-items:center;gap:12px;flex:1">
               <div style="font-weight:800;font-size:13px">${escapeHtml(c.price)}</div>
