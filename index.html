@@ -190,9 +190,54 @@
     .top-btn.show{opacity:1;transform:none}
     .socials{display:flex;gap:8px;align-items:center}
 
+    /* =========================
+       About Instructor + Partners (added)
+       ========================= */
+    .about-instructor {
+      margin:22px 0;
+      padding:18px;
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      border:1px solid rgba(255,255,255,0.02);
+      box-shadow:0 8px 24px rgba(2,6,23,0.45);
+    }
+    .about-instructor h3 { margin:0 0 6px; font-size:18px; }
+    .about-instructor p { margin:0 0 12px; color:var(--muted); font-size:14px; }
+
+    .partners {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .partner {
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      align-items:center;
+      width:120px;
+      text-align:center;
+      padding:8px;
+      border-radius:10px;
+      background:transparent;
+      transition:transform var(--transition), box-shadow var(--transition);
+    }
+    .partner img {
+      width:64px;
+      height:64px;
+      object-fit:cover;
+      border-radius:8px;
+    }
+    .partner span {
+      font-size:13px;
+      color:var(--muted);
+    }
+    .partner:hover { transform:translateY(-6px); }
+
     /* responsive */
     @media (max-width:980px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:720px){.grid{grid-template-columns:1fr}.wrap{padding:16px}.hero h2{font-size:22px}.modal .modal-grid{grid-template-columns:1fr}}
+    @media (max-width:720px){.grid{grid-template-columns:1fr}.wrap{padding:16px}.hero h2{font-size:22px}.modal .modal-grid{grid-template-columns:1fr}.partner{width:45%;}}
     @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   </style>
 </head>
@@ -285,6 +330,58 @@
         <!-- pages injected -->
       </div>
     </main>
+
+    <!-- =========================
+         ABOUT INSTRUCTOR + PARTNERS (ADDED)
+         Placed here before footer as requested
+         ========================= -->
+    <section class="about-instructor" aria-labelledby="aboutInstructor">
+      <h3 id="aboutInstructor">About Instructor</h3>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="width:72px;height:72px;border-radius:12px;overflow:hidden;flex-shrink:0">
+          <img src="images/umt.png" alt="Instructor photo" style="width:100%;height:100%;object-fit:cover" onerror="this.style.objectFit='contain'">
+        </div>
+        <div style="min-width:0">
+          <div style="font-weight:800">Muhammad Shoaib Tahir</div>
+          <p style="margin:6px 0 0">He served as a Resource person in these universities on Corpus and Computational Linguistics webinars, workshops, seminars.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <div style="font-weight:700;margin-bottom:8px">Partner Universities</div>
+        <div class="partners" role="list" aria-label="Partner university logos">
+          <div class="partner" role="listitem" aria-label="UMT Lahore">
+            <img src="images/umt.png" alt="UMT Lahore logo" onerror="this.style.objectFit='contain'">
+            <span>University of Management and Technology (Lahore)</span>
+          </div>
+
+          <div class="partner" role="listitem" aria-label="UMT Sialkot">
+            <img src="images/umt.png" alt="UMT Sialkot logo" onerror="this.style.objectFit='contain'">
+            <span>University of Management and Technology (Sialkot Campus)</span>
+          </div>
+
+          <div class="partner" role="listitem" aria-label="The University of Faisalabad">
+            <img src="images/tuf.jpg" alt="The University of Faisalabad logo" onerror="this.style.objectFit='contain'">
+            <span>The University of Faisalabad</span>
+          </div>
+
+          <div class="partner" role="listitem" aria-label="NUML Faisalabad">
+            <img src="images/numl.png" alt="NUML Faisalabad logo" onerror="this.style.objectFit='contain'">
+            <span>National University of Modern Languages (Faisalabad Campus)</span>
+          </div>
+
+          <div class="partner" role="listitem" aria-label="Air University Islamabad">
+            <img src="images/air.png" alt="Air University Islamabad logo" onerror="this.style.objectFit='contain'">
+            <span>Air University of Islamabad</span>
+          </div>
+
+          <div class="partner" role="listitem" aria-label="University of Agriculture Faisalabad">
+            <img src="images/agri.png" alt="University of Agriculture Faisalabad logo" onerror="this.style.objectFit='contain'">
+            <span>University of Agriculture Faisalabad</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer style="margin-top:28px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
       <div>© <span id="yr"></span> LearnLinguistics — All rights reserved</div>
@@ -734,11 +831,7 @@
      * SCROLL / HEADER / TOP BUTTON
      ***********************/
     const hdr = document.getElementById('header');
-    window.addEventListener('scroll', debounce(()=>{
-      const y = window.scrollY;
-      if(y>60) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
-      if(y>420) topBtn.classList.add('show'); else topBtn.classList.remove('show');
-    }, 80));
+    window.addEventListener('scroll', debounce(()=>{ const y = window.scrollY; if(y>60) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled'); if(y>420) topBtn.classList.add('show'); else topBtn.classList.remove('show'); }, 80));
     topBtn.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
 
     // highlight search terms inside results
