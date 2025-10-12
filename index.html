@@ -272,8 +272,8 @@
 
     <section class="hero" aria-label="Hero">
       <div class="left slide-up" id="heroLeft">
-        <h2>Advance your career with top Linguistics courses</h2>
-        <p>From phonetics to computational linguistics — hands-on projects, peer discussion, and recognized certificates. Updated UI, powerful filters and rich previews.</p>
+        <h2>Advance your career with latest courses</h2>
+        <p>From Corpus to Computational Linguistics, hands-on projects - peer discussion, and recognized certificates.</p>
 
         <div class="searchbar" role="search">
           <input id="q" placeholder="Search courses, instructors, topics..." aria-label="Search courses" />
@@ -292,9 +292,8 @@
 
       <aside class="aside fade-in" aria-labelledby="feat">
         <h3 id="feat">Featured Tracks</h3>
-        <div class="stat"><span>Top Courses</span><strong id="countCourses">60+</strong></div>
-        <div class="stat"><span>University Partners</span><strong id="countPartners">20</strong></div>
-        <div class="stat"><span>Avg. duration</span><strong id="countDuration">6 weeks</strong></div>
+        <div class="stat"><span>Top Courses</span><strong id="countCourses">04</strong></div>
+        <div class="stat"><span>Avg. duration</span><strong id="countDuration">3 weeks</strong></div>
         <div style="height:12px"></div>
         <div style="font-size:13px;color:var(--muted)">Tip: Click Preview on any course to open a rich modal with syllabus, instructors, and enrollment options.</div>
       </aside>
@@ -417,22 +416,20 @@
      ***********************/
     // Each course includes a uniKey that we map to your images + display name.
     const UNIS = {
-      'UAF': {name:'University of Agriculture Faisalabad', img:'images', url:'#'},
+      'UAF': {name:'Develop Personal Portfolio using GitHug Pages', url:'#'},
       'AIR': {name:'Air University Islamabad', img:'images', url:'#'},
       'NUMLF': {name:'National University of Modern Languages (Faisalabad Campus)', img:'images', url:'#'},
-      'TUF': {name:'The University of Faisalabad', img:'images', url:'#'},
       'UMT_LAH': {name:'University of Management and Technology (Lahore)', img:'images', url:'#'},
-      'UMT_SKT': {name:'University of Management and Technology (Sialkot Campus)', img:'images', url:'#'}
+      'UMT_SKT': {name:'Integration of Python Programming in Linguistics', url:'#'}
     };
 
 const AVAILABLE_TAGS = ['Corpus','Computational','Python','Portfolio'];
 
 const COURSES = [
-  {id:3, title:'Computational Linguistics Essentials', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Parsing'], desc:'Practical parsing, corpora and Python projects.', rating:4.7, reviews:930, thumbnail:''},
-  {id:6, title:'Intro to Syntax: Building Sentences', level:'beginner', weeks:6, uniKey:'UMT_LAH', price:'Paid', tags:['Syntax','Theory'], desc:'Phrase structure, movement and constituency.', rating:4.9, reviews:860, thumbnail:''},
-  {id:7, title:'Field Methods in Linguistics', level:'advanced', weeks:10, uniKey:'UAF', price:'Paid', tags:['Fieldwork','Documentation'], desc:'Elicitation and documentation techniques.', rating:4.6, reviews:210, thumbnail:''},
-  {id:9, title:'Corpus Linguistics for Beginners', level:'beginner', weeks:4, uniKey:'TUF', price:'Free', tags:['Corpus','Methods'], desc:'Practical corpus exercises.', rating:4.6, reviews:180, thumbnail:''},
-  {id:13, title:'NLP with Python: Practical Projects', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Python'], desc:'Python-based NLP projects: tokenization, embeddings, models.', rating:4.7, reviews:410, thumbnail:''},
+  {id:3, title:'Computational Linguistics Essentials', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Parsing'], desc:'Practical parsing, corpora and Python projects.', rating:5, reviews:5, thumbnail:''},
+  {id:7, title:'Portfolio Development', level:'advanced', week:1, uniKey:'UAF', price:'Paid', tags:['Fieldwork','Documentation'], desc:'Elicitation and documentation techniques.', rating:5, reviews:5, thumbnail:''},
+  {id:9, title:'Corpus Linguistics from basics to advance', level:'beginner to advance', weeks:2, uniKey:'TUF', price:'Paid', tags:['Corpus','Methods'], desc:'Practical corpus exercises.', rating:5, reviews:5, thumbnail:''},
+  {id:13, title:'NLP with Python: Practical Projects', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Python'], desc:'Python-based NLP projects: tokenization, embeddings, models.', rating:5, reviews:5, thumbnail:''},
 ];
 
 
@@ -744,13 +741,13 @@ console.log('Available Courses:', availableCourses);
             <div style="display:flex;gap:10px;margin-top:12px">
               <button class="btn primary" id="enrollBtn">Enroll now</button>
               <button class="btn" id="wishModalBtn">Add to wishlist</button>
-              <a href="${escapeHtml(uni.url)}" class="btn btn-visit" target="_blank" rel="noopener noreferrer">Visit University</a>
+              <a href="${escapeHtml(uni.url)}" class="btn btn-visit" target="_blank" rel="noopener noreferrer"></a>
             </div>
           </div>
 
           <aside style="padding:8px;border-left:1px solid rgba(255,255,255,0.02)">
             <img src="${escapeHtml(uni.img)}" alt="${escapeHtml(uni.name)}" style="width:100%;border-radius:8px;margin-bottom:12px;object-fit:cover" onerror="this.style.objectFit='contain'">
-            <div style="font-size:13px;color:var(--muted)"><strong>Course details</strong></div>
+            <div style="font-size:13px;color:var(--muted)"><strong>Course details</div>
             <ul style="padding-left:18px;color:var(--muted);margin-top:8px">
               <li>Level: ${escapeHtml(c.level)}</li>
               <li>Duration: ${c.weeks} weeks</li>
