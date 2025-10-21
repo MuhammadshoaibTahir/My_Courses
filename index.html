@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Learn Linguistics — Modern Courses (Enhanced)</title>
+  <title>Learn Python Programming — From Basics to Advanced</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <meta name="color-scheme" content="dark light">
@@ -235,10 +235,22 @@
     }
     .partner:hover { transform:translateY(-6px); }
 
+    .collapsible { cursor:pointer; padding:10px 12px; border-radius:8px; background:var(--glass); border:1px solid rgba(255,255,255,0.02); display:flex;justify-content:space-between;align-items:center; }
+    .collapsible + .content { padding:10px 12px; border-radius:8px; margin-top:8px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid rgba(255,255,255,0.02); display:none; color:var(--muted); }
+
+    .price-box { padding:12px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid rgba(255,255,255,0.02); text-align:center; }
+    .price-big { font-size:22px; font-weight:800; margin-top:6px; }
+
+    /* Student Offer specific */
+    .student-offer { display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02); }
+    .offer-tag { padding:6px 10px;border-radius:999px;background:rgba(96,165,250,0.08);color:var(--accent-2);font-weight:800 }
+    .offer-deadline { font-weight:800;color:var(--accent-2) }
+
     /* responsive */
     @media (max-width:980px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:720px){.grid{grid-template-columns:1fr}.wrap{padding:16px}.hero h2{font-size:22px}.modal .modal-grid{grid-template-columns:1fr}.partner{width:45%;}}
     @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+    @keyframes staggerIn { from { transform: translateY(10px); opacity:0 } to { transform: translateY(0); opacity:1 } }
   </style>
 </head>
 <body class="dark-theme">
@@ -250,14 +262,16 @@
         </div>
         <div>
           <h1>LearnLinguistics</h1>
-          <p>Curated courses — modern UI, real projects</p>
+          <p>Python — from basics to advanced (1.5 months)</p>
         </div>
       </div>
 
       <nav aria-label="Primary navigation">
-        <a href="#subjects" data-scroll>Subjects</a>
-        <a href="#programs" data-scroll>Programs</a>
-        <a href="#partners" data-scroll>Partners</a>
+        <a href="#overview" data-scroll>Overview</a>
+        <a href="#curriculum" data-scroll>Curriculum</a>
+        <a href="#enroll" data-scroll>Enroll</a>
+        <a href="#studentOffer" data-scroll>Student Offer</a>
+        <a href="#faq" data-scroll>FAQ</a>
       </nav>
 
       <div class="actions" role="group" aria-label="Header actions">
@@ -272,39 +286,53 @@
 
     <section class="hero" aria-label="Hero">
       <div class="left slide-up" id="heroLeft">
-        <h2>Advance your career with latest courses</h2>
-        <p>From Corpus to Computational Linguistics, hands-on projects - peer discussion, and recognized certificates.</p>
+        <h2>Learn Python Programming — From Basics to Advanced</h2>
+        <p>1.5 months intensive practical course. Hands-on projects, real datasets, and certificate. Suitable for beginners to advanced learners aiming for applied Python.</p>
 
-        <div class="searchbar" role="search">
-          <input id="q" placeholder="Search courses, instructors, topics..." aria-label="Search courses" />
+        <div class="searchbar" role="search" style="margin-bottom:12px">
+          <input id="q" placeholder="Search within course (modules, topics)..." aria-label="Search course" />
           <button class="btn" id="searchBtn">Search</button>
         </div>
 
         <div class="chip-list" id="chipList" aria-hidden="false" style="margin-top:12px">
-          <button class="chip active" data-filter="all">All</button>
-          <button class="chip" data-filter="beginner">Beginner</button>
-          <button class="chip" data-filter="intermediate">Intermediate</button>
-          <button class="chip" data-filter="advanced">Advanced</button>
-          <button class="chip" data-filter="free">Free</button>
-          <button class="chip" data-filter="cert">Certificate</button>
+          <button class="chip active" data-filter="all">Course</button>
+          <button class="chip" data-filter="modules">Modules</button>
+          <button class="chip" data-filter="enroll">Enroll</button>
+          <button class="chip" data-filter="faq">FAQ</button>
         </div>
+
+        <div style="display:flex;gap:12px;margin-top:14px;align-items:center">
+          <div class="price-box">
+            <div>Price</div>
+            <div id="priceLabel" class="price-big">USD $220 / PKR 45,000</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:6px">Get 4 friends together → <strong>30% off</strong></div>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:13px;color:var(--muted)">Want to enroll now?</div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn primary" id="enrollNowBtn">Enroll Now</button>
+              <button class="btn" id="previewBtn">Preview Syllabus</button>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <aside class="aside fade-in" aria-labelledby="feat">
-        <h3 id="feat">Featured Tracks</h3>
-        <div class="stat"><span>Avg. duration</span><strong id="countDuration">3 weeks</strong></div>
+        <h3 id="feat">Course Snapshot</h3>
+        <div class="stat"><span>Duration</span><strong id="countDuration">1.5 months</strong></div>
+        <div class="stat"><span>Level</span><strong>Beginner → Advanced</strong></div>
+        <div class="stat"><span>Language</span><strong>English</strong></div>
         <div style="height:12px"></div>
-        <div style="font-size:13px;color:var(--muted)">Tip: Click Preview on any course to open a rich modal with syllabus, instructors, and enrollment options.</div>
+        <div style="font-size:13px;color:var(--muted)">Tip: Use the enroll form to register. We accept group bookings and offer a 30% discount for 4+ friends.</div>
       </aside>
     </section>
 
     <div class="controls">
       <div class="filters" role="region" aria-label="Filters">
         <label for="sort" class="sr-only">Sort by</label>
-        <select id="sort" class="sort" aria-label="Sort courses">
-          <option value="relevance">Relevance</option>
-          <option value="newest">Newest</option>
-          <option value="popular">Most popular</option>
+        <select id="sort" class="sort" aria-label="Sort syllabus">
+          <option value="relevance">Recommended</option>
           <option value="alpha">A → Z</option>
         </select>
 
@@ -313,88 +341,256 @@
           <button id="listViewBtn" aria-pressed="false" title="List view">List</button>
         </div>
 
-        <button class="chip" id="viewAll">View all</button>
+        <button class="chip" id="viewAll">View curriculum</button>
       </div>
 
-      <div style="color:var(--muted);font-weight:600">Showing <span id="total">9</span> courses</div>
+      <div style="color:var(--muted);font-weight:600">Course: <span id="total">Python — 1.5 months</span></div>
     </div>
 
     <main>
-      <section class="grid stagger" id="grid" aria-live="polite" aria-label="Course results">
-        <!-- cards injected by JS -->
+      <section id="overview" aria-label="Overview" style="margin-bottom:18px">
+        <div class="card">
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:120px;height:120px;border-radius:12px;background:linear-gradient(135deg,var(--accent-2),var(--accent));display:grid;place-items:center;color:var(--bg);font-weight:800;font-size:20px">Py</div>
+            <div style="flex:1">
+              <h3 style="margin:0 0 6px">Learn Python Programming — From Basics to Advanced</h3>
+              <div style="color:var(--muted);margin-bottom:8px">Comprehensive, project-driven course. Covers Python fundamentals, data handling, web scraping, automation, testing, and applied projects with GitHub portfolio.</div>
+
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <span class="badge">Hands-on</span>
+                <span class="badge">Projects</span>
+                <span class="badge">Certificate</span>
+                <span class="badge">Live Sessions</span>
+              </div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:800">1.5 mo</div>
+              <div style="color:var(--muted);font-size:13px">Level: Beginner → Advanced</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+            <button class="btn primary" id="openSyllabus">Open full syllabus</button>
+            <button class="btn" id="openCurr">View Modules</button>
+            <button class="btn" id="openEnrollShort">Quick Enroll</button>
+          </div>
+        </div>
       </section>
 
-      <div class="pager" id="pager" aria-label="Pagination">
-        <!-- pages injected -->
-      </div>
+      <section id="curriculum" aria-label="Curriculum" style="margin-bottom:18px">
+        <h3 style="margin:0 0 12px">Curriculum</h3>
+
+        <div class="card">
+          <div class="collapsible" data-target="mod1">
+            <div><strong>Module 1</strong> — Python fundamentals & environment</div>
+            <div style="color:var(--muted)">Basics, types, control flow</div>
+          </div>
+          <div class="content" id="mod1">
+            <ul>
+              <li>Python setup, IDEs, virtual environments</li>
+              <li>Variables, types, lists, tuples, dicts</li>
+              <li>Control flow: if, for, while</li>
+              <li>Functions, modules, packages</li>
+              <li>Mini practice: CLI TODO app</li>
+            </ul>
+          </div>
+
+          <div class="collapsible" data-target="mod2">
+            <div><strong>Module 2</strong> — Data handling & libraries</div>
+            <div style="color:var(--muted)">I/O, CSV, JSON, pandas intro</div>
+          </div>
+          <div class="content" id="mod2">
+            <ul>
+              <li>File I/O, parsing CSV/JSON</li>
+              <li>Pandas basics: DataFrame, filtering, grouping</li>
+              <li>Data cleaning & transformations</li>
+              <li>Project: Build a mini ETL pipeline</li>
+            </ul>
+          </div>
+
+          <div class="collapsible" data-target="mod3">
+            <div><strong>Module 3</strong> — Web scraping & APIs</div>
+            <div style="color:var(--muted)">requests, BeautifulSoup, REST APIs</div>
+          </div>
+          <div class="content" id="mod3">
+            <ul>
+              <li>requests, scraping HTML, handling pagination</li>
+              <li>Using APIs, OAuth basics</li>
+              <li>Project: Scrape & load data into pandas</li>
+            </ul>
+          </div>
+
+          <div class="collapsible" data-target="mod4">
+            <div><strong>Module 4</strong> — Automation, testing & packaging</div>
+            <div style="color:var(--muted)">Scripting, unit tests, packaging</div>
+          </div>
+          <div class="content" id="mod4">
+            <ul>
+              <li>Automating tasks, scheduler basics</li>
+              <li>unittest / pytest basics</li>
+              <li>Packaging & publishing to PyPI (overview)</li>
+            </ul>
+          </div>
+
+          <div class="collapsible" data-target="mod5">
+            <div><strong>Module 5</strong> — Advanced topics & project</div>
+            <div style="color:var(--muted)">Async, basics of web frameworks, final project</div>
+          </div>
+          <div class="content" id="mod5">
+            <ul>
+              <li>Intro to async / concurrency</li>
+              <li>Basic web app flow (Flask overview)</li>
+              <li>Final project & GitHub portfolio</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="enroll" aria-label="Enroll" style="margin-bottom:18px">
+        <h3 style="margin:0 0 12px">Enroll — fill the form below</h3>
+
+        <div class="card">
+          <form id="enrollForm" autocomplete="on" novalidate>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <label for="fullName" style="display:block;margin-bottom:6px;font-weight:700">Full name *</label>
+                <input id="fullName" name="fullName" required placeholder="Your full name" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" />
+              </div>
+              <div>
+                <label for="email" style="display:block;margin-bottom:6px;font-weight:700">Email *</label>
+                <input id="email" name="email" type="email" required placeholder="you@example.com" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" />
+              </div>
+
+              <div>
+                <label for="phone" style="display:block;margin-bottom:6px;font-weight:700">Phone *</label>
+                <input id="phone" name="phone" required placeholder="+92..." style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" />
+              </div>
+
+              <div>
+                <label for="country" style="display:block;margin-bottom:6px;font-weight:700">Country *</label>
+                <select id="country" name="country" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit">
+                  <option value="">Select country</option>
+                  <option value="Pakistan">Pakistan</option>
+                  <option value="Other">Other (International)</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="friends" style="display:block;margin-bottom:6px;font-weight:700">Bringing friends? (including you)</label>
+                <input id="friends" name="friends" type="number" min="1" value="1" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" />
+                <div style="font-size:13px;color:var(--muted);margin-top:6px">4 or more people → 30% off</div>
+              </div>
+
+              <div style="grid-column:1/-1">
+                <label for="notes" style="display:block;margin-bottom:6px;font-weight:700">Notes (optional)</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Any notes, accessibility needs, or questions" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
+              <div style="flex:1">
+                <div style="font-size:13px;color:var(--muted)">Your final price</div>
+                <div id="finalPrice" class="price-big">—</div>
+                <div style="font-size:13px;color:var(--muted)">International: USD $220 · Pakistan: PKR 45,000</div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button type="button" class="btn primary" id="calcBtn">Calculate</button>
+                <button type="submit" class="btn" id="submitEnroll">Submit & Save</button>
+              </div>
+            </div>
+
+            <div style="margin-top:10px;color:var(--muted);font-size:13px">By submitting you agree to course terms. We'll contact you with next steps.</div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Student Offer Section -->
+      <section id="studentOffer" aria-label="Student Offer" style="margin-bottom:18px">
+        <h3 style="margin:0 0 12px">Special Student Offer</h3>
+
+        <div class="card">
+          <div class="student-offer">
+            <div style="display:flex;flex-direction:column;gap:6px;max-width:72%">
+              <div style="display:flex;gap:10px;align-items:center">
+                <span class="offer-tag">Student Short Course</span>
+                <div style="font-size:15px;font-weight:800">PKR 5,500</div>
+              </div>
+              <div style="color:var(--muted)">Duration: <strong>15 days</strong> · Minimum group: <strong>10 students</strong></div>
+              <div style="color:var(--muted)">Limited time offer — valid until <span id="offerDeadline" class="offer-deadline">20 December</span>.</div>
+              <div style="font-size:13px;color:var(--muted)" id="offerStatus"></div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+              <div style="font-size:13px;color:var(--muted);text-align:right">Interested?</div>
+              <div style="display:flex;gap:8px">
+                <button class="btn primary" id="studentEnrollBtn">Enroll Students</button>
+                <button class="btn" id="studentDetailsBtn">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" aria-label="Testimonials" style="margin-bottom:18px">
+        <h3 style="margin:0 0 12px">Student Feedback</h3>
+        <div class="grid">
+          <div class="card" style="padding:14px">
+            <div style="font-weight:800">Aisha R.</div>
+            <div style="color:var(--muted);margin-top:6px">"Practical, focused, and the instructor explained things clearly. Built a real project by the end."</div>
+          </div>
+          <div class="card" style="padding:14px">
+            <div style="font-weight:800">Bilal K.</div>
+            <div style="color:var(--muted);margin-top:6px">"Great for beginners. The final project helped me get freelance gigs."</div>
+          </div>
+          <div class="card" style="padding:14px">
+            <div style="font-weight:800">Sara M.</div>
+            <div style="color:var(--muted);margin-top:6px">"The pacing was excellent and the assignments were practical."</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="aboutInstructor" class="about-instructor" aria-labelledby="aboutInstructorTitle">
+        <h3 id="aboutInstructorTitle">About Instructor</h3>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <div style="width:72px;height:72px;border-radius:12px;overflow:hidden;flex-shrink:0">
+            <img src="images/file.jpg" alt="Instructor photo" style="width:100%;height:100%;object-fit:cover" onerror="this.style.objectFit='contain'">
+          </div>
+          <div style="min-width:0">
+            <div style="font-weight:800">Muhammad Shoaib Tahir</div>
+            <p style="margin:6px 0 0">Computational Linguist, Corpus Trainer, and Instructor with industry & academic experience. Hands-on Python projects, corpora processing, and practical guidance on building a portfolio.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" aria-label="FAQ" style="margin-bottom:18px">
+        <h3 style="margin:0 0 12px">FAQ</h3>
+        <div class="card">
+          <div class="collapsible" data-target="q1"><div>Do you offer payment plans?</div><div style="color:var(--muted)">Yes — contact admin for options.</div></div>
+          <div class="content" id="q1">We can arrange installments; reach us through the enrollment form notes or email.</div>
+
+          <div class="collapsible" data-target="q2"><div>Is prior programming experience required?</div><div style="color:var(--muted)">No — starts from basics.</div></div>
+          <div class="content" id="q2">The course is friendly to newcomers but also contains advanced modules.</div>
+
+          <div class="collapsible" data-target="q3"><div>How does the group discount work?</div><div style="color:var(--muted)">Bring 4+ people and get 30% off per person.</div></div>
+          <div class="content" id="q3">Use the 'friends' field in the enroll form; our team will confirm the discount upon registration.</div>
+
+          <div class="collapsible" data-target="q4"><div>Student short course — details?</div><div style="color:var(--muted)">Short course for students costs PKR 5,500 (min 10 students) and runs for 15 days.</div></div>
+          <div class="content" id="q4">This special offer is limited-time. Use the student enroll button to apply.</div>
+        </div>
+      </section>
+
+      <footer style="margin-top:28px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>© <span id="yr"></span> LearnLinguistics — All rights reserved</div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="socials" aria-hidden>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5V9.1c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12H19l-.5 3h-2v7A10 10 0 0022 12z" fill="currentColor"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M22 4.01H2v15.98A2 2 0 004 22h16a2 2 0 002-2V4.01zM8.46 18H6.62V9.9h1.84V18zM7.54 8.67a1.07 1.07 0 110-2.14 1.07 1.07 0 010 2.14zM18 18h-1.84v-4.34c0-1.03-.37-1.73-1.3-1.73-.71 0-1.13.48-1.32.95-.07.17-.09.41-.09.65V18h-1.84s.02-8.46 0-9.34h1.84v1.32c.24-.37.68-.9 1.66-.9 1.2 0 2.1.78 2.1 2.45V18z" fill="currentColor"/></svg>
+          </div>
+          <div style="display:flex;gap:10px"><a href="#" style="color:var(--muted);text-decoration:none">Privacy</a><a href="#" style="color:var(--muted);text-decoration:none">Terms</a></div>
+        </div>
+      </footer>
     </main>
-
-    <!-- =========================
-         ABOUT INSTRUCTOR + PARTNERS (ADDED)
-         Placed here before footer as requested
-         ========================= -->
-    <section class="about-instructor" aria-labelledby="aboutInstructor">
-      <h3 id="aboutInstructor">About Instructor</h3>
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <div style="width:72px;height:72px;border-radius:12px;overflow:hidden;flex-shrink:0">
-          <img src="images/file.jpg" alt="Instructor photo" style="width:100%;height:100%;object-fit:cover" onerror="this.style.objectFit='contain'">
-        </div>
-        <div style="min-width:0">
-          <div style="font-weight:800">Muhammad Shoaib Tahir</div>
-          <p style="margin:6px 0 0">computational Linguist, Assistant Manager HR at linguistic Association of Pakistan, Corpus Trainer, Resource Person.</p>
-        </div>
-      </div>
-
-      <div style="margin-top:14px">
-        <div style="font-weight:700;margin-bottom:8px">Academic Workshops & Webinars</div>
-        <div style="margin-bottom:16px;">
-  Conducted webinars and workshops as a Resource Person at the following universities:
-</div>
-        <div class="partners" role="list" aria-label="Partner university logos">
-          <div class="partner" role="listitem" aria-label="UMT Lahore">
-            <img src="images/umt.png" alt="UMT Lahore logo" onerror="this.style.objectFit='contain'">
-            <span>University of Management and Technology (Lahore)</span>
-          </div>
-
-          <div class="partner" role="listitem" aria-label="UMT Sialkot">
-            <img src="images/umt.png" alt="UMT Sialkot logo" onerror="this.style.objectFit='contain'">
-            <span>University of Management and Technology (Sialkot Campus)</span>
-          </div>
-
-          <div class="partner" role="listitem" aria-label="The University of Faisalabad">
-            <img src="images/tuf.jpg" alt="The University of Faisalabad logo" onerror="this.style.objectFit='contain'">
-            <span>The University of Faisalabad</span>
-          </div>
-
-          <div class="partner" role="listitem" aria-label="NUML Faisalabad">
-            <img src="images/numl.png" alt="NUML Faisalabad logo" onerror="this.style.objectFit='contain'">
-            <span>National University of Modern Languages (Faisalabad Campus)</span>
-          </div>
-
-          <div class="partner" role="listitem" aria-label="Air University Islamabad">
-            <img src="images/air.png" alt="Air University Islamabad logo" onerror="this.style.objectFit='contain'">
-            <span>Air University of Islamabad</span>
-          </div>
-
-          <div class="partner" role="listitem" aria-label="University of Agriculture Faisalabad">
-            <img src="images/agri.png" alt="University of Agriculture Faisalabad logo" onerror="this.style.objectFit='contain'">
-            <span>University of Agriculture Faisalabad</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer style="margin-top:28px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-      <div>© <span id="yr"></span> LearnLinguistics — All rights reserved</div>
-      <div style="display:flex;gap:10px;align-items:center">
-        <div class="socials" aria-hidden>
-          <!-- small inline icons -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5V9.1c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12H19l-.5 3h-2v7A10 10 0 0022 12z" fill="currentColor"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M22 4.01H2v15.98A2 2 0 004 22h16a2 2 0 002-2V4.01zM8.46 18H6.62V9.9h1.84V18zM7.54 8.67a1.07 1.07 0 110-2.14 1.07 1.07 0 010 2.14zM18 18h-1.84v-4.34c0-1.03-.37-1.73-1.3-1.73-.71 0-1.13.48-1.32.95-.07.17-.09.41-.09.65V18h-1.84s.02-8.46 0-9.34h1.84v1.32c.24-.37.68-.9 1.66-.9 1.2 0 2.1.78 2.1 2.45V18z" fill="currentColor"/></svg>
-        </div>
-        <div style="display:flex;gap:10px"><a href="#" style="color:var(--muted);text-decoration:none">Privacy</a><a href="#" style="color:var(--muted);text-decoration:none">Terms</a></div>
-      </div>
-    </footer>
   </div>
 
   <!-- Modal / Backdrop -->
@@ -405,380 +601,466 @@
     </div>
   </div>
 
+  <!-- Student Offer Modal (separate to keep clarity) -->
+  <div class="backdrop" id="studentBackdrop" aria-hidden="true" style="display:none;z-index:70">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="studentTitle" tabindex="-1">
+      <button id="closeStudentModal" style="float:right;background:none;border:0;color:var(--muted);font-size:20px;cursor:pointer" aria-label="Close modal">✕</button>
+      <div id="studentModalBody"></div>
+    </div>
+  </div>
+
   <!-- Toast & Top button -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <button class="top-btn" id="topBtn" aria-label="Scroll to top" title="Scroll to top">↑</button>
 
   <script>
     /***********************
-     * DATASET
+     * CONFIG — Google Form placeholders
+     *
+     * Replace GOOGLE_FORM_ACTION and GOOGLE_FORM_FIELDS with your form's details.
+     * Example:
+     * const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/FORM_ID/formResponse';
+     * const GOOGLE_FORM_FIELDS = { name: 'entry.111111', email: 'entry.222222', phone: 'entry.333333', country: 'entry.444444', friends: 'entry.555555', notes: 'entry.666666', price: 'entry.777777' };
      ***********************/
-    // Each course includes a uniKey that we map to your images + display name.
-    const UNIS = {
-      'UAF': {name:'Develop Personal Portfolio using GitHug Pages', url:'#'},
-      'AIR': {name:'Air University Islamabad', img:'images', url:'#'},
-      'NUMLF': {name:'National University of Modern Languages (Faisalabad Campus)', img:'images', url:'#'},
-      'UMT_LAH': {name:'University of Management and Technology (Lahore)', img:'images', url:'#'},
-      'UMT_SKT': {name:'Integration of Python Programming in Linguistics', url:'#'}
-    };
-
-const AVAILABLE_TAGS = ['Corpus','Computational','Python','Portfolio'];
-
-const COURSES = [
-  {id:3, title:'Computational Linguistics Essentials', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Parsing'], desc:'Practical parsing, corpora and Python projects.', rating:5, reviews:5, thumbnail:''},
-  {id:7, title:'Portfolio Development', level:'advanced', week:1, uniKey:'UAF', price:'Paid', tags:['Fieldwork','Documentation'], desc:'Elicitation and documentation techniques.', rating:5, reviews:5, thumbnail:''},
-  {id:9, title:'Corpus Linguistics from basics to advance', level:'beginner to advance', weeks:2, uniKey:'TUF', price:'Paid', tags:['Corpus','Methods'], desc:'Practical corpus exercises.', rating:5, reviews:5, thumbnail:''},
-  {id:13, title:'NLP with Python: Practical Projects', level:'advanced', weeks:8, uniKey:'UMT_SKT', price:'Paid', tags:['NLP','Python'], desc:'Python-based NLP projects: tokenization, embeddings, models.', rating:5, reviews:5, thumbnail:''},
-];
-
-
-// Filter available courses
-const availableCourses = COURSES.filter(course =>
-  course.status === 'available' || course.tags.some(tag => AVAILABLE_TAGS.includes(tag))
-);
-
-console.log('Available Courses:', availableCourses);
+    const GOOGLE_FORM_ACTION = ''; // <-- put your Google Form action URL here
+    const GOOGLE_FORM_FIELDS = {}; // <-- put mapping like {name: 'entry.12345', email: 'entry.67890', ...}
 
     /***********************
-     * STATE
+     * DATA & STATE
      ***********************/
-    let state = {filter:'all', q:'', sort:'relevance', page:1, perPage:6, view:'grid', wishlist: new Set()};
-
-    // Persisted keys
-    const LS = {
-      THEME: 'learnling-theme',
-      WISH: 'learnling-wishlist',
+    const COURSE = {
+      id: 1,
+      title: 'Learn Python Programming — From Basics to Advanced',
+      duration: '1.5 months',
+      weeks: 6,
+      level: 'Beginner → Advanced',
+      priceIntl: 220, // USD
+      pricePK: 45,000,   // PKR (representational)
+      instructor: 'Muhammad Shoaib Tahir',
+      desc: 'Comprehensive, project-driven Python course with real-world projects and portfolio guidance.'
     };
+
+    // Student short course details
+    const STUDENT_OFFER = {
+      pricePKR: 5500,
+      minGroup: 10,
+      durationDays: 15,
+      deadlineMonthDay: { month: 12, day: 20 } // valid until 20 December (current year)
+    };
+
+    let state = { theme: 'dark' };
 
     // DOM refs
-    const grid = document.getElementById('grid');
-    const totalEl = document.getElementById('total');
     const yr = document.getElementById('yr'); yr.textContent = new Date().getFullYear();
     const toastEl = document.getElementById('toast');
-    const topBtn = document.getElementById('topBtn');
-
-    // Load wishlist from localStorage
-    (function loadWishlist(){
-      try{
-        const raw = localStorage.getItem(LS.WISH);
-        if(raw){
-          const arr = JSON.parse(raw);
-          state.wishlist = new Set(arr);
-        }
-      }catch(e){ state.wishlist = new Set(); }
-    })();
-
-    function saveWishlist(){
-      try{
-        const arr = Array.from(state.wishlist);
-        localStorage.setItem(LS.WISH, JSON.stringify(arr));
-      }catch(e){}
-    }
-
-    // escape
-    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m])); }
-
-    /***********************
-     * RENDERING
-     ***********************/
-    function cardHTML(c){
-      const uni = UNIS[c.uniKey] || {name:c.uniKey, img:'images/umt.png', url:'#'};
-      const seed = (c.id * 47) % 77 + 15;
-      const isWished = state.wishlist.has(String(c.id));
-      return `
-        <article class="card" role="article" tabindex="0" data-id="${c.id}" aria-labelledby="t${c.id}">
-          <div class="course-head">
-            <div class="course-thumb" aria-hidden="true" style="
-              width: 80px; 
-              height: 80px; 
-              border-radius: 6px; 
-              background-size: cover; 
-              background-position: center; 
-              background-image: url('${c.thumbnail || uni.img}');
-            ">
-            </div>
-            <div class="course-meta">
-              <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
-                <div style="min-width:0">
-                  <h3 id="t${c.id}" style="margin:0;font-size:16px">${escapeHtml(c.title)}</h3>
-                  <div class="instructor" style="margin-top:6px;color:var(--muted)"> 
-                    <div>
-                      <div style="font-size:13px;font-weight:700">Muhammad Shoaib Tahir</div>
-                      <div style="font-size:12px;color:var(--muted)">${escapeHtml(uni.name)}</div>
-                    </div>
-                  </div>
-                </div>
-                <div style="text-align:right;color:var(--muted);font-size:13px">
-                  <div style="font-weight:800">${c.weeks} wk</div>
-                  <div style="font-size:12px">${escapeHtml(c.level)}</div>
-                </div>
-              </div>
-              <div class="uni-row" style="margin-top:8px">
-                <div style="font-size:13px;color:var(--muted)">${escapeHtml(uni.name)}</div>
-              </div>
-            </div>
-          </div>
-    
-          <p style="margin-top:12px">${escapeHtml(c.desc)}</p>
-    
-          <div class="badges" aria-hidden="${c.tags.length===0}">
-            ${c.tags.map(t=>`<span class="badge">${escapeHtml(t)}</span>`).join('')}
-          </div>
-    
-          <div class="actions" style="margin-top:12px">
-            <button class="btn btn-more" data-action="preview" data-id="${c.id}" aria-label="More info about ${escapeHtml(c.title)}">More Info</button>
-            <button class="btn-wish" data-action="wishlist" data-id="${c.id}" title="${isWished? 'Remove from wishlist' : 'Add to wishlist'}" aria-pressed="${isWished? 'true':'false'}">
-              ${isWished? '❤️' : '♡'}
-            </button>
-          </div>
-    
-          <div class="foot" aria-hidden="false" style="margin-top:12px">
-            <div style="display:flex;align-items:center;gap:12px;flex:1">
-              <div style="font-weight:800;font-size:13px">${escapeHtml(c.price)}</div>
-              <div style="font-size:13px;color:var(--muted)">⭐ ${c.rating} · ${c.reviews} reviews</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px">
-              <div class="progress" style="width:140px"><i style="width:${seed}%"></i></div>
-            </div>
-          </div>
-        </article>
-      `;
-    }
-
-    function applyFilters(){
-      let out = COURSES.filter(c=>{
-        if(state.filter!=='all'){
-          if(state.filter==='free' && c.price.toLowerCase()!=='free') return false;
-          if(state.filter==='cert' && c.price.toLowerCase()==='free') return false;
-          if(['beginner','intermediate','advanced'].includes(state.filter) && c.level!==state.filter) return false;
-        }
-        if(state.q){
-          const hay = (c.title+' '+c.desc+' '+(UNIS[c.uniKey]?.name||'')+' '+c.tags.join(' ')).toLowerCase();
-          if(hay.indexOf(state.q.toLowerCase())===-1) return false;
-        }
-        return true;
-      });
-
-      // sort
-      if(state.sort==='alpha') out.sort((a,b)=>a.title.localeCompare(b.title));
-      if(state.sort==='newest') out = out.slice().reverse();
-      if(state.sort==='popular') out.sort((a,b)=>b.reviews - a.reviews);
-
-      return out;
-    }
-
-    function render(){
-      const all = applyFilters();
-      const start = (state.page-1)*state.perPage;
-      const pageItems = all.slice(start, start+state.perPage);
-
-      grid.innerHTML = pageItems.map(cardHTML).join('');
-      totalEl.textContent = all.length;
-      renderPager(Math.max(1, Math.ceil(all.length/state.perPage)));
-      animateCards();
-      attachCardEventHandlers(); // attach events after render
-    }
-
-    function renderPager(pages){
-      const pager = document.getElementById('pager');
-      pager.innerHTML = '';
-      // prev
-      const prev = document.createElement('button');
-      prev.className = 'nav';
-      prev.textContent = 'Prev';
-      prev.disabled = state.page<=1;
-      prev.addEventListener('click', ()=>{ if(state.page>1) { state.page--; render(); window.scrollTo({top:320,behavior:'smooth'}); }});
-      pager.appendChild(prev);
-      for(let i=1;i<=pages;i++){
-        const btn = document.createElement('button');
-        btn.className='page'+(i===state.page? ' active':'');
-        btn.textContent = i;
-        btn.addEventListener('click', ()=>{ state.page=i; render(); window.scrollTo({top:320,behavior:'smooth'}); });
-        pager.appendChild(btn);
-      }
-      const next = document.createElement('button');
-      next.className = 'nav';
-      next.textContent = 'Next';
-      next.disabled = state.page>=pages;
-      next.addEventListener('click', ()=>{ if(state.page<pages){ state.page++; render(); window.scrollTo({top:320,behavior:'smooth'}); }});
-      pager.appendChild(next);
-    }
-
-    /***********************
-     * ANIMATIONS / INTERACTIONS
-     ***********************/
-    function animateCards(){
-      const cards = Array.from(document.querySelectorAll('.card'));
-      cards.forEach((c, i) => {
-        c.style.animationDelay = (i*60)+'ms';
-        c.classList.add('stagger-child');
-        const bar = c.querySelector('.progress > i');
-        if(bar){
-          const w = bar.style.width;
-          bar.style.width = '0%';
-          requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ bar.style.width = w; })});
-        }
-      });
-
-      const parent = document.querySelector('.stagger');
-      if(parent){
-        Array.from(parent.children).forEach((el, idx)=>el.style.animation = `staggerIn .55s cubic-bezier(.2,.9,.2,1) both ${idx*0.06}s`);
-      }
-    }
-
-    // Debounce helper
-    function debounce(fn,ms){ let t; return function(...a){ clearTimeout(t); t=setTimeout(()=>fn.apply(this,a),ms); }; }
-
-    /***********************
-     * EVENT ATTACHMENTS
-     ***********************/
-    // Search & sort
-    document.getElementById('q').addEventListener('input', debounce((e)=>{
-      state.q = e.target.value; state.page=1; render(); highlightSearch(state.q);
-    }, 220));
-    document.getElementById('sort').addEventListener('change', (e)=>{ state.sort=e.target.value; state.page=1; render(); });
-
-    // chip filters
-    document.querySelectorAll('#chipList .chip').forEach(ch=>{
-      ch.addEventListener('click', (e)=>{
-        document.querySelectorAll('#chipList .chip').forEach(x=>x.classList.remove('active'));
-        e.currentTarget.classList.add('active');
-        state.filter = e.currentTarget.dataset.filter;
-        state.page=1; render();
-      });
-    });
-
-    // view toggle
-    document.getElementById('gridViewBtn').addEventListener('click', ()=>{ document.body.classList.remove('list-view'); state.view='grid'; document.getElementById('gridViewBtn').setAttribute('aria-pressed','true'); document.getElementById('listViewBtn').setAttribute('aria-pressed','false'); document.querySelector('.wrap').classList.remove('list-view'); });
-    document.getElementById('listViewBtn').addEventListener('click', ()=>{ document.body.classList.add('list-view'); state.view='list'; document.getElementById('gridViewBtn').setAttribute('aria-pressed','false'); document.getElementById('listViewBtn').setAttribute('aria-pressed','true'); document.querySelector('.wrap').classList.add('list-view'); });
-
-    // keyboard / Enter opens preview
-    grid.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ const id = e.target.dataset.id; if(id){ const c = COURSES.find(x=>x.id==id); openModal(c); } } });
-
-    // global click: preview / wishlist handled after render via attachCardEventHandlers
-
-    function attachCardEventHandlers(){
-      // preview buttons
-      document.querySelectorAll('[data-action="preview"]').forEach(btn=>{
-        btn.removeEventListener('click', previewHandler);
-        btn.addEventListener('click', previewHandler);
-      });
-      // wishlist buttons
-      document.querySelectorAll('[data-action="wishlist"]').forEach(btn=>{
-        btn.removeEventListener('click', wishlistHandler);
-        btn.addEventListener('click', wishlistHandler);
-      });
-    }
-
-    function previewHandler(e){
-      const id = +e.currentTarget.dataset.id;
-      const c = COURSES.find(x=>x.id===id);
-      if(c) openModal(c);
-    }
-
-    function wishlistHandler(e){
-      const id = String(e.currentTarget.dataset.id);
-      if(state.wishlist.has(id)){
-        state.wishlist.delete(id);
-        toast('Removed from wishlist');
-      } else {
-        state.wishlist.add(id);
-        toast('Added to wishlist');
-      }
-      saveWishlist();
-      render(); // re-render to update icons/aria-pressed
-    }
-
-    /***********************
-     * MODAL
-     ***********************/
     const backdrop = document.getElementById('backdrop');
     const modalBody = document.getElementById('modalBody');
     const closeModalBtn = document.getElementById('closeModal');
+
+    const studentBackdrop = document.getElementById('studentBackdrop');
+    const studentModalBody = document.getElementById('studentModalBody');
+    const closeStudentModalBtn = document.getElementById('closeStudentModal');
+
+    // Helper: escape
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m])); }
+
+    /***********************
+     * UI: Collapsibles (curriculum & FAQ)
+     ***********************/
+    document.addEventListener('click', (e)=>{
+      const tgt = e.target.closest('.collapsible');
+      if(tgt){
+        const id = tgt.dataset.target;
+        const content = document.getElementById(id);
+        if(content){
+          content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+      }
+    });
+
+    /***********************
+     * Modal operations
+     ***********************/
+    document.getElementById('openSyllabus').addEventListener('click', ()=> openSyllabusModal());
+    document.getElementById('openCurr').addEventListener('click', ()=> openSyllabusModal());
+    document.getElementById('previewBtn').addEventListener('click', ()=> openSyllabusModal());
+    document.getElementById('enrollNowBtn').addEventListener('click', ()=> openEnrollModal());
+    document.getElementById('openEnrollShort').addEventListener('click', ()=> openEnrollModal());
 
     closeModalBtn.addEventListener('click', closeModal);
     backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeModal(); });
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
 
-    function openModal(c){
-      const uni = UNIS[c.uniKey] || {name:c.uniKey, img:'images/umt.png', url:'#'};
+    function openSyllabusModal(){
       modalBody.innerHTML = `
         <div class="modal-grid">
           <div>
-            <h2 id="mTitle">${escapeHtml(c.title)}</h2>
-            <div style="color:var(--muted);margin-bottom:8px">${escapeHtml(uni.name)} · ${c.weeks} weeks · ${escapeHtml(c.level)} · ${escapeHtml(c.price)}</div>
-            <p style="margin:10px 0">${escapeHtml(c.desc)}</p>
-
-            <div style="display:flex;gap:12px;align-items:center;margin:8px 0">
-              <div style="flex:1">
-                <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Course progress preview</div>
-                <div class="progress" style="height:12px"><i style="width:0%"></i></div>
-              </div>
-              <div style="text-align:right">
-                <div style="font-weight:800">${c.rating} ★</div>
-                <div style="font-size:13px;color:var(--muted)">${c.reviews} reviews</div>
-              </div>
-            </div>
-
-            <h4 style="margin:8px 0">Syllabus snapshot</h4>
-            <ol style="margin:0 0 12px;padding-left:18px;color:var(--muted)">
-              <li>Week 1: Introduction & key concepts</li>
-              <li>Week 2–3: Core methods and labs</li>
-              <li>Week 4: Project work and assessment</li>
+            <h2 id="mTitle">${escapeHtml(COURSE.title)} — Full Syllabus</h2>
+            <p style="color:var(--muted)">${escapeHtml(COURSE.desc)}</p>
+            <h4>Syllabus snapshot</h4>
+            <ol style="color:var(--muted)">
+              <li>Module 1: Python fundamentals & environment</li>
+              <li>Module 2: Data handling & pandas</li>
+              <li>Module 3: Web scraping & APIs</li>
+              <li>Module 4: Automation, testing & packaging</li>
+              <li>Module 5: Advanced topics & final project</li>
             </ol>
-
-            <h4 style="margin:8px 0">Instructor</h4>
-            <div style="display:flex;gap:12px;align-items:center">
-              <img src="${escapeHtml(uni.img)}" alt="Instructor avatar" style="width:72px;height:72px;border-radius:12px;object-fit:cover" onerror="this.style.objectFit='contain'">
-              <div>
-                <div style="font-weight:800">Muhammad Shoaib Tahir</div>
-                <div style="color:var(--muted);font-size:13px">${escapeHtml(uni.name)}</div>
-                <div style="margin-top:6px;color:var(--muted);font-size:13px">Instructor profile, contact and office hours will be shown here.</div>
-              </div>
-            </div>
-
-            <div style="display:flex;gap:10px;margin-top:12px">
-              <button class="btn primary" id="enrollBtn">Enroll now</button>
-              <button class="btn" id="wishModalBtn">Add to wishlist</button>
-              <a href="${escapeHtml(uni.url)}" class="btn btn-visit" target="_blank" rel="noopener noreferrer"></a>
+            <h4>Projects</h4>
+            <ul style="color:var(--muted)">
+              <li>CLI app, ETL pipeline, Scraper project, Mini web app, Final portfolio project</li>
+            </ul>
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="btn primary" id="modalEnrollBtn">Enroll now</button>
+              <button class="btn" id="modalCloseBtn">Close</button>
             </div>
           </div>
-
-          <aside style="padding:8px;border-left:1px solid rgba(255,255,255,0.02)">
-            <img src="${escapeHtml(uni.img)}" alt="${escapeHtml(uni.name)}" style="width:100%;border-radius:8px;margin-bottom:12px;object-fit:cover" onerror="this.style.objectFit='contain'">
-            <div style="font-size:13px;color:var(--muted)"><strong>Course details</div>
-            <ul style="padding-left:18px;color:var(--muted);margin-top:8px">
-              <li>Level: ${escapeHtml(c.level)}</li>
-              <li>Duration: ${c.weeks} weeks</li>
-              <li>Price: ${escapeHtml(c.price)}</li>
-              <li>Language: English</li>
-            </ul>
+          <aside>
+            <div style="font-weight:800">${escapeHtml(COURSE.instructor)}</div>
+            <div style="color:var(--muted);margin-top:6px">Instructor profile, contact and office hours will be shown here.</div>
+            <div style="margin-top:12px">
+              <div class="price-box">
+                <div>Price</div>
+                <div class="price-big">USD ${COURSE.priceIntl} / PKR ${COURSE.pricePK}</div>
+                <div style="font-size:13px;color:var(--muted);margin-top:6px">Group: 4+ → 30% off</div>
+              </div>
+            </div>
           </aside>
         </div>
       `;
       backdrop.classList.add('show'); backdrop.setAttribute('aria-hidden','false');
-      requestAnimationFrame(()=>{ const bar = modalBody.querySelector('.progress > i'); if(bar){ bar.style.width = '62%'; }});
-      const modal = backdrop.querySelector('.modal');
-      modal.focus();
+      // attach modal buttons
+      document.getElementById('modalEnrollBtn').addEventListener('click', ()=>{ closeModal(); document.getElementById('fullName').focus(); });
+      document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+    }
 
-      // attach enroll/wishlist inside modal
-      const enrollBtn = document.getElementById('enrollBtn');
-      const wishModalBtn = document.getElementById('wishModalBtn');
-      enrollBtn.addEventListener('click', ()=>{ toast('Enrollment successful — confirmation sent to your email'); });
-      wishModalBtn.addEventListener('click', ()=>{ 
-        state.wishlist.add(String(c.id)); saveWishlist(); render(); toast('Added to wishlist'); 
+    function openEnrollModal(){
+      modalBody.innerHTML = `
+        <div class="modal-grid">
+          <div>
+            <h2 id="mTitle">Quick Enroll — ${escapeHtml(COURSE.title)}</h2>
+            <p style="color:var(--muted)">Complete the short form to reserve your seat. We'll confirm and request payment instructions.</p>
+            <form id="quickEnroll" style="display:grid;gap:8px">
+              <input name="qname" id="qname" placeholder="Full name" required style="padding:8px;border-radius:8px"/>
+              <input name="qemail" id="qemail" placeholder="Email" type="email" required style="padding:8px;border-radius:8px"/>
+              <input name="qphone" id="qphone" placeholder="Phone" required style="padding:8px;border-radius:8px"/>
+              <div style="display:flex;gap:8px">
+                <select id="qcountry" required style="flex:1;padding:8px;border-radius:8px">
+                  <option value="">Country</option><option value="Pakistan">Pakistan</option><option value="Other">Other</option>
+                </select>
+                <input id="qfriends" type="number" min="1" value="1" style="width:88px;padding:8px;border-radius:8px" />
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <button type="button" id="quickCalc" class="btn primary">Calc Price</button>
+                <div id="quickPrice" style="font-weight:800">—</div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button type="submit" class="btn primary">Submit</button>
+                <button type="button" id="quickCancel" class="btn">Cancel</button>
+              </div>
+            </form>
+          </div>
+          <aside>
+            <div style="font-weight:800">Need help?</div>
+            <div style="color:var(--muted);margin-top:6px">Contact: admin@learnlinguistics.example (placeholder)</div>
+          </aside>
+        </div>
+      `;
+      backdrop.classList.add('show'); backdrop.setAttribute('aria-hidden','false');
+
+      document.getElementById('quickCancel').addEventListener('click', closeModal);
+      document.getElementById('quickCalc').addEventListener('click', ()=>{
+        const country = document.getElementById('qcountry').value;
+        const friends = parseInt(document.getElementById('qfriends').value || '1',10);
+        const price = calcPrice(country, friends);
+        document.getElementById('quickPrice').textContent = price.display;
+      });
+
+      document.getElementById('quickEnroll').addEventListener('submit', (ev)=>{
+        ev.preventDefault();
+        // Build simplified data and send to same Google Form mechanism
+        const data = {
+          name: document.getElementById('qname').value,
+          email: document.getElementById('qemail').value,
+          phone: document.getElementById('qphone').value,
+          country: document.getElementById('qcountry').value,
+          friends: document.getElementById('qfriends').value,
+          notes: 'Quick enroll via modal'
+        };
+        submitToGoogleForm(data).then(ok=>{
+          if(ok) { toast('Enrollment saved — we will contact you shortly'); closeModal(); }
+          else { toast('Saved locally (Google Form not configured).'); closeModal(); }
+        });
       });
     }
 
-    function closeModal(){ backdrop.classList.remove('show'); backdrop.setAttribute('aria-hidden','true'); }
+    function closeModal(){ backdrop.classList.remove('show'); backdrop.setAttribute('aria-hidden','true'); modalBody.innerHTML=''; }
 
     /***********************
-     * THEME TOGGLE
+     * Student Offer modal & handling
+     ***********************/
+    document.getElementById('studentEnrollBtn').addEventListener('click', openStudentModal);
+    document.getElementById('studentDetailsBtn').addEventListener('click', openStudentModal);
+    closeStudentModalBtn && closeStudentModalBtn.addEventListener('click', closeStudentModal);
+    studentBackdrop && studentBackdrop.addEventListener('click', (e)=>{ if(e.target===studentBackdrop) closeStudentModal(); });
+
+    function openStudentModal(){
+      // Show the student short-course enroll form
+      studentModalBody.innerHTML = `
+        <div class="modal-grid">
+          <div>
+            <h2 id="studentTitle">Student Short Course — Group Enrollment</h2>
+            <p style="color:var(--muted)">Short intensive course for students. Price: PKR ${STUDENT_OFFER.pricePKR}. Minimum group: ${STUDENT_OFFER.minGroup}. Duration: ${STUDENT_OFFER.durationDays} days.</p>
+            <form id="studentEnrollForm" style="display:grid;gap:8px">
+              <input id="sName" name="sName" placeholder="Representative full name" required style="padding:8px;border-radius:8px"/>
+              <input id="sEmail" name="sEmail" placeholder="Email" type="email" required style="padding:8px;border-radius:8px"/>
+              <input id="sPhone" name="sPhone" placeholder="Phone" required style="padding:8px;border-radius:8px"/>
+              <input id="sInstitution" name="sInstitution" placeholder="Institution / University" required style="padding:8px;border-radius:8px"/>
+              <div style="display:flex;gap:8px">
+                <input id="sCount" name="sCount" type="number" min="${STUDENT_OFFER.minGroup}" value="${STUDENT_OFFER.minGroup}" style="width:140px;padding:8px;border-radius:8px" />
+                <div style="display:flex;flex-direction:column;justify-content:center">
+                  <div style="font-size:13px;color:var(--muted)">Min ${STUDENT_OFFER.minGroup} students required</div>
+                </div>
+              </div>
+              <textarea id="sNotes" name="sNotes" rows="3" placeholder="Any questions or preferred schedule" style="padding:8px;border-radius:8px"></textarea>
+
+              <div style="display:flex;gap:8px;align-items:center">
+                <button type="button" id="studentCalc" class="btn primary">Calc Total</button>
+                <div id="studentPrice" style="font-weight:800">—</div>
+              </div>
+
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button type="submit" class="btn primary">Submit Group Request</button>
+                <button type="button" id="studentCancel" class="btn">Cancel</button>
+              </div>
+            </form>
+          </div>
+          <aside>
+            <div style="font-weight:800">Offer details</div>
+            <div style="color:var(--muted);margin-top:6px">
+              This student offer is limited-time and subject to confirmation. Offer valid until <strong>20 December</strong> (this year). Our team will confirm scheduling and next steps.
+            </div>
+          </aside>
+        </div>
+      `;
+      studentBackdrop.style.display = 'flex';
+      studentBackdrop.setAttribute('aria-hidden','false');
+
+      document.getElementById('studentCancel').addEventListener('click', closeStudentModal);
+      document.getElementById('studentCalc').addEventListener('click', ()=>{
+        const n = Number(document.getElementById('sCount').value || STUDENT_OFFER.minGroup);
+        if(n < STUDENT_OFFER.minGroup){ toast(`Minimum ${STUDENT_OFFER.minGroup} students required`); return; }
+        const total = n * STUDENT_OFFER.pricePKR;
+        document.getElementById('studentPrice').textContent = `PKR ${total.toLocaleString()}`;
+      });
+
+      document.getElementById('studentEnrollForm').addEventListener('submit', (ev)=>{
+        ev.preventDefault();
+        const name = document.getElementById('sName').value.trim();
+        const email = document.getElementById('sEmail').value.trim();
+        const phone = document.getElementById('sPhone').value.trim();
+        const inst = document.getElementById('sInstitution').value.trim();
+        const count = Number(document.getElementById('sCount').value || STUDENT_OFFER.minGroup);
+        const notes = document.getElementById('sNotes').value || '';
+
+        if(!name || !email || !phone || !inst){ toast('Please fill required fields'); return; }
+        if(count < STUDENT_OFFER.minGroup){ toast(`Minimum ${STUDENT_OFFER.minGroup} students required`); return; }
+
+        const payload = {
+          name, email, phone, institution: inst, students: count, notes, offer: 'student-short-course', total: `PKR ${ (count*STUDENT_OFFER.pricePKR).toLocaleString() }`
+        };
+
+        submitToGoogleForm(payload).then(ok=>{
+          if(ok){
+            toast('Student group request submitted — we will contact you.');
+            closeStudentModal();
+          } else {
+            // fallback to local save
+            try{
+              const key = 'learnling-student-requests';
+              const raw = localStorage.getItem(key);
+              const arr = raw ? JSON.parse(raw) : [];
+              arr.push({payload, ts: Date.now()});
+              localStorage.setItem(key, JSON.stringify(arr));
+              navigator.clipboard && navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
+            }catch(e){}
+            toast('Saved locally — Google Form not configured. Data copied to clipboard.');
+            closeStudentModal();
+          }
+        });
+      });
+    }
+
+    function closeStudentModal(){ studentBackdrop.style.display = 'none'; studentBackdrop.setAttribute('aria-hidden','true'); studentModalBody.innerHTML=''; }
+
+    /***********************
+     * Price calculation & Enroll form handling
+     ***********************/
+    function calcPrice(country, friends){
+      let base = (country === 'Pakistan') ? COURSE.pricePK : COURSE.priceIntl;
+      let currency = (country === 'Pakistan') ? 'PKR' : 'USD';
+      let total = base;
+      const n = Number(friends) || 1;
+      if(n > 1){
+        // assume price shown is per person; multiply then discount if applicable
+        total = base * n;
+      }
+      if(n >= 4){
+        total = total * 0.7; // 30% off
+      }
+      // Format
+      const display = (currency === 'USD') ? `USD $${total.toFixed(2)}` : `PKR ${total.toFixed(0)}`;
+      return { total, display, currency };
+    }
+
+    document.getElementById('calcBtn').addEventListener('click', ()=>{
+      const country = document.getElementById('country').value;
+      const friends = Number(document.getElementById('friends').value || '1');
+      if(!country){ toast('Please select country'); return; }
+      const res = calcPrice(country, friends);
+      document.getElementById('finalPrice').textContent = res.display;
+    });
+
+    // Enroll form submit
+    document.getElementById('enrollForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const country = document.getElementById('country').value;
+      const friends = Number(document.getElementById('friends').value || '1');
+      const notes = document.getElementById('notes').value || '';
+
+      if(!name || !email || !phone || !country){ toast('Please fill required fields'); return; }
+
+      const price = calcPrice(country, friends);
+
+      const payload = {
+        name, email, phone, country, friends, notes, price: price.display
+      };
+
+      const ok = await submitToGoogleForm(payload);
+      if(ok){
+        toast('Enrollment saved — confirmation will be sent via email.');
+        // clear form (optional)
+        document.getElementById('enrollForm').reset();
+        document.getElementById('finalPrice').textContent = '—';
+      } else {
+        // fallback: save locally and copy payload for manual submission
+        try {
+          const key = 'learnling-enrollments';
+          const raw = localStorage.getItem(key);
+          const arr = raw ? JSON.parse(raw) : [];
+          arr.push({payload, ts: Date.now()});
+          localStorage.setItem(key, JSON.stringify(arr));
+          navigator.clipboard && navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
+        } catch(e){}
+        toast('Saved locally — Google Form not configured. Data copied to clipboard.');
+      }
+    });
+
+    /***********************
+     * Google Forms submission helper
+     *
+     * Strategy:
+     * - If GOOGLE_FORM_ACTION and mapping provided: create hidden form pointing to action, with mapped entry names, submit into a hidden iframe to avoid navigation.
+     * - If not configured: return false so fallback kicks in.
+     ***********************/
+    async function submitToGoogleForm(data){
+      if(!GOOGLE_FORM_ACTION || !GOOGLE_FORM_FIELDS || Object.keys(GOOGLE_FORM_FIELDS).length===0){
+        return false;
+      }
+      try {
+        // Build and submit hidden form into iframe
+        const iframeName = 'gf_iframe_' + Math.random().toString(36).slice(2);
+        const ifr = document.createElement('iframe');
+        ifr.name = iframeName;
+        ifr.style.display = 'none';
+        document.body.appendChild(ifr);
+
+        const form = document.createElement('form');
+        form.action = GOOGLE_FORM_ACTION;
+        form.method = 'POST';
+        form.target = iframeName;
+        form.style.display = 'none';
+
+        // Map known fields
+        const mapping = GOOGLE_FORM_FIELDS;
+        function addField(name, val){
+          const inp = document.createElement('input');
+          inp.type = 'text';
+          inp.name = name;
+          inp.value = val;
+          form.appendChild(inp);
+        }
+        // expected mapping keys: name, email, phone, country, friends, notes, price (optional)
+        if(mapping.name) addField(mapping.name, data.name || '');
+        if(mapping.email) addField(mapping.email, data.email || '');
+        if(mapping.phone) addField(mapping.phone, data.phone || '');
+        if(mapping.country) addField(mapping.country, data.country || '');
+        if(mapping.friends) addField(mapping.friends, String(data.friends || '1'));
+        if(mapping.notes) addField(mapping.notes, data.notes || '');
+        if(mapping.price) addField(mapping.price, data.price || data.total || '');
+
+        document.body.appendChild(form);
+
+        // Submit and resolve when iframe loads
+        return await new Promise((resolve)=>{
+          let done = false;
+          function cleanup(){
+            try{ form.remove(); }catch(e){}
+            try{ ifr.remove(); }catch(e){}
+          }
+          ifr.addEventListener('load', ()=>{
+            if(done) return;
+            done = true;
+            cleanup();
+            resolve(true);
+          });
+          // submit
+          form.submit();
+          // fallback timeout (in case load doesn't fire)
+          setTimeout(()=>{ if(!done){ done = true; cleanup(); resolve(true); } }, 3000);
+        });
+      } catch(err){
+        return false;
+      }
+    }
+
+    /***********************
+     * Offer countdown & status (Student offer valid until Dec 20)
+     ***********************/
+    function checkOfferDeadline(){
+      const now = new Date();
+      // Use current year by default
+      const year = now.getFullYear();
+      const deadline = new Date(year, STUDENT_OFFER.deadlineMonthDay.month - 1, STUDENT_OFFER.deadlineMonthDay.day, 23, 59, 59);
+      // If deadline already passed this year, optionally consider next year as expired (we'll show expired)
+      const offerElem = document.getElementById('offerStatus');
+      const offerDeadlineLabel = document.getElementById('offerDeadline');
+      offerDeadlineLabel.textContent = `${STUDENT_OFFER.deadlineMonthDay.day} December ${year}`;
+      if(now > deadline){
+        offerElem.textContent = 'Offer expired';
+        offerElem.style.color = 'var(--muted)';
+        document.getElementById('studentEnrollBtn').disabled = true;
+        document.getElementById('studentEnrollBtn').style.opacity = 0.6;
+        document.getElementById('studentEnrollBtn').title = 'Offer expired';
+      } else {
+        // show days left
+        const diff = Math.max(0, Math.floor((deadline - now) / (1000 * 60 * 60 * 24)));
+        offerElem.textContent = `${diff} day(s) left — limited seats`;
+        offerElem.style.color = 'var(--accent-2)';
+      }
+    }
+    checkOfferDeadline();
+
+    /***********************
+     * Theme Toggle (kept from original)
      ***********************/
     const themeToggle = document.getElementById('themeToggle');
     const themeLabel = document.getElementById('themeLabel');
     const iconSun = document.getElementById('iconSun');
     const iconMoon = document.getElementById('iconMoon');
+    const LS = { THEME: 'learnling-theme' };
 
     function setTheme(name){
       document.body.classList.remove('dark-theme','light-theme');
@@ -803,7 +1085,7 @@ console.log('Available Courses:', availableCourses);
     themeToggle.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') themeToggle.click(); });
 
     /***********************
-     * TOASTS
+     * Toast helper
      ***********************/
     let toastTimer = null;
     function toast(msg, ms=2600){
@@ -813,69 +1095,53 @@ console.log('Available Courses:', availableCourses);
     }
 
     /***********************
-     * COUNTERS (animate)
+     * Small UI niceties
      ***********************/
-    function animateCounter(node, from, to, ms=900){
-      let start = null;
-      function step(ts){
-        if(!start) start = ts;
-        const p = Math.min(1, (ts-start)/ms);
-        const val = Math.floor(from + (to-from)*p);
-        node.textContent = (to>=100? val+'+' : val);
-        if(p<1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
+    document.getElementById('getStarted').addEventListener('click', ()=>{ toast('Welcome! Start by opening syllabus or enrolling.'); window.scrollTo({top:370,behavior:'smooth'}); });
+    document.getElementById('searchBtn').addEventListener('click', ()=>{ document.getElementById('q').focus(); });
+    document.getElementById('viewAll').addEventListener('click', ()=>{ window.location.hash = '#curriculum'; });
 
-    const asideObserver = new IntersectionObserver((entries)=>{ entries.forEach(ent=>{ if(ent.isIntersecting){ animateCounter(document.getElementById('countCourses'), 0, 60); animateCounter(document.getElementById('countPartners'), 0, 20); asideObserver.disconnect(); } }); }, {threshold:0.4});
-    asideObserver.observe(document.querySelector('.aside'));
-
-    /***********************
-     * SCROLL / HEADER / TOP BUTTON
-     ***********************/
+    // top button
     const hdr = document.getElementById('header');
-    window.addEventListener('scroll', debounce(()=>{ const y = window.scrollY; if(y>60) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled'); if(y>420) topBtn.classList.add('show'); else topBtn.classList.remove('show'); }, 80));
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', (e)=>{ const y = window.scrollY; if(y>60) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled'); if(y>420) topBtn.classList.add('show'); else topBtn.classList.remove('show'); });
     topBtn.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-    // highlight search terms inside results
-    function highlightSearch(q){
-      document.querySelectorAll('.card h3, .card p, .card .badge').forEach(n=>{
-        const txt = n.textContent;
+    // quick helpers for keyboard (Enter opens modal when focused on card etc.)
+    document.addEventListener('keydown', (e)=>{ if(e.key==='/' ) { e.preventDefault(); document.getElementById('q').focus(); } });
+
+    // small animation for cards on load
+    function animateInitial(){
+      const cards = document.querySelectorAll('.card');
+      cards.forEach((c,i)=>{
+        c.style.animation = `staggerIn .55s cubic-bezier(.2,.9,.2,1) both ${i*0.06}s`;
+      });
+    }
+    requestAnimationFrame(animateInitial);
+
+    // highlight search
+    function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+    document.getElementById('q').addEventListener('input', (e)=>{
+      const q = e.target.value.trim();
+      document.querySelectorAll('.card h3, .card p, .card .badge, .card div').forEach(n=>{
+        const txt = n.textContent || '';
         if(!q){ n.innerHTML = escapeHtml(txt); return; }
         const re = new RegExp(`(${escapeRegExp(q)})`, 'ig');
         n.innerHTML = txt.replace(re, '<span style="background:var(--accent-2);color:var(--bg);padding:0 4px;border-radius:4px">$1</span>');
       });
-    }
-    function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-
-    // smooth scroll for nav anchors data-scroll
-    document.querySelectorAll('[data-scroll]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const target = a.getAttribute('href');
-        if(!target || target==='') return;
-        const el = document.querySelector(target);
-        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-      });
     });
 
-    // Get Started click
-    document.getElementById('getStarted').addEventListener('click', ()=>{ toast('Welcome! Explore courses and preview syllabi.'); window.scrollTo({top:370,behavior:'smooth'}); });
+    // populate price label initially
+    document.getElementById('priceLabel').textContent = `USD $${COURSE.priceIntl} / PKR ${COURSE.pricePK}`;
 
-    // demo search button: focus input
-    document.getElementById('searchBtn').addEventListener('click', ()=>{ document.getElementById('q').focus(); });
+    // quick calc sample (for hero)
+    document.getElementById('enrollNowBtn').addEventListener('click', ()=>{ document.getElementById('fullName').focus(); });
 
-    // View all quick filter resets
-    document.getElementById('viewAll').addEventListener('click', ()=>{ document.querySelectorAll('#chipList .chip').forEach(x=>x.classList.remove('active')); document.querySelector('#chipList .chip[data-filter="all"]').classList.add('active'); state.filter='all'; state.page=1; render(); });
+    // ensure collapsibles initially collapsed
+    document.querySelectorAll('.content').forEach(c=>c.style.display='none');
 
-    /***********************
-     * Initial render + debugging
-     ***********************/
-    render();
-    console.log('LearnLinguistics enhanced UI loaded — theme:', document.body.className);
-
-    // expose some helpers for dev console (optional)
-    window.__LL = {COURSES, UNIS, state, render, toast};
+    // optional: expose debug
+    window.__LL = { COURSE, STUDENT_OFFER, submitToGoogleForm };
 
   </script>
 </body>
