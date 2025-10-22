@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Course for Absolute Beginners</title>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* --- CSS --- */
         body {
@@ -31,7 +33,7 @@
             text-align: center;
             color: white;
             overflow: hidden;
-            background: url('https://source.unsplash.com/1600x900/?coding,abstract,technology') no-repeat center center/cover; /* Updated hero background */
+            background: url('https://source.unsplash.com/1600x900/?coding,abstract,technology') no-repeat center center/cover;
         }
 
         .hero::before {
@@ -90,19 +92,48 @@
             color: #1a1a2e;
         }
 
-        /* NEW: Hero Offer Styling */
         .hero-offer {
-            margin-top: 30px; /* Space from buttons */
+            margin-top: 30px;
             padding: 15px 25px;
-            background-color: rgba(58, 58, 94, 0.9); /* Slightly darker, semi-transparent background */
+            background-color: rgba(58, 58, 94, 0.9);
             border-radius: 8px;
-            display: inline-block; /* To shrink-wrap the content */
+            display: inline-block;
             font-size: 1.1em;
             color: #a0a0ff;
-            max-width: 500px; /* Limit width for better readability */
+            max-width: 500px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
         }
+
+        /* --- Updated Social Links Styling --- */
+        .social-links {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Vertically center icon and text */
+        }
+
+        .social-link i {
+            margin-right: 8px; /* Space between icon and text */
+            font-size: 1.2em; /* Slightly larger icon */
+        }
+
+        .social-link:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+        /* --- END Social Links Styling --- */
 
         section {
             padding: 80px 0;
@@ -130,7 +161,6 @@
             margin: 10px auto 0;
         }
 
-        /* What You'll Learn */
         .learn-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -159,45 +189,36 @@
             margin-bottom: 10px;
         }
 
-        /* Instructor Bio Section */
         .instructor-bio {
-            display: flex;          /* Enables flexbox layout */
-            flex-direction: column; /* Stacks the image and text vertically */
-            align-items: center;    /* Centers everything horizontally */
-            gap: 20px;              /* Adds space between the image and the text block */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
             margin-top: 40px;
         }
         
-        /* The circular image style */
         .instructor-bio img {
-            width: 150px;           /* Sets a fixed width */
-            height: 150px;          /* Sets a fixed height (making it a square) */
-            border-radius: 50%;     /* This is the key property that makes the square a perfect circle */
-            object-fit: cover;      /*
-                                       This is crucial. It makes the image fill the entire circle
-                                       without distorting its aspect ratio. The image will be
-                                       cropped to fit if it's not perfectly square.
-                                    */
-            object-position: center; /* (Recommended) Ensures the image is centered within the frame. */
-            border: 4px solid #ffd700; /* Creates the solid yellow border */
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); /* Adds a soft glow effect */
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            border: 4px solid #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
         
-        /* The container for the text below the image */
         .instructor-info {
-            max-width: 800px; /* Keeps the text from becoming too wide on large screens */
-            text-align: left;   /* Aligns the main paragraphs to the left */
+            max-width: 800px;
+            text-align: left;
         }
         
-        /* The instructor's name heading */
         .instructor-info h3 {
             color: #ffd700;
             font-size: 1.8em;
             margin-bottom: 10px;
-            text-align: center; /* Centers the name to match the image above it */
+            text-align: center;
         }
         
-        /* The descriptive paragraphs */
         .instructor-info p {
             margin-bottom: 15px;
         }
@@ -217,7 +238,6 @@
             font-size: 0.9em;
         }
 
-        /* Testimonials */
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -254,7 +274,6 @@
             margin-top: 10px;
         }
 
-        /* Pricing Cards - Flip Animation */
         .pricing-cards {
             display: flex;
             justify-content: center;
@@ -266,16 +285,12 @@
 
         .pricing-card-wrapper {
             width: 300px;
-            /* Removed fixed height */
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.6s;
+            transition: transform 0.6s, min-height 0.4s ease-in-out;
             cursor: pointer;
-            /* Added margin-bottom to create space even when taller */
             margin-bottom: 20px;
-            /* Ensure the wrapper also creates space */
             box-sizing: border-box;
-            /* Added min-height to ensure a baseline for unflipped cards */
             min-height: 250px;
         }
 
@@ -283,7 +298,6 @@
             transform: rotateY(180deg);
         }
 
-        /* Important changes for front and back cards */
         .pricing-card-front,
         .pricing-card-back {
             background-color: #25253e;
@@ -292,42 +306,28 @@
             width: 100%;
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             text-align: center;
-            position: absolute; /* Keep absolute for flipping effect */
+            position: absolute;
             backface-visibility: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            top: 0; /* Align to top of wrapper */
+            top: 0;
             left: 0;
-            /* Remove height: 100% to let content define height */
-            /* Add min-height to ensure cards are not too short */
-            min-height: 250px; /* Same as wrapper's min-height for consistency */
-            box-sizing: border-box; /* Include padding in height calculation */
+            min-height: 250px;
+            box-sizing: border-box;
         }
 
         .pricing-card-back {
             transform: rotateY(180deg);
             text-align: left;
             justify-content: space-between;
-            min-height: 550px; /* Explicitly set min-height for the back, as it's taller */
-            align-items: stretch; /* Stretch items to fill height when content varies */
+            align-items: stretch;
         }
-        /* Adjust wrapper height dynamically based on the active card */
-        .pricing-card-wrapper {
-            transition: transform 0.6s, min-height 0.6s ease-in-out; /* Smooth transition for height */
-        }
-        .pricing-card-wrapper:not(.flipped) {
-            min-height: 250px; /* Height of the front card */
-        }
-        .pricing-card-wrapper.flipped {
-            min-height: 550px; /* Height of the back card */
-        }
-
 
         .pricing-card-front h3 {
             color: #ffd700;
-            font-size: 2.5em;
+            font-size: 2.2em;
             margin-bottom: 10px;
             text-align: center;
         }
@@ -346,7 +346,7 @@
         }
 
         .pricing-card-back .price {
-            font-size: 2.5em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #e0e0e0;
             margin-bottom: 5px;
@@ -408,10 +408,9 @@
             border-bottom-left-radius: 10px;
             font-size: 0.8em;
             font-weight: bold;
-            z-index: 10; /* Ensure tag is above other content */
+            z-index: 10;
         }
 
-        /* FAQ Section */
         .faq-item {
             background-color: #25253e;
             padding: 20px 25px;
@@ -454,11 +453,9 @@
             margin-bottom: 0;
         }
 
-        /* General styles for buttons to ensure Google Form redirection */
         .btn[href^="https://forms.gle"] {
             cursor: pointer;
         }
-
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5em; }
@@ -466,7 +463,6 @@
             .pricing-cards { flex-direction: column; align-items: center; }
             .pricing-card-wrapper {
                 width: 90%;
-                /* min-height will be managed by JS for dynamic height */
             }
             .learn-grid, .testimonials-grid { grid-template-columns: 1fr; }
             .instructor-info { text-align: center; }
@@ -484,6 +480,22 @@
                 <div class="hero-offer">
                     Special Offer: Get 25% off for groups of 4 or more participants!
                 </div>
+                <!-- SOCIAL LINKS START -->
+                <div class="social-links">
+                    <a href="https://github.com/MuhammadshoaibTahir" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/muhammad-shoaib-tahir-3a9103179/" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://www.facebook.com/muhammad.shoaib.tahir.166555" target="_blank" class="social-link">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
+                    <a href="mailto:shoaibtahir410@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+                <!-- SOCIAL LINKS END -->
             </div>
         </div>
     </header>
@@ -492,72 +504,37 @@
         <section id="learn" class="container">
             <h2>What You'll Learn</h2>
             <div class="learn-grid">
-                <div class="learn-item">
-                    <h3>Fundamentals of Python</h3>
-                    <p>Master the core concepts of Python programming, from variables to control flow.</p>
-                </div>
-                <div class="learn-item">
-                    <h3>Data Structures</h3>
-                    <p>Understand and utilize Python's essential data structures like lists, dictionaries, and tuples.</p>
-                </div>
-                <div class="learn-item">
-                    <h3>Functions & Modules</h3>
-                    <p>Learn to write reusable code with functions and organize your projects with modules.</p>
-                </div>
-                <div class="learn-item">
-                    <h3>Object-Oriented Programming (OOP)</h3>
-                    <p>Dive into OOP principles like classes, objects, inheritance, and polymorphism.</p>
-                </div>
-                <div class="learn-item">
-                    <h3>Problem Solving</h3>
-                    <p>Develop logical thinking and problem-solving skills through practical exercises.</p>
-                </div>
-                <div class="learn-item">
-                    <h3>Real-World Projects</h3>
-                    <p>Apply your knowledge to build practical projects and enhance your portfolio.</p>
+                <div class="learn-item"><h3>Fundamentals of Python</h3><p>Master the core concepts of Python programming, from variables to control flow.</p></div>
+                <div class="learn-item"><h3>Data Structures</h3><p>Understand and utilize Python's essential data structures like lists, dictionaries, and tuples.</p></div>
+                <div class="learn-item"><h3>Functions & Modules</h3><p>Learn to write reusable code with functions and organize your projects with modules.</p></div>
+                <div class="learn-item"><h3>Object-Oriented Programming (OOP)</h3><p>Dive into OOP principles like classes, objects, inheritance, and polymorphism.</p></div>
+                <div class="learn-item"><h3>Problem Solving</h3><p>Develop logical thinking and problem-solving skills through practical exercises.</p></div>
+                <div class="learn-item"><h3>Real-World Projects</h3><p>Apply your knowledge to build practical projects and enhance your portfolio.</p></div>
+            </div>
+        </section>
+
+        <section id="instructor" class="container">
+            <h2>Instructor Bio</h2>
+            <div class="instructor-bio">
+                <img src="images/file.jpg" alt="A photo of Muhammad Shoaib Tahir">
+                <div class="instructor-info">
+                    <h3>Muhammad Shoaib Tahir</h3>
+                    <p>Muhammad Shoaib Tahir is a highly experienced Computational Linguist with a passion for teaching Python to beginners. With a strong academic background and practical experience in linguistic computing, he makes complex concepts easy to understand. Shoaib has a knack for breaking down programming challenges into manageable steps, fostering a supportive and engaging learning environment.</p>
+                    <p>He conducts successful webinars and workshops at various prestigious universities:</p>
+                    <ul class="university-list">
+                        <li>UMT Lahore</li><li>UMT Sialkot</li><li>University of Agriculture Faisalabad</li><li>The University of Faisalabad</li><li>Air University Islamabad</li><li>Pakistan Corpus Studio</li><li>Ghazi University Dera Ghazi Khan</li>
+                    </ul>
+                    <p>His dedication to empowering students with coding skills has earned him excellent feedback and a reputation for clarity and effectiveness in his teaching.</p>
                 </div>
             </div>
         </section>
 
-<section id="instructor" class="container">
-    <h2>Instructor Bio</h2>
-    <div class="instructor-bio">
-        <!-- Image source is now your local file -->
-        <img src="images/file.jpg" alt="A photo of Muhammad Shoaib Tahir">
-        
-        <div class="instructor-info">
-            <h3>Muhammad Shoaib Tahir</h3>
-            <p>Muhammad Shoaib Tahir is a highly experienced Computational Linguist with a passion for teaching Python to beginners. With a strong academic background and practical experience in linguistic computing, he makes complex concepts easy to understand. Shoaib has a knack for breaking down programming challenges into manageable steps, fostering a supportive and engaging learning environment.</p>
-            <p>He conducts successful webinars and workshops at various prestigious universities:</p>
-            <ul class="university-list">
-                <li>UMT Lahore</li>
-                <li>UMT Sialkot</li>
-                <li>University of Agriculture Faisalabad</li>
-                <li>The University of Faisalabad</li>
-                <li>Air University Islamabad</li>
-                <li>Pakistan Corpus Studio</li>
-                <li>Ghazi University Dera Ghazi Khan</li>
-            </ul>
-            <p>His dedication to empowering students with coding skills has earned him excellent feedback and a reputation for clarity and effectiveness in his teaching.</p>
-        </div>
-    </div>
-</section>
-
         <section id="testimonials" class="container">
             <h2>Testimonials</h2>
             <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p>"Shoaib's Python course was exactly what I needed to kickstart my coding journey. His explanations were clear, and the pace was perfect for a beginner. Highly recommended!"</p>
-                    <span class="author">– Ali Khan, Student</span>
-                </div>
-                <div class="testimonial-card">
-                    <p>"As a non-technical person, I was intimidated by programming. But Muhammad Shoaib Tahir made it incredibly accessible and fun. I now feel confident writing my own Python scripts."</p>
-                    <span class="author">– Sara Ahmed, Researcher</span>
-                </div>
-                <div class="testimonial-card">
-                    <p>"The project-based learning approach really solidified my understanding. The instructor's support and feedback were invaluable. Best Python course I've taken!"</p>
-                    <span class="author">– Usman Tariq, Aspiring Developer</span>
-                </div>
+                <div class="testimonial-card"><p>"Shoaib's Python course was exactly what I needed to kickstart my coding journey. His explanations were clear, and the pace was perfect for a beginner. Highly recommended!"</p><span class="author">– Ali Khan, Student</span></div>
+                <div class="testimonial-card"><p>"As a non-technical person, I was intimidated by programming. But Muhammad Shoaib Tahir made it incredibly accessible and fun. I now feel confident writing my own Python scripts."</p><span class="author">– Sara Ahmed, Researcher</span></div>
+                <div class="testimonial-card"><p>"The project-based learning approach really solidified my understanding. The instructor's support and feedback were invaluable. Best Python course I've taken!"</p><span class="author">– Usman Tariq, Aspiring Developer</span></div>
             </div>
         </section>
 
@@ -566,133 +543,72 @@
             <div class="pricing-cards">
                 <!-- Basic Card -->
                 <div class="pricing-card-wrapper" onclick="togglePricingCard(this)">
-                    <div class="pricing-card-front">
-                        <h3>Basic</h3>
-                        <p class="tagline">(Limited Features)</p>
-                        <p style="font-size: 0.9em; color: #ccc;">Click to see details</p>
-                    </div>
+                    <div class="pricing-card-front"><h3>Basic</h3><p class="tagline">(Limited Features)</p><p style="font-size: 0.9em; color: #ccc;">Click to see details</p></div>
                     <div class="pricing-card-back">
-                        <span class="student-discount-tag">10% Student Discount</span>
-                        <h3>Basic</h3>
-                        <div class="price">USD 65 / PKR 6,500</div>
-                        <div class="student-price">Student Price: USD 58.5 / PKR 5,850</div>
-                        <div class="duration">(Limited Features)</div>
-                        <ul>
-                            <li>Basics of Python</li>
-                            <li class="unavailable">Basic Data Types</li>
-                            <li class="unavailable">Control Flow</li>
-                            <li class="unavailable">Functions</li>
-                            <li class="unavailable">OOP</li>
-                            <li class="unavailable">Project Work</li>
-                            <li class="unavailable">Certificate</li>
-                        </ul>
+                        <span class="student-discount-tag">10% Student Discount</span><h3>Basic</h3><div class="price">USD 65 / PKR 6,500</div><div class="student-price">Student Price: USD 58.5 / PKR 5,850</div><div class="duration">(Limited Features)</div>
+                        <ul><li>Basics of Python</li><li class="unavailable">Basic Data Types</li><li class="unavailable">Control Flow</li><li class="unavailable">Functions</li><li class="unavailable">OOP</li><li class="unavailable">Project Work</li><li class="unavailable">Certificate</li></ul>
                         <a href="https://forms.gle/W7cihiM85cqt2PnV7" class="btn" target="_blank">Enroll Now</a>
                     </div>
                 </div>
 
                 <!-- Standard Card -->
                 <div class="pricing-card-wrapper" onclick="togglePricingCard(this)">
-                    <div class="pricing-card-front">
-                        <h3>Standard</h3>
-                        <p class="tagline">(More Features)</p>
-                        <p style="font-size: 0.9em; color: #ccc;">Click to see details</p>
-                    </div>
+                    <div class="pricing-card-front"><h3>Standard</h3><p class="tagline">(More Features)</p><p style="font-size: 0.9em; color: #ccc;">Click to see details</p></div>
                     <div class="pricing-card-back">
-                        <span class="student-discount-tag">10% Student Discount</span>
-                        <h3>Standard</h3>
-                        <div class="price">USD 110 / PKR 15,000</div>
-                        <div class="student-price">Student Price: USD 99 / PKR 13,500</div>
-                        <div class="duration">(More Features)</div>
-                        <ul>
-                            <li>Basics to Intermediate Python</li>
-                            <li>Basic Data Types</li>
-                            <li>Control Flow</li>
-                            <li>Functions</li>
-                            <li class="unavailable">OOP</li>
-                            <li class="unavailable">Project Work</li>
-                            <li class="unavailable">Certificate</li>
-                        </ul>
+                        <span class="student-discount-tag">10% Student Discount</span><h3>Standard</h3><div class="price">USD 110 / PKR 15,000</div><div class="student-price">Student Price: USD 99 / PKR 13,500</div><div class="duration">(More Features)</div>
+                        <ul><li>Basics to Intermediate Python</li><li>Basic Data Types</li><li>Control Flow</li><li>Functions</li><li class="unavailable">OOP</li><li class="unavailable">Project Work</li><li class="unavailable">Certificate</li></ul>
                         <a href="https://forms.gle/W7cihiM85cqt2PnV7" class="btn" target="_blank">Enroll Now</a>
                     </div>
                 </div>
 
                 <!-- Premium Card -->
                 <div class="pricing-card-wrapper" onclick="togglePricingCard(this)">
-                    <div class="pricing-card-front">
-                        <h3>Premium</h3>
-                        <p class="tagline">(Full Features - 1.5 months)</p>
-                        <p style="font-size: 0.9em; color: #ccc;">Click to see details</p>
-                    </div>
+                    <div class="pricing-card-front"><h3>Premium</h3><p class="tagline">(Full Features - 1.5 months)</p><p style="font-size: 0.9em; color: #ccc;">Click to see details</p></div>
                     <div class="pricing-card-back">
-                        <span class="student-discount-tag">10% Student Discount</span>
-                        <h3>Premium</h3>
-                        <div class="price">USD 220 / PKR 45,000</div>
-                        <div class="student-price">Student Price: USD 198 / PKR 40,500</div>
-                        <div class="duration">(Full Features - 1.5 months)</div>
-                        <ul>
-                            <li>Basic Data Types</li>
-                            <li>Control Flow</li>
-                            <li>Functions</li>
-                            <li>Object-Oriented Programming (OOP)</li>
-                            <li>Modules and Packages</li>
-                            <li>Error and Exception Handling</li>
-                            <li>Advanced Data Structures (e.g., collections module)</li>
-                            <li>Regular Expressions</li>
-                            <li>Working with Dates and Times</li>
-                            <li>Introduction to Virtual Environments</li>
-                            <li>Web Scraping Fundamentals</li>
-                            <li>Project Work</li>
-                            <li>Certificate</li>
-                        </ul>
+                        <span class="student-discount-tag">10% Student Discount</span><h3>Premium</h3><div class="price">USD 220 / PKR 45,000</div><div class="student-price">Student Price: USD 198 / PKR 40,500</div><div class="duration">(Full Features - 1.5 months)</div>
+                        <ul><li>Basic Data Types</li><li>Control Flow</li><li>Functions</li><li>Object-Oriented Programming (OOP)</li><li>Modules and Packages</li><li>Error and Exception Handling</li><li>Advanced Data Structures (e.g., collections module)</li><li>Regular Expressions</li><li>Working with Dates and Times</li><li>Introduction to Virtual Environments</li><li>Web Scraping Fundamentals</li><li>Project Work</li><li>Certificate</li></ul>
                         <a href="https://forms.gle/W7cihiM85cqt2PnV7" class="btn" target="_blank">Enroll Now</a>
                     </div>
                 </div>
             </div>
         </section>
 
+        <section id="specialized-workshops" class="container">
+            <h2>Specialized Workshops</h2>
+            <p style="max-width: 800px; margin: -20px auto 40px; color: #ccc;">Take your skills to the next level with these focused workshops. Recommended for students who have completed the Premium course or have equivalent Python knowledge.</p>
+            <div class="pricing-cards">
+
+                <!-- Python for Computational Linguistics Card -->
+                <div class="pricing-card-wrapper" onclick="togglePricingCard(this)">
+                    <div class="pricing-card-front"><h3>Python for Computational Linguistics</h3><p style="font-size: 0.9em; color: #ccc;">Click to see details</p></div>
+                    <div class="pricing-card-back">
+                        <h3>Python for Computational Linguistics</h3><div class="price">USD 110 / PKR 14,000</div><div class="duration">(10-Day Intensive Workshop)</div>
+                        <ul><li>Text Processing with Python</li><li>Intro to NLP Libraries (NLTK & spaCy)</li><li>Sentiment Analysis Projects</li><li>Corpus Analysis Techniques</li><li>Building Simple Chatbots</li><li>Leverage your linguistic knowledge with code</li></ul>
+                        <a href="https://forms.gle/7U8BiiG27vvAx2sC6" class="btn" target="_blank">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Development Card -->
+                <div class="pricing-card-wrapper" onclick="togglePricingCard(this)">
+                    <div class="pricing-card-front"><h3>Portfolio Development with GitHub</h3><p style="font-size: 0.9em; color: #ccc;">Click to see details</p></div>
+                    <div class="pricing-card-back">
+                        <h3>Portfolio Development with GitHub</h3><div class="price">USD 70 / PKR 6,500</div><div class="duration">(5-Day Project-Based Workshop)</div>
+                        <ul><li>Mastering Git & GitHub for Version Control</li><li>Structuring a Professional Project Repository</li><li>Writing Clean & Clear Project Documentation</li><li>Deploying Static Sites with GitHub Pages</li><li>Showcasing Your Skills to Employers</li><li>Build a portfolio that gets you noticed</li></ul>
+                        <a href="https://forms.gle/BpxBrH2oQx53moNd8" class="btn" target="_blank">Enroll Now</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <section id="faq" class="container">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Is this course truly for absolute beginners?
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! This course is designed from the ground up for individuals with no prior programming experience. We start with the very basics and gradually build up your skills.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        What software do I need for this course?
-                    </div>
-                    <div class="faq-answer">
-                        <p>You will only need Python installed on your computer and a code editor like VS Code, both of which are free. We'll guide you through the setup process in the first module.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Will I receive a certificate upon completion?
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes, participants who successfully complete the Premium course will receive a certificate of completion.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        What if I have questions during the course?
-                    </div>
-                    <div class="faq-answer">
-                        <p>Our instructor provides dedicated support. You can ask questions during live sessions, via email, or through our dedicated community channel.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Do you offer refunds?
-                    </div>
-                    <div class="faq-answer">
-                        <p>Please refer to our terms and conditions on the enrollment form for details regarding refunds and cancellations.</p>
-                    </div>
-                </div>
+                <div class="faq-item"><div class="faq-question">Is this course truly for absolute beginners?</div><div class="faq-answer"><p>Yes! This course is designed from the ground up for individuals with no prior programming experience. We start with the very basics and gradually build up your skills.</p></div></div>
+                <div class="faq-item"><div class="faq-question">What software do I need for this course?</div><div class="faq-answer"><p>You will only need Python installed on your computer and a code editor like VS Code, both of which are free. We'll guide you through the setup process in the first module.</p></div></div>
+                <div class="faq-item"><div class="faq-question">Will I receive a certificate upon completion?</div><div class="faq-answer"><p>Yes, participants who successfully complete the Premium course will receive a certificate of completion.</p></div></div>
+                <div class="faq-item"><div class="faq-question">What if I have questions during the course?</div><div class="faq-answer"><p>Our instructor provides dedicated support. You can ask questions during live sessions, via email, or through our dedicated community channel.</p></div></div>
+                <div class="faq-item"><div class="faq-question">Do you offer refunds?</div><div class="faq-answer"><p>Please refer to our terms and conditions on the enrollment form for details regarding refunds and cancellations.</p></div></div>
             </div>
         </section>
     </main>
@@ -706,14 +622,12 @@
                 question.addEventListener('click', function() {
                     const answer = this.nextElementSibling;
                     const isActive = this.classList.contains('active');
-
                     document.querySelectorAll('.faq-question.active').forEach(activeQuestion => {
                         if (activeQuestion !== this) {
                             activeQuestion.classList.remove('active');
                             activeQuestion.nextElementSibling.style.maxHeight = null;
                         }
                     });
-
                     this.classList.toggle('active', !isActive);
                     if (answer.style.maxHeight) {
                         answer.style.maxHeight = null;
@@ -729,13 +643,11 @@
             wrapper.classList.toggle('flipped');
             const front = wrapper.querySelector('.pricing-card-front');
             const back = wrapper.querySelector('.pricing-card-back');
-
-            // Dynamically set the height of the wrapper based on the active card's scrollHeight
-            // This is crucial for the wrapper to push down other content
+            
             if (wrapper.classList.contains('flipped')) {
-                wrapper.style.minHeight = back.scrollHeight + 'px';
+                wrapper.style.minHeight = (back.scrollHeight + 30) + 'px';
             } else {
-                wrapper.style.minHeight = front.scrollHeight + 'px';
+                wrapper.style.minHeight = (front.scrollHeight + 30) + 'px';
             }
         }
 
@@ -743,8 +655,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.pricing-card-wrapper').forEach(wrapper => {
                 const front = wrapper.querySelector('.pricing-card-front');
-                // Set initial min-height based on the front card
-                wrapper.style.minHeight = front.scrollHeight + 'px';
+                if (front) {
+                    wrapper.style.minHeight = (front.scrollHeight + 30) + 'px';
+                }
             });
         });
     </script>
