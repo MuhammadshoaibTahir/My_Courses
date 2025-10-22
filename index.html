@@ -159,32 +159,45 @@
             margin-bottom: 10px;
         }
 
-        /* Instructor Bio */
+        /* Instructor Bio Section */
         .instructor-bio {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            display: flex;          /* Enables flexbox layout */
+            flex-direction: column; /* Stacks the image and text vertically */
+            align-items: center;    /* Centers everything horizontally */
+            gap: 20px;              /* Adds space between the image and the text block */
             margin-top: 40px;
         }
+        
+        /* The circular image style */
         .instructor-bio img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #ffd700;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            width: 150px;           /* Sets a fixed width */
+            height: 150px;          /* Sets a fixed height (making it a square) */
+            border-radius: 50%;     /* This is the key property that makes the square a perfect circle */
+            object-fit: cover;      /*
+                                       This is crucial. It makes the image fill the entire circle
+                                       without distorting its aspect ratio. The image will be
+                                       cropped to fit if it's not perfectly square.
+                                    */
+            object-position: center; /* (Recommended) Ensures the image is centered within the frame. */
+            border: 4px solid #ffd700; /* Creates the solid yellow border */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); /* Adds a soft glow effect */
         }
+        
+        /* The container for the text below the image */
         .instructor-info {
-            max-width: 800px;
-            text-align: left;
+            max-width: 800px; /* Keeps the text from becoming too wide on large screens */
+            text-align: left;   /* Aligns the main paragraphs to the left */
         }
+        
+        /* The instructor's name heading */
         .instructor-info h3 {
             color: #ffd700;
             font-size: 1.8em;
             margin-bottom: 10px;
-            text-align: center;
+            text-align: center; /* Centers the name to match the image above it */
         }
+        
+        /* The descriptive paragraphs */
         .instructor-info p {
             margin-bottom: 15px;
         }
@@ -507,27 +520,28 @@
         </section>
 
 <section id="instructor" class="container">
-            <h2>Instructor Bio</h2>
-            <div class="instructor-bio">
-                <!-- Updated src to a public placeholder URL for demonstration -->
-                <img src="https://via.placeholder.com/200x200/FFD700/1a1a2e?text=Instructor" alt="Muhammad Shoaib Tahir">
-                <div class="instructor-info">
-                    <h3>Muhammad Shoaib Tahir</h3>
-                    <p>Muhammad Shoaib Tahir is a highly experienced Computational Linguist with a passion for teaching Python to beginners. With a strong academic background and practical experience in linguistic computing, he makes complex concepts easy to understand. Shoaib has a knack for breaking down programming challenges into manageable steps, fostering a supportive and engaging learning environment.</p>
-                    <p>He conducts successful webinars and workshops at various prestigious universities:</p>
-                    <ul class="university-list">
-                        <li>UMT Lahore</li>
-                        <li>UMT Sialkot</li>
-                        <li>University of Agriculture Faisalabad</li>
-                        <li>The University of Faisalabad</li>
-                        <li>Air University Islamabad</li>
-                        <li>Pakistan Corpus Studio</li>
-                        <li>Ghazi University Dera Ghazi Khan</li>
-                    </ul>
-                    <p>His dedication to empowering students with coding skills has earned him excellent feedback and a reputation for clarity and effectiveness in his teaching.</p>
-                </div>
-            </div>
-        </section>
+    <h2>Instructor Bio</h2>
+    <div class="instructor-bio">
+        <!-- Image source is now your local file -->
+        <img src="images/file.jpg" alt="A photo of Muhammad Shoaib Tahir">
+        
+        <div class="instructor-info">
+            <h3>Muhammad Shoaib Tahir</h3>
+            <p>Muhammad Shoaib Tahir is a highly experienced Computational Linguist with a passion for teaching Python to beginners. With a strong academic background and practical experience in linguistic computing, he makes complex concepts easy to understand. Shoaib has a knack for breaking down programming challenges into manageable steps, fostering a supportive and engaging learning environment.</p>
+            <p>He conducts successful webinars and workshops at various prestigious universities:</p>
+            <ul class="university-list">
+                <li>UMT Lahore</li>
+                <li>UMT Sialkot</li>
+                <li>University of Agriculture Faisalabad</li>
+                <li>The University of Faisalabad</li>
+                <li>Air University Islamabad</li>
+                <li>Pakistan Corpus Studio</li>
+                <li>Ghazi University Dera Ghazi Khan</li>
+            </ul>
+            <p>His dedication to empowering students with coding skills has earned him excellent feedback and a reputation for clarity and effectiveness in his teaching.</p>
+        </div>
+    </div>
+</section>
 
         <section id="testimonials" class="container">
             <h2>Testimonials</h2>
